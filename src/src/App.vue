@@ -19,7 +19,7 @@ import HeroSection from './components/HeroSection.vue';
 
   <Testimonial />
 
-  <GetInTouchSection />
+  <GetInTouchSection class="mb-6" />
 
   <Footer />
 </template>

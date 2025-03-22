@@ -1,37 +1,81 @@
-<template>
-  <footer class="bg-white py-6 border-t">
-    <div class="container mx-auto flex flex-col items-center text-center md:flex-row md:justify-between">
-      <!-- Logo -->
-      <div class="text-2xl font-semibold">Logo</div>
+<script setup lang="ts">
+import FacebookIcon from './FacebookIcon.vue';
+import InstagramIcon from './InstagramIcon.vue';
+import LinkedInIcon from './LinkedInIcon.vue';
+import TwitterIcon from './TwitterIcon.vue';
+import YouTubeIcon from './YouTubeIcon.vue';
 
-      <!-- Navigation Links -->
-      <nav class="flex flex-wrap justify-center space-x-6 mt-4 md:mt-0">
-        <a href="#" class="text-gray-700 hover:text-black">About Us</a>
-        <a href="#" class="text-gray-700 hover:text-black">Our Services</a>
-        <a href="#" class="text-gray-700 hover:text-black">Contact Us</a>
-        <a href="#" class="text-gray-700 hover:text-black">Blog Posts</a>
-        <a href="#" class="text-gray-700 hover:text-black">Support Center</a>
+const links01 = [
+  {
+    label: "About Us",
+    href: "#"
+  },
+  {
+    label: "Our Services",
+    href: "#"
+  },
+  {
+    label: "Contact Us",
+    href: "#"
+  },
+  {
+    label: "Blog Posts",
+    href: "#"
+  },
+  {
+    label: "Support Center",
+    href: "#"
+  }
+];
+
+const links02 = [
+  {
+    label: "Privacy Policy",
+    href: "#"
+  },
+  {
+    label: "Terms of Use",
+    href: "#"
+  },
+  {
+    label: "Cookie Preferences",
+    href: "#"
+  }
+];
+</script>
+
+<template>
+  <footer class="border-t border-gray-200 py-16 px-16">
+
+    <div class="flex flex-col lg:flex-row mb-16">
+
+      <div class="mx-auto mb-10 lg:mx-0 lg:mb-0 w-60 h-10 debug">
+        <p class="text-center text-2xl font-semibold">Logo</p>
+      </div>
+
+      <nav class="w-full mb-8 md:flex md:justify-center md:items-center md:gap-x-6 lg:mb-0">
+        <p v-for="link of links01" class="font-semibold text-center mb-4 md:mb-0">
+          <a :href="link.href">{{ link.label }}</a>
+        </p>
+      </nav>
+
+      <nav class="mx-auto lg:mx-0 flex gap-x-4 items-center">
+        <FacebookIcon />
+        <InstagramIcon />
+        <TwitterIcon />
+        <LinkedInIcon />
+        <YouTubeIcon />
       </nav>
     </div>
 
-    <!-- Bottom Section -->
-    <div class="container mx-auto flex flex-col items-center text-center mt-6 md:flex-row md:justify-between">
-      <p class="text-gray-600">&copy; 2025 Constellations. All rights reserved.</p>
+    <div class="lg:flex lg:justify-center lg:gap-x-8">
+      <p class="text-gray-500 text-center mb-4 lg:mb-0">
+        &copy; 2025 Constelutions. All rights reserved.
+      </p>
 
-      <div class="flex space-x-4 mt-2 md:mt-0">
-        <a href="#" class="text-gray-600 hover:text-black">Privacy Policy</a>
-        <a href="#" class="text-gray-600 hover:text-black">Terms of Use</a>
-        <a href="#" class="text-gray-600 hover:text-black">Cookie Preferences</a>
-      </div>
-    </div>
-
-    <!-- Social Icons -->
-    <div class="container mx-auto flex justify-center space-x-4 mt-4">
-      <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-facebook"></i></a>
-      <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-x-twitter"></i></a>
-      <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-linkedin"></i></a>
-      <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-youtube"></i></a>
+      <p v-for="link of links02" class="text-gray-500 text-center mb-4 lg:mb-0">
+        <a :href="link.href" class="underline">{{ link.label }}</a>
+      </p>
     </div>
   </footer>
 </template>
