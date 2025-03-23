@@ -2,6 +2,7 @@
 import FacebookIcon from './FacebookIcon.vue';
 import InstagramIcon from './InstagramIcon.vue';
 import LinkedInIcon from './LinkedInIcon.vue';
+import Logo from './Logo.vue';
 import TwitterIcon from './TwitterIcon.vue';
 import YouTubeIcon from './YouTubeIcon.vue';
 
@@ -49,8 +50,8 @@ const links02 = [
 
     <div class="flex flex-col lg:flex-row mb-16">
 
-      <div class="mx-auto mb-10 lg:mx-0 lg:mb-0 w-60 h-10 debug">
-        <p class="text-center text-2xl font-semibold">Logo</p>
+      <div class="mx-auto mb-10 lg:mx-0 lg:mb-0">
+        <Logo class="bg-linear-to-br from-indigo-900 to-indigo-600 px-4 py-3 rounded-xl" fill="white" />
       </div>
 
       <nav class="w-full mb-8 md:flex md:justify-center md:items-center md:gap-x-6 lg:mb-0">
