@@ -3,3 +3,18 @@
 .debug {
   border: 2px solid red;
 }
+
+/* See https://tailwindcss.com/docs/animation#customizing-your-theme */
+@theme {
+  --animate-fade-in: fadeIn 500ms ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

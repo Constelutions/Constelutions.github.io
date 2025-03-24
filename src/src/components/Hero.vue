@@ -8,9 +8,9 @@ import Tesseract from './Tesseract.vue';
   <div class="text-white h-screen relative flex justify-center items-center">
     <ParticlesBackground class="absolute top-0 left-0 w-screen h-screen z-1" />
 
-    <Logo class="absolute top-0 mt-6 z-2" fill="white" />
+    <Logo class="animate-fade-in absolute top-0 mt-6 z-2" fill="white" />
 
-    <div class="z-2 xl:flex xl:items-center xl:gap-x-8 2xl:gap-x-36">
+    <div class="animate-fade-in z-2 xl:flex xl:items-center xl:gap-x-8 2xl:gap-x-36">
       <div class="px-6 xl:p-0">
         <h1 class="text-4xl text-center mb-2 xl:text-5xl xl:text-left xl:mb-4">
           Welcome to Constelutions
@@ -27,7 +27,7 @@ import Tesseract from './Tesseract.vue';
 
         <div class="flex justify-center xl:justify-start">
           <button class="bg-white text-gray-800 w-32 h-12 font-semibold rounded-md mr-6 cursor-pointer">Explore</button>
-          <button class="border-2 border-white w-32 h-12 rounded-md">Learn More</button>
+          <button class="border-2 border-white w-32 h-12 rounded-md cursor-pointer">Learn More</button>
         </div>
       </div>
 
