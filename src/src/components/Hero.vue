@@ -5,12 +5,12 @@ import Tesseract from './Tesseract.vue';
 </script>
 
 <template>
-  <div class="bg-gray-900 text-white h-screen relative flex justify-center items-center">
-    <ParticlesBackground />
+  <div class="text-white h-screen relative flex justify-center items-center">
+    <ParticlesBackground class="absolute top-0 left-0 w-screen h-screen z-1" />
 
-    <Logo class="absolute top-0 mt-6" fill="white" />
+    <Logo class="absolute top-0 mt-6 z-2" fill="white" />
 
-    <div class="xl:flex xl:items-center xl:gap-x-8 2xl:gap-x-36">
+    <div class="z-2 xl:flex xl:items-center xl:gap-x-8 2xl:gap-x-36">
       <div class="px-6 xl:p-0">
         <h1 class="text-4xl text-center mb-2 xl:text-5xl xl:text-left xl:mb-4">
           Welcome to Constelutions
@@ -36,7 +36,6 @@ import Tesseract from './Tesseract.vue';
         <Tesseract />
       </div>
     </div>
-
   </div>
 
 </template>

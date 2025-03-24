@@ -31,7 +31,6 @@ const props = withDefaults(defineProps<{
 onMounted(() => {
   //Canvas
   const canvas = document.getElementById('c1') as HTMLCanvasElement;
-  console.log({ canvas });
 
   if (canvas === null) {
     console.error("Canvas is null");
