@@ -4,7 +4,8 @@
       <!-- Header -->
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold mb-4">Get in Touch</h2>
-        <p class="text-gray-400 text-lg">Have questions or want to see a demo? We're here to help you every step of the way.</p>
+        <p class="text-gray-400 text-lg">Have questions or want to see a demo? We're here to help you every step of the
+          way.</p>
       </div>
 
       <!-- Contact Content -->
@@ -21,7 +22,8 @@
             <div>
               <h3 class="text-lg font-semibold mb-1">Email</h3>
               <p class="text-gray-400">hello@constelutions.dev</p>
-              <a href="mailto:hello@constelutions.dev" class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">Send us an email</a>
+              <a href="mailto:hello@constelutions.dev"
+                class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">Send us an email</a>
             </div>
           </div>
 
@@ -35,7 +37,8 @@
             <div>
               <h3 class="text-lg font-semibold mb-1">Phone</h3>
               <p class="text-gray-400">+1 (555) 123-4567</p>
-              <a href="tel:+15551234567" class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">Give us a call</a>
+              <a href="tel:+15551234567" class="text-blue-400 hover:text-blue-300 text-sm mt-2 inline-block">Give us a
+                call</a>
             </div>
           </div>
         </div>
@@ -46,21 +49,26 @@
           <form class="space-y-4">
             <div>
               <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-              <input type="text" id="name" placeholder="Your name" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+              <input type="text" id="name" placeholder="Your name"
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-              <input type="email" id="email" placeholder="your@email.com" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+              <input type="email" id="email" placeholder="your@email.com"
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
             </div>
             <div>
               <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
-              <input type="text" id="subject" placeholder="How can we help?" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+              <input type="text" id="subject" placeholder="How can we help?"
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
             </div>
             <div>
               <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
-              <textarea id="message" rows="4" placeholder="Tell us about your project..." class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none"></textarea>
+              <textarea id="message" rows="4" placeholder="Tell us about your project..."
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none"></textarea>
             </div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors mt-6">
+            <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-colors mt-6">
               Send Message
             </button>
           </form>

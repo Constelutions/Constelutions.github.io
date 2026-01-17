@@ -1,3 +1,7 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
 @import "tailwindcss";
 
 .debug {
@@ -6,6 +10,7 @@
 
 /* See https://tailwindcss.com/docs/animation#customizing-your-theme */
 @theme {
+  --font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --animate-fade-in: fadeIn 500ms ease-in;
 
   @keyframes fadeIn {

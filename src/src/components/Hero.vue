@@ -563,10 +563,10 @@ const options = {
           life. Join us on a journey through the universe of possibilities.
         </p>
 
-        <div class="flex justify-center xl:justify-start">
+        <!-- <div class="flex justify-center xl:justify-start">
           <button class="bg-white text-gray-800 w-32 h-12 font-semibold rounded-md mr-6 cursor-pointer">Explore</button>
           <button class="border-2 border-white w-32 h-12 rounded-md cursor-pointer">Learn More</button>
-        </div>
+        </div> -->
       </div>
 
       <div class="hidden xl:block">
