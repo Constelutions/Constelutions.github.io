@@ -1,60 +1,127 @@
 <template>
-  <section class="container mx-auto py-12">
-    <!-- Header Section -->
-    <div class="flex justify-between items-center mb-6">
-      <div>
-        <p class="text-sm text-gray-500">Explore</p>
-        <h2 class="text-3xl font-bold">Products</h2>
-        <p class="text-gray-600">Discover our innovative range of tech products today!</p>
+  <section class="bg-gray-900 text-white py-30 px-4">
+    <div class="container mx-auto">
+      <!-- Header Section -->
+      <div class="mb-12">
+        <p class="text-sm text-gray-400 font-semibold uppercase tracking-wide">Showcase</p>
+        <h2 class="text-4xl font-bold mb-2">Our Projects</h2>
+        <p class="text-gray-300 max-w-2xl">Explore the work we're building. From live products to upcoming innovations in spatial computing and developer tools.</p>
       </div>
-      <button class="border px-4 py-2 text-sm">View all</button>
-    </div>
 
-    <!-- Product Carousel -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      <div v-for="(product, index) in products" :key="index" class="text-center">
-        <div class="bg-gray-200 h-48 flex items-center justify-center">
-          <span class="text-gray-500">Image</span>
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div v-for="(project, index) in projects" :key="index" class="group bg-gray-800 rounded-lg border border-gray-700 overflow-hidden hover:border-gray-600 hover:shadow-xl transition-all duration-300">
+          <!-- Project Image/Icon Area -->
+          <div class="h-48 bg-gradient-to-br flex items-center justify-center relative overflow-hidden" :style="{ backgroundImage: project.gradient || 'linear-gradient(135deg, #374151 0%, #1f2937 100%)' }">
+            <div class="text-5xl opacity-30 group-hover:scale-110 transition-transform duration-300">
+              {{ project.icon }}
+            </div>
+          </div>
+
+          <!-- Project Content -->
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="font-bold text-lg leading-tight">{{ project.name }}</h3>
+              <span 
+                :class="{
+                  'bg-emerald-900 text-emerald-300': project.status === 'Live',
+                  'bg-blue-900 text-blue-300': project.status === 'In Progress',
+                  'bg-gray-700 text-gray-300': project.status === 'Planned'
+                }"
+                class="inline-block px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
+              >
+                {{ project.status }}
+              </span>
+            </div>
+
+            <p class="text-sm text-gray-400 mb-4 line-clamp-2">{{ project.description }}</p>
+
+            <!-- Technology Tags -->
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tech in project.technologies" :key="tech" class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+                {{ tech }}
+              </span>
+            </div>
+
+          </div>
         </div>
-        <p class="font-semibold mt-2">{{ product.name }}</p>
-        <p class="text-sm text-gray-500">{{ product.category }}</p>
-        <p class="font-bold">${{ product.price }}</p>
-      </div>
-    </div>
-
-    <!-- Pagination and Navigation -->
-    <div class="flex justify-between items-center mt-6">
-      <div class="flex space-x-1">
-        <span class="h-2 w-2 bg-gray-400 rounded-full" v-for="(dot, i) in 6" :key="i"></span>
-      </div>
-      <div class="flex space-x-2">
-        <button class="border rounded-full p-2">⬅</button>
-        <button class="border rounded-full p-2">➡</button>
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="mt-12 border-t py-4 text-center">
-    <div class="flex justify-between items-center container mx-auto">
-      <div class="text-2xl font-semibold">Logo</div>
-      <nav class="flex space-x-6 text-sm">
-        <a href="#">Home Page</a>
-        <a href="#">Our Products</a>
-        <a href="#">Demos & Apps</a>
-        <a href="#">Team Info</a>
-      </nav>
-      <button class="bg-black text-white px-4 py-2">Join</button>
-    </div>
-  </footer>
 </template>
 
 <script setup lang="ts">
-const products = [
-  { name: 'Smart Gadget', category: 'Pro', price: 55 },
-  { name: 'Wireless Charger', category: 'Standard', price: 55 },
-  { name: 'Bluetooth Speaker', category: 'Mini', price: 55 },
-  { name: 'Smart Watch', category: 'Sport', price: 55 },
-  { name: 'VR Headset', category: 'Elite', price: 55 }
+interface Project {
+  name: string;
+  description: string;
+  status: 'Live' | 'In Progress' | 'Planned';
+  progress: number;
+  icon: string;
+  gradient?: string;
+  technologies: string[];
+  link?: string;
+}
+
+const projects: Project[] = [
+  {
+    name: 'Constelutions Website',
+    description: 'Our company landing site and portfolio — a showcase of who we are and what we do.',
+    status: 'Live',
+    progress: 100,
+    icon: '🌐',
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    technologies: ['Vue 3', 'TypeScript', 'Tailwind CSS'],
+    link: '#'
+  },
+  {
+    name: 'Tesseract SDK',
+    description: 'A powerful SDK for spatial data visualization and 3D environment mapping with real-time processing.',
+    status: 'In Progress',
+    progress: 60,
+    icon: '📦',
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    technologies: ['TypeScript', 'WebGL', 'Three.js'],
+    link: '#'
+  },
+  {
+    name: 'Analytics Dashboard',
+    description: 'Comprehensive admin dashboard for tracking metrics, generating reports, and managing client data.',
+    status: 'In Progress',
+    progress: 35,
+    icon: '📊',
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    technologies: ['React', 'Node.js', 'PostgreSQL'],
+    link: '#'
+  },
+  {
+    name: 'Developer Portal',
+    description: 'Self-service platform for developers to manage API keys, access documentation, and monitor usage.',
+    status: 'In Progress',
+    progress: 25,
+    icon: '👨‍💻',
+    gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    technologies: ['Next.js', 'TypeScript', 'Stripe API'],
+    link: '#'
+  },
+  {
+    name: 'Mobile App (iOS)',
+    description: 'Native iOS application for on-the-go access to Constelutions services and real-time notifications.',
+    status: 'Planned',
+    progress: 5,
+    icon: '📱',
+    gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    technologies: ['Swift', 'SwiftUI', 'iOS 15+'],
+    link: '#'
+  },
+  {
+    name: 'AI Integration Suite',
+    description: 'Advanced AI-powered tools and APIs for intelligent automation, data analysis, and predictive modeling.',
+    status: 'Planned',
+    progress: 10,
+    icon: '🤖',
+    gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    technologies: ['Python', 'TensorFlow', 'FastAPI'],
+    link: '#'
+  }
 ];
 </script>

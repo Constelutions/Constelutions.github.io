@@ -543,7 +543,7 @@ const options = {
 <template>
   <div class="text-white h-screen relative flex justify-center items-center overflow-hidden">
 
-    <vue-particles id="particlesBackground" :options
+    <vue-particles id="particlesBackground" :options="options"
       class="absolute top-0 left-0 w-screen h-screen z-1"></vue-particles>
 
     <Logo class="animate-fade-in absolute top-0 mt-6 z-2" fill="white" />
