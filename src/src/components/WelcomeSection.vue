@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import TechStack from './TechStack.vue'
+</script>
+
 <template>
   <section class="text-white py-30 px-4">
     <div class="container mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <!-- Left Section - Content -->
         <div>
           <p class="text-sm text-gray-400 font-semibold uppercase tracking-wide mb-3">About Us</p>
@@ -28,65 +32,13 @@
               <p class="text-gray-400">To create stellar solutions that enhance everyday experiences.</p>
             </div>
           </div>
+
+          <TechStack class="lg:hidden" />
         </div>
 
         <!-- Right Section - Tech Stack -->
-        <div class="flex justify-center">
-          <div class="w-full">
-            <h3 class="text-2xl font-bold mb-8 text-center">Our Tech Stack</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
-              <!-- Frontend -->
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">⚛️</span>
-                <p class="text-sm text-gray-400 text-center font-medium">React & Vue</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">📘</span>
-                <p class="text-sm text-gray-400 text-center font-medium">TypeScript</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🎨</span>
-                <p class="text-sm text-gray-400 text-center font-medium">Tailwind CSS</p>
-              </div>
-
-              <!-- Backend & DB -->
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🟢</span>
-                <p class="text-sm text-gray-400 text-center font-medium">Node.js</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🐘</span>
-                <p class="text-sm text-gray-400 text-center font-medium">PostgreSQL</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🚀</span>
-                <p class="text-sm text-gray-400 text-center font-medium">Next.js</p>
-              </div>
-
-              <!-- Advanced Tech -->
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🎮</span>
-                <p class="text-sm text-gray-400 text-center font-medium">WebGL</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">🤖</span>
-                <p class="text-sm text-gray-400 text-center font-medium">Python & AI</p>
-              </div>
-              <div
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 flex flex-col items-center justify-center">
-                <span class="text-5xl mb-3">📱</span>
-                <p class="text-sm text-gray-400 text-center font-medium">Swift & iOS</p>
-              </div>
-            </div>
-          </div>
+        <div class="flex justify-center items-center">
+          <TechStack class="hidden lg:block" />
         </div>
       </div>
     </div>
