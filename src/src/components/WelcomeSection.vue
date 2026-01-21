@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gray-900 text-white py-30 px-4">
+  <section class="text-white py-30 px-4">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <!-- Left Section - Content -->

@@ -12,7 +12,7 @@ const currentYear: ComputedRef<number> = computed<number>(() => new Date().getFu
 </script>
 
 <template>
-  <footer class="bg-gray-900 text-white py-16 px-4">
+  <footer class="text-white py-16 px-4">
     <!-- Main Footer Content -->
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-20 items-center mb-12">

@@ -4,16 +4,19 @@ import WelcomeSection from './components/WelcomeSection.vue';
 import Footer from './components/Footer.vue';
 import ProductsSection from './components/ProductsSection.vue';
 import Hero from './components/Hero.vue';
+import ParticleBackground from './components/ParticleBackground.vue';
 </script>
 
 <template>
-  <Hero />
+  <ParticleBackground>
+    <Hero />
 
-  <WelcomeSection />
+    <WelcomeSection />
 
-  <ProductsSection />
+    <ProductsSection />
 
-  <GetInTouchSection />
+    <GetInTouchSection />
 
-  <Footer />
+    <Footer />
+  </ParticleBackground>
 </template>
