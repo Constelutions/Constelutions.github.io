@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, type ComputedRef } from 'vue';
 import FacebookIcon from './FacebookIcon.vue';
 import InstagramIcon from './InstagramIcon.vue';
 import LinkedInIcon from './LinkedInIcon.vue';
@@ -6,77 +7,58 @@ import Logo from './Logo.vue';
 import TwitterIcon from './TwitterIcon.vue';
 import YouTubeIcon from './YouTubeIcon.vue';
 
-const links01 = [
-  {
-    label: "About Us",
-    href: "#"
-  },
-  {
-    label: "Our Services",
-    href: "#"
-  },
-  {
-    label: "Contact Us",
-    href: "#"
-  },
-  {
-    label: "Blog Posts",
-    href: "#"
-  },
-  {
-    label: "Support Center",
-    href: "#"
-  }
-];
+const currentYear: ComputedRef<number> = computed<number>(() => new Date().getFullYear());
 
-const links02 = [
-  {
-    label: "Privacy Policy",
-    href: "#"
-  },
-  {
-    label: "Terms of Use",
-    href: "#"
-  },
-  {
-    label: "Cookie Preferences",
-    href: "#"
-  }
-];
 </script>
 
 <template>
-  <footer class="border-t border-gray-200 py-16 px-16">
+  <footer class="text-white py-16 px-4">
+    <!-- Main Footer Content -->
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-20 items-center mb-12">
+        <!-- Copyright Section (Left) -->
+        <div class="flex flex-col items-center md:items-start">
+          <p class="text-gray-500 text-lg text-center md:text-left">
+            &copy; {{ currentYear }} <span class="font-semibold text-white">Constelutions</span>
+          </p>
+        </div>
 
-    <div class="flex flex-col lg:flex-row mb-16">
+        <!-- Logo Section (Center) -->
+        <div class="flex flex-col items-center">
+          <Logo class="bg-gradient-to-br from-blue-600 to-blue-500 px-4 py-3 rounded-xl" fill="white" />
+          <p class="text-gray-400 text-sm mt-4 text-center max-w-sm">Innovating technology that shines bright like the
+            stars.</p>
+        </div>
 
-      <div class="mx-auto mb-10 lg:mx-0 lg:mb-0">
-        <Logo class="bg-linear-to-br from-indigo-900 to-indigo-600 px-4 py-3 rounded-xl" fill="white" />
+        <!-- Social Media Section (Right) -->
+        <div class="flex flex-col items-center md:items-end">
+          <div class="flex gap-3 flex-wrap justify-center">
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white group hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-110">
+              <FacebookIcon class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white group hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-110">
+              <InstagramIcon class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white group hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-110">
+              <TwitterIcon class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white group hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-110">
+              <LinkedInIcon class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-lg bg-gray-800 hover:bg-blue-600 border border-gray-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-white group hover:shadow-lg hover:shadow-blue-500/20 transform hover:scale-110">
+              <YouTubeIcon class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+            </a>
+          </div>
+        </div>
       </div>
 
-      <nav class="w-full mb-8 md:flex md:justify-center md:items-center md:gap-x-6 lg:mb-0">
-        <p v-for="link of links01" class="font-semibold text-center mb-4 md:mb-0">
-          <a :href="link.href">{{ link.label }}</a>
-        </p>
-      </nav>
-
-      <nav class="mx-auto lg:mx-0 flex gap-x-4 items-center">
-        <FacebookIcon />
-        <InstagramIcon />
-        <TwitterIcon />
-        <LinkedInIcon />
-        <YouTubeIcon />
-      </nav>
-    </div>
-
-    <div class="lg:flex lg:justify-center lg:gap-x-8">
-      <p class="text-gray-500 text-center mb-4 lg:mb-0">
-        &copy; 2025 Constelutions. All rights reserved.
-      </p>
-
-      <p v-for="link of links02" class="text-gray-500 text-center mb-4 lg:mb-0">
-        <a :href="link.href" class="underline">{{ link.label }}</a>
-      </p>
+      <!-- Divider -->
+      <div class="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
     </div>
   </footer>
 </template>
