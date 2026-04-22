@@ -22,10 +22,12 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache-dependency-path: src/package-lock.json
-      - run: npm ci
+      - uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+      - run: pnpm install --frozen-lockfile
         working-directory: src
-      - run: npm run build
+      - run: pnpm run build
         working-directory: src
       - uses: actions/upload-pages-artifact@v3
         with:
