@@ -2,6 +2,7 @@
   "name": "constelutions",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@10.29.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
