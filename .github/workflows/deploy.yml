@@ -28,7 +28,7 @@ jobs:
         working-directory: src
       - run: npm run build
         working-directory: src
-      - uses: actions/upload-pages-artifact@v7
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: src/dist
 
