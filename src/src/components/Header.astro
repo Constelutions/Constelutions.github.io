@@ -79,10 +79,10 @@ const { activePage = "home" } = Astro.props;
       class="nav-links"
       aria-label="Principal">
       <a
-        href="/servicios"
-        class={activePage === "services" ? "active" : ""}
-        data-i18n="nav_services"
-        >Servicios</a
+        href="/"
+        class={activePage === "home" ? "active" : ""}
+        data-i18n="nav_home"
+        >Inicio</a
       >
       <a
         href="/#nosotros"
@@ -103,6 +103,12 @@ const { activePage = "home" } = Astro.props;
         href="/#contacto"
         data-i18n="nav_contact"
         >Contacto</a
+      >
+      <a
+        href="/servicios"
+        class={activePage === "services" ? "active" : ""}
+        data-i18n="nav_services"
+        >Servicios</a
       >
     </nav>
     <div class="nav-right">
