@@ -1,0 +1,158 @@
+---
+
+---
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span
+        class="eyebrow center"
+        data-i18n="test_eyebrow">
+        Lo que dicen
+      </span>
+      <h2
+        class="section-h"
+        style="margin-left:auto;margin-right:auto"
+        data-i18n="test_title">
+        Confianza que se construye proyecto a proyecto.
+      </h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p data-i18n="q1">
+          Constelutions entendió nuestra operación desde el primer día y entregó una plataforma que
+          nuestro equipo realmente usa.
+        </p>
+        <div class="who">
+          <div class="av"></div><div>
+            <div
+              class="nm"
+              data-i18n="q1_n">
+              Nombre Apellido
+            </div><div
+              class="rl"
+              data-i18n="q1_r">
+              Dirección de Operaciones
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p data-i18n="q2">
+          El nivel técnico y la comunicación fueron excepcionales. Se sintieron como parte de
+          nuestro equipo.
+        </p>
+        <div class="who">
+          <div class="av"></div><div>
+            <div
+              class="nm"
+              data-i18n="q2_n">
+              Nombre Apellido
+            </div><div
+              class="rl"
+              data-i18n="q2_r">
+              CTO, Empresa de Tecnología
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quote reveal">
+        <div class="mark">"</div>
+        <p data-i18n="q3">
+          Modernizamos sistemas críticos sin interrumpir la operación. Resultados claros y medibles.
+        </p>
+        <div class="who">
+          <div class="av"></div><div>
+            <div
+              class="nm"
+              data-i18n="q3_n">
+              Nombre Apellido
+            </div><div
+              class="rl"
+              data-i18n="q3_r">
+              Gerente de TI
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      class="placeholder-note"
+      data-i18n="test_note">
+      Testimonios de ejemplo — reemplázalos con reseñas reales de tus clientes.
+    </p>
+  </div>
+</section>
+
+<style>
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .quote {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+  }
+  .quote .mark {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 0.5;
+    color: var(--accent);
+    height: 22px;
+  }
+  .quote p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 18px 0 24px;
+    flex: 1;
+  }
+  .quote .who {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  .quote .av {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    flex: 0 0 auto;
+    background-image: repeating-linear-gradient(
+      45deg,
+      oklch(0.3 0.03 264) 0 6px,
+      oklch(0.26 0.03 264) 6px 12px
+    );
+  }
+  .quote .who .nm {
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .quote .who .rl {
+    font-size: 12.5px;
+    color: var(--faint);
+    font-family: var(--mono);
+  }
+  .placeholder-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin-top: 22px;
+    text-align: center;
+  }
+
+  @media (max-width: 1040px) {
+    .quotes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

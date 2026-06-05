@@ -1,0 +1,92 @@
+---
+
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span
+        class="eyebrow"
+        data-i18n="tech_eyebrow">
+        Stack tecnológico
+      </span>
+      <h2
+        class="section-h"
+        data-i18n="tech_title">
+        Herramientas modernas, elegidas con criterio.
+      </h2>
+      <p
+        class="lede"
+        data-i18n="tech_lede">
+        Seleccionamos cada tecnología según las necesidades del proyecto, no por moda.
+      </p>
+    </div>
+    <div class="tech-cols reveal">
+      <div class="tech-col">
+        <h4 data-i18n="tech_c1">Frontend</h4>
+        <ul>
+          <li>React</li><li>Next.js</li><li>TypeScript</li><li>Vue</li><li>Tailwind CSS</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4 data-i18n="tech_c2">Backend</h4>
+        <ul><li>Node.js</li><li>Python</li><li>Go</li><li>.NET</li><li>PostgreSQL</li></ul>
+      </div>
+      <div class="tech-col">
+        <h4 data-i18n="tech_c3">Nube &amp; DevOps</h4>
+        <ul><li>AWS</li><li>Azure</li><li>Docker</li><li>Kubernetes</li><li>Terraform</li></ul>
+      </div>
+      <div class="tech-col">
+        <h4 data-i18n="tech_c4">Datos &amp; Móvil</h4>
+        <ul>
+          <li>React Native</li><li>Flutter</li><li>GraphQL</li><li>Redis</li><li>MongoDB</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .tech-col h4 {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 18px;
+  }
+  .tech-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 11px;
+  }
+  .tech-col li {
+    font-size: 15.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tech-col li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 1040px) {
+    .tech-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+</style>

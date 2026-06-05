@@ -1,0 +1,105 @@
+---
+
+---
+
+<section
+  class="section alt"
+  id="proceso">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span
+        class="eyebrow"
+        data-i18n="proc_eyebrow">
+        Cómo trabajamos
+      </span>
+      <h2
+        class="section-h"
+        data-i18n="proc_title">
+        Un proceso claro, de la idea a producción.
+      </h2>
+      <p
+        class="lede"
+        data-i18n="proc_lede">
+        Metodología ágil con entregas continuas y visibilidad total en cada paso.
+      </p>
+    </div>
+    <div class="process">
+      <div class="step reveal">
+        <div class="pnum">01</div><h4 data-i18n="st1_t">Descubrimiento</h4><p data-i18n="st1_d">
+          Entendemos tu negocio, objetivos y requisitos técnicos.
+        </p>
+      </div>
+      <div class="step reveal">
+        <div class="pnum">02</div><h4 data-i18n="st2_t">Diseño</h4><p data-i18n="st2_d">
+          Definimos arquitectura y experiencia antes de escribir código.
+        </p>
+      </div>
+      <div class="step reveal">
+        <div class="pnum">03</div><h4 data-i18n="st3_t">Desarrollo</h4><p data-i18n="st3_d">
+          Construimos en ciclos cortos con demos frecuentes.
+        </p>
+      </div>
+      <div class="step reveal">
+        <div class="pnum">04</div><h4 data-i18n="st4_t">Integración</h4><p data-i18n="st4_d">
+          Conectamos sistemas y aseguramos calidad con pruebas.
+        </p>
+      </div>
+      <div class="step reveal">
+        <div class="pnum">05</div><h4 data-i18n="st5_t">Lanzamiento</h4><p data-i18n="st5_d">
+          Desplegamos con confianza y pipelines automatizados.
+        </p>
+      </div>
+      <div class="step reveal">
+        <div class="pnum">06</div><h4 data-i18n="st6_t">Soporte</h4><p data-i18n="st6_d">
+          Monitoreo, mejoras y acompañamiento continuo.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+  .step {
+    position: relative;
+    padding: 30px 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .step .pnum {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent-2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    display: grid;
+    place-items: center;
+    margin-bottom: 20px;
+    background: oklch(0.24 0.05 266);
+  }
+  .step h4 {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .step p {
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 1040px) {
+    .process {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

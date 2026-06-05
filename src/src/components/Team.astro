@@ -1,0 +1,156 @@
+---
+
+---
+
+<section
+  class="section"
+  id="equipo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span
+        class="eyebrow"
+        data-i18n="team_eyebrow">
+        Nuestro equipo
+      </span>
+      <h2
+        class="section-h"
+        data-i18n="team_title">
+        Las personas detrás de cada solución.
+      </h2>
+      <p
+        class="lede"
+        data-i18n="team_lede">
+        Un grupo multidisciplinario de ingenieros, diseñadores y consultores.
+      </p>
+    </div>
+    <div class="team">
+      <div class="member reveal">
+        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
+          <div
+            class="nm"
+            data-i18n="team_name">
+            Nombre Apellido
+          </div><div
+            class="rl"
+            data-i18n="m1_r">
+            Desarrollo de Software
+          </div>
+        </div>
+      </div>
+      <div class="member reveal">
+        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
+          <div
+            class="nm"
+            data-i18n="team_name">
+            Nombre Apellido
+          </div><div
+            class="rl"
+            data-i18n="m2_r">
+            Diseño UI/UX
+          </div>
+        </div>
+      </div>
+      <div class="member reveal">
+        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
+          <div
+            class="nm"
+            data-i18n="team_name">
+            Nombre Apellido
+          </div><div
+            class="rl"
+            data-i18n="m3_r">
+            Arquitectura &amp; DevOps
+          </div>
+        </div>
+      </div>
+      <div class="member reveal">
+        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
+          <div
+            class="nm"
+            data-i18n="team_name">
+            Nombre Apellido
+          </div><div
+            class="rl"
+            data-i18n="m4_r">
+            Consultoría &amp; Estrategia
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      class="placeholder-note"
+      data-i18n="team_note">
+      Fotos y nombres de ejemplo — añade a tu equipo real.
+    </p>
+  </div>
+</section>
+
+<style>
+  .team {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .member {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+  .member:hover {
+    border-color: var(--accent);
+  }
+  .member .photo {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      oklch(0.2 0.03 264) 0 11px,
+      oklch(0.18 0.03 264) 11px 22px
+    );
+    display: grid;
+    place-items: center;
+  }
+  .member .photo span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+  .member .info {
+    padding: 20px 22px;
+  }
+  .member .info .nm {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .member .info .rl {
+    font-size: 13.5px;
+    color: var(--accent-2);
+    font-family: var(--mono);
+    margin-top: 5px;
+    letter-spacing: 0.03em;
+  }
+  .placeholder-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin-top: 22px;
+    text-align: center;
+  }
+
+  @media (max-width: 1040px) {
+    .team {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .team {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
