@@ -1,5 +1,31 @@
 ---
-
+const tech: { category: string; "data-i18n": string; items: string[] }[] = [
+  {
+    category: "Frontend",
+    "data-i18n": "tech_frontend",
+    items: ["React", "Next.js", "Vue", "Svelte", "Angular"],
+  },
+  {
+    category: "Backend",
+    "data-i18n": "tech_backend",
+    items: ["Node.js", "Python", "Go", ".NET", "Java"],
+  },
+  {
+    category: "Móvil",
+    "data-i18n": "tech_mobile",
+    items: ["Android & iOS", "Flutter", "React Native", ".NET MAUI", "GraphQL"],
+  },
+  {
+    category: "Cloud & DevOps",
+    "data-i18n": "tech_cloud",
+    items: ["AWS", "Azure", "Kubernetes", "GCP", "Terraform"],
+  },
+  {
+    category: "Base de datos",
+    "data-i18n": "tech_database",
+    items: ["PostgreSQL", "Microsoft SQL Server", "My SQL", "MongoDB", "Redis"],
+  },
+];
 ---
 
 <section class="section">
@@ -13,7 +39,7 @@
       <h2
         class="section-h"
         data-i18n="tech_title">
-        Herramientas modernas, elegidas con criterio.
+        Herramientas modernas, elegidas con criterio
       </h2>
       <p
         class="lede"
@@ -22,26 +48,18 @@
       </p>
     </div>
     <div class="tech-cols reveal">
-      <div class="tech-col">
-        <h4 data-i18n="tech_c1">Frontend</h4>
-        <ul>
-          <li>React</li><li>Next.js</li><li>TypeScript</li><li>Vue</li><li>Tailwind CSS</li>
-        </ul>
-      </div>
-      <div class="tech-col">
-        <h4 data-i18n="tech_c2">Backend</h4>
-        <ul><li>Node.js</li><li>Python</li><li>Go</li><li>.NET</li><li>PostgreSQL</li></ul>
-      </div>
-      <div class="tech-col">
-        <h4 data-i18n="tech_c3">Nube &amp; DevOps</h4>
-        <ul><li>AWS</li><li>Azure</li><li>Docker</li><li>Kubernetes</li><li>Terraform</li></ul>
-      </div>
-      <div class="tech-col">
-        <h4 data-i18n="tech_c4">Datos &amp; Móvil</h4>
-        <ul>
-          <li>React Native</li><li>Flutter</li><li>GraphQL</li><li>Redis</li><li>MongoDB</li>
-        </ul>
-      </div>
+      {
+        tech.map((t) => (
+          <div class="tech-col">
+            <h4 data-i18n={t["data-i18n"]}>{t.category}</h4>
+            <ul>
+              {t.items.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -49,7 +67,7 @@
 <style>
   .tech-cols {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 22px;
   }
   .tech-col h4 {

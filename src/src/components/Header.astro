@@ -1,8 +1,36 @@
 ---
 interface Props {
-  activePage?: "home" | "services";
+  activePage?: string;
 }
+
 const { activePage = "home" } = Astro.props;
+
+const pages: { href: string; pageId: string; "data-i18n": string; label: string }[] = [
+  {
+    href: "/",
+    pageId: "home",
+    "data-i18n": "nav_home",
+    label: "Inicio",
+  },
+  {
+    href: "/services",
+    pageId: "services",
+    "data-i18n": "nav_services",
+    label: "Servicios",
+  },
+  {
+    href: "/portfolio",
+    pageId: "portfolio",
+    "data-i18n": "nav_portfolio",
+    label: "Portafolio",
+  },
+  {
+    href: "/about",
+    pageId: "about",
+    "data-i18n": "nav_about",
+    label: "Nosotros",
+  },
+] as const;
 ---
 
 <header class="site-header">
@@ -78,39 +106,18 @@ const { activePage = "home" } = Astro.props;
     <nav
       class="nav-links"
       aria-label="Principal">
-      <a
-        href="/"
-        class={activePage === "home" ? "active" : ""}
-        data-i18n="nav_home"
-        >Inicio</a
-      >
-      <a
-        href="/#nosotros"
-        data-i18n="nav_about"
-        >Nosotros</a
-      >
-      <a
-        href="/#proceso"
-        data-i18n="nav_process"
-        >Proceso</a
-      >
-      <a
-        href="/#equipo"
-        data-i18n="nav_team"
-        >Equipo</a
-      >
-      <a
-        href="/#contacto"
-        data-i18n="nav_contact"
-        >Contacto</a
-      >
-      <a
-        href="/services"
-        class={activePage === "services" ? "active" : ""}
-        data-i18n="nav_services"
-        >Servicios</a
-      >
+      {
+        pages.map((page) => (
+          <a
+            href={page.href}
+            class={activePage === page.pageId ? "active" : ""}
+            data-i18n={page["data-i18n"]}>
+            {page.label}
+          </a>
+        ))
+      }
     </nav>
+
     <div class="nav-right">
       <div
         class="langtoggle"

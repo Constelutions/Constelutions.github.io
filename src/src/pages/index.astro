@@ -1,45 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import ServicesGrid from "../components/ServicesGrid.astro";
 import ConsultingSpecialties from "../components/ConsultingSpecialties.astro";
-import Stats from "../components/Stats.astro";
 import WhyUs from "../components/WhyUs.astro";
 import Process from "../components/Process.astro";
 import TechStack from "../components/TechStack.astro";
 import Testimonials from "../components/Testimonials.astro";
 import Team from "../components/Team.astro";
 import Contact from "../components/Contact.astro";
-import CtaBanner from "../components/CtaBanner.astro";
-import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Constelutions — Soluciones de software a la medida">
-  <Header activePage="home" />
+<Layout
+  title="Constelutions — Software a la medida"
+  activePage="home">
   <Hero />
   <ServicesGrid />
   <ConsultingSpecialties />
-  <Stats />
+  <!-- <Stats /> -->
   <WhyUs />
   <Process />
   <TechStack />
   <Testimonials />
   <Team />
   <Contact />
-  <CtaBanner>
-    <a
-      href="#contacto"
-      class="btn btn-primary btn-lg"
-      data-i18n="cta_book">
-      Agenda una consulta
-    </a>
-    <a
-      href="/services"
-      class="btn btn-ghost btn-lg"
-      data-i18n="cta_services">
-      Ver servicios
-    </a>
-  </CtaBanner>
-  <Footer />
 </Layout>

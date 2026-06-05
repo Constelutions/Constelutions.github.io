@@ -1,12 +1,18 @@
 ---
+import CtaBanner from "../components/CtaBanner.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
 interface Props {
   title: string;
   description?: string;
+  activePage?: string;
 }
 
 const {
   title,
   description = "Constelutions — Desarrollo de software, diseño UI/UX, integración de sistemas y consultoría técnica. Desde México para el mundo.",
+  activePage = "home",
 } = Astro.props;
 ---
 
@@ -53,7 +59,27 @@ const {
     />
   </head>
   <body>
+    <Header activePage={activePage} />
+
     <slot />
+
+    <CtaBanner>
+      <a
+        href="/#contacto"
+        class="btn btn-primary btn-lg"
+        data-i18n="cta_book">
+        Agenda una consulta
+      </a>
+      <a
+        href="/services"
+        class="btn btn-ghost btn-lg"
+        data-i18n="cta_services">
+        Ver servicios
+      </a>
+    </CtaBanner>
+
+    <Footer />
+
     <script
       src="/scripts/i18n.js"
       is:inline

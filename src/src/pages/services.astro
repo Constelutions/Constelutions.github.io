@@ -1,31 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
 import ServicesPageHead from "../components/ServicesPageHead.astro";
 import ServiceDetails from "../components/ServiceDetails.astro";
-import CtaBanner from "../components/CtaBanner.astro";
-import Footer from "../components/Footer.astro";
 ---
 
 <Layout
-  title="Servicios — Constelutions"
-  description="Servicios de Constelutions: Desarrollo de Software, Diseño UI/UX, Integración de APIs y Sistemas, y Consultoría técnica especializada.">
-  <Header activePage="services" />
+  title="Constelutions — Servicios"
+  description="Servicios de Constelutions: Desarrollo de Software, Diseño UI/UX, Integración de APIs y Sistemas, y Consultoría técnica especializada."
+  activePage="services">
   <ServicesPageHead />
   <ServiceDetails />
-  <CtaBanner>
-    <a
-      href="/#contacto"
-      class="btn btn-primary btn-lg"
-      data-i18n="cta_book">
-      Agenda una consulta
-    </a>
-    <a
-      href="/"
-      class="btn btn-ghost btn-lg"
-      data-i18n="nav_home">
-      Inicio
-    </a>
-  </CtaBanner>
-  <Footer />
 </Layout>
