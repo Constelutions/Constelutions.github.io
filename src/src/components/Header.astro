@@ -1,0 +1,41 @@
+---
+interface Props {
+  activePage?: "home" | "services";
+}
+const { activePage = "home" } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Constelutions — inicio">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="7" y1="9" x2="16" y2="6" stroke="var(--accent)" stroke-width="1.1"/>
+        <line x1="16" y1="6" x2="25" y2="13" stroke="var(--accent)" stroke-width="1.1"/>
+        <line x1="25" y1="13" x2="19" y2="24" stroke="var(--accent)" stroke-width="1.1"/>
+        <line x1="19" y1="24" x2="7" y2="9" stroke="var(--accent)" stroke-width="1.1"/>
+        <circle cx="7" cy="9" r="2.4" fill="var(--accent-2)"/>
+        <circle cx="16" cy="6" r="3" fill="var(--star)"/>
+        <circle cx="25" cy="13" r="2.1" fill="var(--accent-2)"/>
+        <circle cx="19" cy="24" r="2.6" fill="var(--accent-2)"/>
+      </svg>
+      <span class="wm">Conste<b>lutions</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="/servicios" class={activePage === "services" ? "active" : ""} data-i18n="nav_services">Servicios</a>
+      <a href="/#nosotros" data-i18n="nav_about">Nosotros</a>
+      <a href="/#proceso" data-i18n="nav_process">Proceso</a>
+      <a href="/#equipo" data-i18n="nav_team">Equipo</a>
+      <a href="/#contacto" data-i18n="nav_contact">Contacto</a>
+    </nav>
+    <div class="nav-right">
+      <div class="langtoggle" role="group" aria-label="Idioma / Language">
+        <button type="button" data-set-lang="es" data-lang-opt="es">ES</button>
+        <button type="button" data-set-lang="en" data-lang-opt="en">EN</button>
+      </div>
+      <a href="/#contacto" class="btn btn-primary" data-i18n="cta_book">Agenda una consulta</a>
+      <button class="nav-toggle" aria-label="Menú" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
