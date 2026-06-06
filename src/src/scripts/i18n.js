@@ -25,8 +25,8 @@
       en: "Development · Design · Integration",
     },
     hero_head: {
-      es: "Cada solución, una <em>constelación</em> de talento.",
-      en: "Every solution, a <em>constellation</em> of talent.",
+      es: "Cada solución, una <em>constelación</em> de talento",
+      en: "Every solution, a <em>constellation</em> of talent",
     },
     hero_lede: {
       es: "Conectamos ingeniería, diseño y estrategia para construir productos digitales que escalan. Un solo equipo, alineado a tus objetivos.",
