@@ -1,0 +1,261 @@
+---
+const demos: {
+  num: string;
+  titleKey: string;
+  title: string;
+  descKey: string;
+  desc: string;
+  typeKey: string;
+  type: string;
+  tags: string[];
+}[] = [
+  {
+    num: "01",
+    titleKey: "demo1_title",
+    title: "Dashboard de analíticas en tiempo real",
+    descKey: "demo1_desc",
+    desc: "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
+    typeKey: "demo_type_web",
+    type: "App web",
+    tags: ["React", "D3.js", "WebSockets"],
+  },
+  {
+    num: "02",
+    titleKey: "demo2_title",
+    title: "App móvil de gestión de campo",
+    descKey: "demo2_desc",
+    desc: "Aplicación offline-first para técnicos de campo: captura de formularios, firma digital y sincronización automática al recuperar señal.",
+    typeKey: "demo_type_mobile",
+    type: "App móvil",
+    tags: ["React Native", "SQLite", "REST API"],
+  },
+  {
+    num: "03",
+    titleKey: "demo3_title",
+    title: "Portal de autoservicio para clientes",
+    descKey: "demo3_desc",
+    desc: "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
+    typeKey: "demo_type_web",
+    type: "App web",
+    tags: ["Next.js", "Auth.js", "Stripe"],
+  },
+  {
+    num: "04",
+    titleKey: "demo4_title",
+    title: "API de integración ERP ↔ e-commerce",
+    descKey: "demo4_desc",
+    desc: "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
+    typeKey: "demo_type_api",
+    type: "API / Backend",
+    tags: [".NET", "OpenAPI", "RabbitMQ"],
+  },
+  {
+    num: "05",
+    titleKey: "demo5_title",
+    title: "Sistema de notificaciones multicanal",
+    descKey: "demo5_desc",
+    desc: "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
+    typeKey: "demo_type_api",
+    type: "API / Backend",
+    tags: ["Go", "Redis", "Twilio"],
+  },
+  {
+    num: "06",
+    titleKey: "demo6_title",
+    title: "Plataforma de onboarding digital",
+    descKey: "demo6_desc",
+    desc: "Flujo de alta de clientes con validación de identidad, firma electrónica y conexión a buró de crédito. Reduce el tiempo de onboarding de días a minutos.",
+    typeKey: "demo_type_web",
+    type: "App web",
+    tags: ["Vue", "Python", "AWS Lambda"],
+  },
+];
+---
+
+<section class="section alt" id="demos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="demos_eyebrow">Demos en vivo</span>
+      <h2 class="section-h" data-i18n="demos_title">
+        Mira nuestro trabajo en acción
+      </h2>
+      <p class="lede" data-i18n="demos_lede">
+        Aplicaciones funcionales que puedes explorar ahora mismo. Cada demo refleja patrones reales
+        que aplicamos en proyectos de clientes.
+      </p>
+    </div>
+
+    <div class="demos-grid">
+      {
+        demos.map((d) => (
+          <div class="demo-card reveal">
+            <div class="demo-screen">
+              <span class="demo-num">{d.num}</span>
+              <span class="demo-type-pill" data-i18n={d.typeKey}>
+                {d.type}
+              </span>
+              <span class="photo-label" data-i18n="demo_screenshot">
+                Demo en vivo próximamente
+              </span>
+            </div>
+            <div class="demo-body">
+              <h3 data-i18n={d.titleKey}>{d.title}</h3>
+              <p data-i18n={d.descKey}>{d.desc}</p>
+              <div class="demo-footer">
+                <div class="demo-tags">
+                  {d.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <a
+                  href="#"
+                  class="demo-link"
+                  aria-disabled="true"
+                  data-i18n="demo_soon">
+                  Próximamente
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="placeholder-note" data-i18n="demo_note">
+      Los demos estarán disponibles próximamente — contáctanos si quieres ver una demostración en
+      vivo.
+    </p>
+  </div>
+</section>
+
+<style>
+  .demos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .demo-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+  }
+  .demo-card:hover {
+    border-color: var(--accent);
+  }
+  .demo-screen {
+    aspect-ratio: 16 / 9;
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      oklch(0.2 0.03 264) 0 14px,
+      oklch(0.18 0.03 264) 14px 28px
+    );
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .demo-num {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+  .demo-type-pill {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    color: var(--accent-2);
+    background: oklch(0.28 0.06 266 / 0.6);
+    border: 1px solid oklch(0.4 0.08 266 / 0.5);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .photo-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+
+  .demo-body {
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .demo-body h3 {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  .demo-body p {
+    font-size: 14.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+  .demo-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .demo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent-2);
+    background: oklch(0.28 0.06 266 / 0.45);
+    border: 1px solid oklch(0.4 0.08 266 / 0.5);
+    border-radius: 6px;
+    padding: 3px 8px;
+    letter-spacing: 0.03em;
+  }
+  .demo-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    cursor: default;
+  }
+
+  .placeholder-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin-top: 32px;
+    text-align: center;
+  }
+
+  @media (max-width: 1040px) {
+    .demos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .demos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

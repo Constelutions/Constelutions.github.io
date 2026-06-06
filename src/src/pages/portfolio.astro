@@ -1,9 +1,15 @@
 ---
+import PortfolioDemos from "../components/PortfolioDemos.astro";
+import PortfolioHead from "../components/PortfolioHead.astro";
+import PortfolioProjects from "../components/PortfolioProjects.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
   title="Constelutions — Portafolio"
+  description="Proyectos y demos de Constelutions: sistemas en producción para fintech, salud, logística y e-commerce."
   activePage="portfolio">
-  TODO
+  <PortfolioHead />
+  <PortfolioProjects />
+  <PortfolioDemos />
 </Layout>

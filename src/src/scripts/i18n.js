@@ -239,6 +239,161 @@
       en: "Sample testimonials — replace with real client reviews.",
     },
 
+    /* ---- about page head ---- */
+    about_title: {
+      es: "El equipo detrás de cada constelación",
+      en: "The team behind every constellation",
+    },
+    about_lede: {
+      es: "Conoce quiénes somos, de dónde venimos y qué nos mueve a construir software con rigor y propósito.",
+      en: "Learn who we are, where we come from and what drives us to build software with rigour and purpose.",
+    },
+
+    /* ---- portfolio page ---- */
+    port_title: {
+      es: "Productos reales, impacto medible",
+      en: "Real products, measurable impact",
+    },
+    port_lede: {
+      es: "Una selección de los sistemas, plataformas y aplicaciones que hemos construido para clientes en distintas industrias.",
+      en: "A selection of the systems, platforms and applications we have built for clients across industries.",
+    },
+
+    proj_eyebrow: { es: "Proyectos destacados", en: "Featured projects" },
+    proj_title: { es: "Lo que hemos construido", en: "What we have built" },
+    proj_lede: {
+      es: "Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y generan resultados medibles para nuestros clientes.",
+      en: "Production systems that process real transactions, serve real users and generate measurable results for our clients.",
+    },
+    proj_screenshot: { es: "Captura de pantalla", en: "Screenshot" },
+    proj_note: {
+      es: "Proyectos representativos — los nombres de clientes se omiten por confidencialidad.",
+      en: "Representative projects — client names omitted for confidentiality.",
+    },
+
+    proj1_industry: { es: "Fintech", en: "Fintech" },
+    proj1_title: { es: "Plataforma de pagos y conciliación", en: "Payments & reconciliation platform" },
+    proj1_desc: {
+      es: "Sistema de procesamiento de pagos en tiempo real con motor de conciliación automática, paneles de control para operadores y API pública para integraciones de terceros.",
+      en: "Real-time payment processing system with automatic reconciliation engine, operator dashboards and a public API for third-party integrations.",
+    },
+    proj1_outcome: { es: "Reducción del 70 % en errores de conciliación manual", en: "70 % reduction in manual reconciliation errors" },
+
+    proj2_industry: { es: "Salud", en: "Healthcare" },
+    proj2_title: { es: "Expediente clínico electrónico", en: "Electronic medical record system" },
+    proj2_desc: {
+      es: "Solución de expediente clínico para red de clínicas privadas: historial de pacientes, agenda de citas, recetas digitales y módulo de facturación integrado con el SAT.",
+      en: "Clinical record solution for a private clinic network: patient history, appointment scheduling, digital prescriptions and a billing module integrated with the tax authority.",
+    },
+    proj2_outcome: { es: "Digitalización de 120 000 expedientes en 3 clínicas", en: "120,000 records digitized across 3 clinics" },
+
+    proj3_industry: { es: "Logística", en: "Logistics" },
+    proj3_title: { es: "Sistema de rastreo de flotilla en tiempo real", en: "Real-time fleet tracking system" },
+    proj3_desc: {
+      es: "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
+      en: "Vehicle monitoring platform with real-time map, geofence alerts, route efficiency reports and a mobile app for drivers.",
+    },
+    proj3_outcome: { es: "Visibilidad al 100 % sobre 400 unidades activas", en: "100 % visibility across 400 active units" },
+
+    proj4_industry: { es: "E-commerce", en: "E-commerce" },
+    proj4_title: { es: "Marketplace B2B con catálogo inteligente", en: "B2B marketplace with smart catalogue" },
+    proj4_desc: {
+      es: "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
+      en: "Wholesale marketplace with a configurable catalogue, volume pricing engine, ERP integration and a custom order approval workflow.",
+    },
+    proj4_outcome: { es: "3× crecimiento en volumen de órdenes en el primer año", en: "3× growth in order volume in the first year" },
+
+    demos_eyebrow: { es: "Demos en vivo", en: "Live demos" },
+    demos_title: { es: "Mira nuestro trabajo en acción", en: "See our work in action" },
+    demos_lede: {
+      es: "Aplicaciones funcionales que puedes explorar ahora mismo. Cada demo refleja patrones reales que aplicamos en proyectos de clientes.",
+      en: "Functional applications you can explore right now. Each demo reflects real patterns we apply on client projects.",
+    },
+    demo_screenshot: { es: "Demo en vivo próximamente", en: "Live demo coming soon" },
+    demo_soon: { es: "Próximamente", en: "Coming soon" },
+    demo_note: {
+      es: "Los demos estarán disponibles próximamente — contáctanos si quieres ver una demostración en vivo.",
+      en: "Demos coming soon — contact us if you'd like to see a live walkthrough.",
+    },
+    demo_type_web: { es: "App web", en: "Web app" },
+    demo_type_mobile: { es: "App móvil", en: "Mobile app" },
+    demo_type_api: { es: "API / Backend", en: "API / Backend" },
+
+    demo1_title: { es: "Dashboard de analíticas en tiempo real", en: "Real-time analytics dashboard" },
+    demo1_desc: {
+      es: "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
+      en: "KPI visualisation, time-series charts and dynamic filters. Built with React and a WebSocket backend.",
+    },
+    demo2_title: { es: "App móvil de gestión de campo", en: "Field management mobile app" },
+    demo2_desc: {
+      es: "Aplicación offline-first para técnicos de campo: captura de formularios, firma digital y sincronización automática al recuperar señal.",
+      en: "Offline-first application for field technicians: form capture, digital signature and automatic sync on reconnection.",
+    },
+    demo3_title: { es: "Portal de autoservicio para clientes", en: "Customer self-service portal" },
+    demo3_desc: {
+      es: "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
+      en: "B2C portal with authentication, order history, invoice downloads and integrated support chat.",
+    },
+    demo4_title: { es: "API de integración ERP ↔ e-commerce", en: "ERP ↔ e-commerce integration API" },
+    demo4_desc: {
+      es: "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
+      en: "Middleware that syncs inventory, pricing and orders between a legacy ERP and an online store. Interactive documentation included.",
+    },
+    demo5_title: { es: "Sistema de notificaciones multicanal", en: "Multi-channel notification system" },
+    demo5_desc: {
+      es: "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
+      en: "Rule-driven notification engine: email, SMS, push and webhooks. Admin panel with delivery metrics.",
+    },
+    demo6_title: { es: "Plataforma de onboarding digital", en: "Digital onboarding platform" },
+    demo6_desc: {
+      es: "Flujo de alta de clientes con validación de identidad, firma electrónica y conexión a buró de crédito. Reduce el tiempo de onboarding de días a minutos.",
+      en: "Customer sign-up flow with identity verification, electronic signature and credit bureau connection. Reduces onboarding time from days to minutes.",
+    },
+
+    /* ---- about: who we are ---- */
+    wwa_eyebrow: { es: "Quiénes somos", en: "Who we are" },
+    wwa_title: {
+      es: "Un equipo construido para resolver los retos de software más exigentes",
+      en: "A team built to solve the most demanding software challenges",
+    },
+    wwa_lede: {
+      es: "Nacimos en México con una convicción clara: los equipos técnicos de alto nivel no deberían estar reservados solo para las grandes corporaciones.",
+      en: "We were born in Mexico with a clear conviction: high-level technical teams shouldn't be reserved only for large corporations.",
+    },
+    wwa_story_title: { es: "Cómo empezamos", en: "How we started" },
+    wwa_story_body: {
+      es: "Constelutions nació de la colaboración entre ingenieros y diseñadores que compartían una visión: construir una empresa donde el rigor técnico y el cuidado por el cliente fueran inseparables. Lo que comenzó como un pequeño equipo resolviendo proyectos puntuales creció hasta convertirse en una firma de consultoría y desarrollo con presencia regional, capaz de acompañar a clientes desde la idea inicial hasta la operación en producción.",
+      en: "Constelutions grew out of a collaboration between engineers and designers who shared a vision: to build a company where technical rigor and care for the client were inseparable. What started as a small team solving one-off projects grew into a consulting and development firm with regional reach, capable of supporting clients from the initial idea through to production.",
+    },
+    wwa_location_title: { es: "Dónde estamos", en: "Where we are" },
+    wwa_location_body: {
+      es: "Tenemos nuestra sede en México y operamos de forma remota con clientes en toda América Latina y Estados Unidos. Nuestro modelo de trabajo distribuido nos permite conformar el equipo correcto para cada proyecto, sin importar la zona horaria.",
+      en: "We are headquartered in Mexico and work remotely with clients across Latin America and the United States. Our distributed work model lets us assemble the right team for every project, regardless of time zone.",
+    },
+    wwa_badge_hq: { es: "México · CDMX", en: "Mexico · CDMX" },
+    wwa_badge_reach: { es: "LATAM · EE. UU.", en: "LATAM · USA" },
+    wwa_photo_label: { es: "Fotografía de sede", en: "Headquarters photo" },
+
+    /* ---- about: misión & visión ---- */
+    mv_mission_eyebrow: { es: "Misión", en: "Mission" },
+    mv_mission_title: {
+      es: "Construir software que importa",
+      en: "Build software that matters",
+    },
+    mv_mission_body: {
+      es: "Conectar ingeniería, diseño y estrategia para entregar productos digitales robustos, escalables y alineados a los objetivos de cada cliente. Trabajamos como una extensión del equipo de nuestros clientes, con transparencia, rigor técnico y compromiso real con los resultados.",
+      en: "Connect engineering, design and strategy to deliver robust, scalable digital products aligned with each client's goals. We work as an extension of our clients' teams, with transparency, technical rigor and a genuine commitment to results.",
+    },
+    mv_vision_eyebrow: { es: "Visión", en: "Vision" },
+    mv_vision_title: {
+      es: "Ser el socio técnico de referencia en LATAM",
+      en: "Become the go-to technical partner in LATAM",
+    },
+    mv_vision_body: {
+      es: "Convertirnos en el equipo al que empresas y emprendedores de América Latina acuden cuando enfrentan sus retos digitales más complejos — reconocidos por la calidad de nuestro trabajo, la solidez de nuestras relaciones y el impacto medible que generamos.",
+      en: "Become the team that companies and entrepreneurs across Latin America turn to when facing their most complex digital challenges — recognized for the quality of our work, the strength of our relationships and the measurable impact we generate.",
+    },
+
     /* ---- team ---- */
     team_eyebrow: { es: "Nuestro equipo", en: "Our team" },
     team_title: {

@@ -1,0 +1,265 @@
+---
+const projects: {
+  num: string;
+  industry: string;
+  industryKey: string;
+  titleKey: string;
+  title: string;
+  descKey: string;
+  desc: string;
+  tags: string[];
+  tagsKey: string;
+  outcomeKey: string;
+  outcome: string;
+  flip?: boolean;
+}[] = [
+  {
+    num: "01",
+    industry: "Fintech",
+    industryKey: "proj1_industry",
+    titleKey: "proj1_title",
+    title: "Plataforma de pagos y conciliación",
+    descKey: "proj1_desc",
+    desc: "Sistema de procesamiento de pagos en tiempo real con motor de conciliación automática, paneles de control para operadores y API pública para integraciones de terceros.",
+    tags: ["React", "Node.js", ".NET", "PostgreSQL", "AWS"],
+    tagsKey: "proj1_tags",
+    outcomeKey: "proj1_outcome",
+    outcome: "Reducción del 70 % en errores de conciliación manual",
+  },
+  {
+    num: "02",
+    industry: "Salud",
+    industryKey: "proj2_industry",
+    titleKey: "proj2_title",
+    title: "Expediente clínico electrónico",
+    descKey: "proj2_desc",
+    desc: "Solución de expediente clínico para red de clínicas privadas: historial de pacientes, agenda de citas, recetas digitales y módulo de facturación integrado con el SAT.",
+    tags: ["Vue", "Python", "FastAPI", "Azure", "SQL Server"],
+    tagsKey: "proj2_tags",
+    outcomeKey: "proj2_outcome",
+    outcome: "Digitalización de 120 000 expedientes en 3 clínicas",
+    flip: true,
+  },
+  {
+    num: "03",
+    industry: "Logística",
+    industryKey: "proj3_industry",
+    titleKey: "proj3_title",
+    title: "Sistema de rastreo de flotilla en tiempo real",
+    descKey: "proj3_desc",
+    desc: "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
+    tags: ["React Native", "Go", "Kafka", "GCP", "MongoDB"],
+    tagsKey: "proj3_tags",
+    outcomeKey: "proj3_outcome",
+    outcome: "Visibilidad al 100 % sobre 400 unidades activas",
+  },
+  {
+    num: "04",
+    industry: "E-commerce",
+    industryKey: "proj4_industry",
+    titleKey: "proj4_title",
+    title: "Marketplace B2B con catálogo inteligente",
+    descKey: "proj4_desc",
+    desc: "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
+    tags: ["Next.js", "Node.js", "Redis", "Stripe", "AWS"],
+    tagsKey: "proj4_tags",
+    outcomeKey: "proj4_outcome",
+    outcome: "3× crecimiento en volumen de órdenes en el primer año",
+    flip: true,
+  },
+];
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="proj_eyebrow">Proyectos destacados</span>
+      <h2 class="section-h" data-i18n="proj_title">
+        Lo que hemos construido
+      </h2>
+      <p class="lede" data-i18n="proj_lede">
+        Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y
+        generan resultados medibles para nuestros clientes.
+      </p>
+    </div>
+
+    {
+      projects.map((p) => (
+        <article class={`proj reveal${p.flip ? " flip" : ""}`}>
+          <div class="proj-visual">
+            <div class="proj-img">
+              <span class="proj-num">{p.num}</span>
+              <span class="photo-label" data-i18n="proj_screenshot">Captura de pantalla</span>
+            </div>
+            <div class="proj-tags">
+              {p.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div class="proj-info">
+            <span class="industry-badge" data-i18n={p.industryKey}>
+              {p.industry}
+            </span>
+            <h3 data-i18n={p.titleKey}>{p.title}</h3>
+            <p data-i18n={p.descKey}>{p.desc}</p>
+            <div class="proj-outcome">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 17l4-8 4 4 4-6 4 9" />
+              </svg>
+              <span data-i18n={p.outcomeKey}>{p.outcome}</span>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+
+    <p class="placeholder-note" data-i18n="proj_note">
+      Proyectos representativos — los nombres de clientes se omiten por confidencialidad.
+    </p>
+  </div>
+</section>
+
+<style>
+  .proj {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .proj:last-of-type {
+    border-bottom: 0;
+  }
+  .proj.flip {
+    direction: rtl;
+  }
+  .proj.flip > * {
+    direction: ltr;
+  }
+
+  .proj-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .proj-img {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      oklch(0.2 0.03 264) 0 14px,
+      oklch(0.18 0.03 264) 14px 28px
+    );
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-num {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+  .photo-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+  .proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    background: oklch(0.28 0.06 266 / 0.45);
+    border: 1px solid oklch(0.4 0.08 266 / 0.5);
+    border-radius: 6px;
+    padding: 4px 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .proj-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .industry-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid oklch(0.5 0.16 266 / 0.4);
+    border-radius: 999px;
+    padding: 4px 12px;
+    width: fit-content;
+  }
+  .proj-info h3 {
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.15;
+  }
+  .proj-info p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.68;
+    margin: 0;
+  }
+  .proj-outcome {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 20px;
+    background: oklch(0.28 0.06 266 / 0.25);
+    border: 1px solid oklch(0.4 0.1 266 / 0.4);
+    border-radius: var(--radius-sm);
+  }
+  .proj-outcome svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--ok);
+    fill: none;
+    stroke-width: 2;
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+  .proj-outcome span {
+    font-size: 14.5px;
+    color: var(--ok);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .placeholder-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  @media (max-width: 1040px) {
+    .proj,
+    .proj.flip {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      direction: ltr;
+    }
+    .proj.flip > * {
+      direction: ltr;
+    }
+  }
+</style>
