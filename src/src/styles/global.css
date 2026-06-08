@@ -38,6 +38,79 @@
   --radius-sm: 9px;
 }
 
+/* ============================================================
+   LIGHT THEME — system default via media query; overridden by
+   html[data-theme="dark"] / html[data-theme="light"]
+   ============================================================ */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: oklch(0.97 0.008 264);
+    --bg-2: oklch(0.94 0.012 264);
+    --surface: oklch(0.91 0.015 264);
+    --surface-2: oklch(0.87 0.018 264);
+    --surface-hi: oklch(0.83 0.02 264);
+
+    --ink: oklch(0.18 0.025 264);
+    --muted: oklch(0.42 0.022 264);
+    --faint: oklch(0.58 0.018 258);
+
+    --line: oklch(0.8 0.02 264);
+    --line-soft: oklch(0.8 0.02 264 / 0.55);
+
+    --accent: oklch(0.52 0.18 266);
+    --accent-bright: oklch(0.58 0.18 264);
+    --accent-2: oklch(0.45 0.14 228);
+    --accent-dim: oklch(0.42 0.18 266 / 0.3);
+    --star: oklch(0.3 0.04 240);
+    --ok: oklch(0.45 0.14 152);
+  }
+}
+
+/* Manual overrides — explicit data-theme wins over media query */
+html[data-theme="light"] {
+  --bg: oklch(0.97 0.008 264);
+  --bg-2: oklch(0.94 0.012 264);
+  --surface: oklch(0.91 0.015 264);
+  --surface-2: oklch(0.87 0.018 264);
+  --surface-hi: oklch(0.83 0.02 264);
+
+  --ink: oklch(0.18 0.025 264);
+  --muted: oklch(0.42 0.022 264);
+  --faint: oklch(0.58 0.018 258);
+
+  --line: oklch(0.8 0.02 264);
+  --line-soft: oklch(0.8 0.02 264 / 0.55);
+
+  --accent: oklch(0.52 0.18 266);
+  --accent-bright: oklch(0.58 0.18 264);
+  --accent-2: oklch(0.45 0.14 228);
+  --accent-dim: oklch(0.42 0.18 266 / 0.3);
+  --star: oklch(0.3 0.04 240);
+  --ok: oklch(0.45 0.14 152);
+}
+
+html[data-theme="dark"] {
+  --bg: oklch(0.155 0.022 264);
+  --bg-2: oklch(0.182 0.027 264);
+  --surface: oklch(0.214 0.029 264);
+  --surface-2: oklch(0.247 0.031 264);
+  --surface-hi: oklch(0.285 0.033 264);
+
+  --ink: oklch(0.972 0.008 250);
+  --muted: oklch(0.745 0.02 256);
+  --faint: oklch(0.6 0.02 258);
+
+  --line: oklch(0.33 0.028 264);
+  --line-soft: oklch(0.3 0.025 264 / 0.55);
+
+  --accent: oklch(0.66 0.16 266);
+  --accent-bright: oklch(0.72 0.16 264);
+  --accent-2: oklch(0.8 0.11 228);
+  --accent-dim: oklch(0.5 0.16 266 / 0.4);
+  --star: oklch(0.96 0.02 240);
+  --ok: oklch(0.72 0.14 152);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -201,6 +274,37 @@ h3 em {
 }
 
 /* ============================================================
+   LIGHT-MODE STARS — boosted opacity and size
+   Stars stay dark on a light background; compensated with a
+   darker, more saturated color and CSS scale.
+   Note: --base/--peak are set as inline styles per star by JS,
+   so opacity is overridden via a dedicated animation instead.
+   ============================================================ */
+html[data-theme="light"] .star {
+  --star: oklch(0.18 0.06 264);
+  scale: 2;
+  animation: twinkle-light var(--dur, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes twinkle-light {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .star {
+    --star: oklch(0.18 0.06 264);
+    scale: 2;
+    animation: twinkle-light var(--dur, 4s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+}
+
+/* ============================================================
    SECTION SHELL
    ============================================================ */
 .section {
@@ -242,7 +346,7 @@ h3 em {
   border-bottom: 1px solid transparent;
 }
 .site-header.scrolled {
-  background: oklch(0.155 0.022 264 / 0.82);
+  background: color-mix(in oklch, var(--bg) 82%, transparent);
   backdrop-filter: blur(14px);
   border-bottom-color: var(--line-soft);
 }
@@ -318,6 +422,38 @@ h3 em {
 }
 html[data-lang="es"] [data-lang-opt="es"],
 html[data-lang="en"] [data-lang-opt="en"] {
+  background: var(--accent);
+  color: white;
+}
+
+.themetoggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+.themetoggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--faint);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.18s;
+  padding: 0;
+}
+.themetoggle button svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+html[data-theme="dark"] [data-theme-opt="dark"],
+html[data-theme="light"] [data-theme-opt="light"] {
   background: var(--accent);
   color: white;
 }

@@ -83,8 +83,16 @@
       my = -999;
     });
 
+    function isLight() {
+      var t = document.documentElement.getAttribute("data-theme");
+      if (t === "light") return true;
+      if (t === "dark") return false;
+      return window.matchMedia("(prefers-color-scheme: light)").matches;
+    }
+
     function frame() {
       ctx.clearRect(0, 0, W, H);
+      var light = isLight();
       for (var i = 0; i < N; i++) {
         var a = nodes[i];
         a.x += a.vx;
@@ -104,8 +112,12 @@
             dy = a.y - b.y,
             d = Math.hypot(dx, dy);
           if (d < 120) {
-            ctx.strokeStyle = "oklch(0.66 0.16 266 / " + (0.42 * (1 - d / 120)).toFixed(3) + ")";
-            ctx.lineWidth = 1;
+            var alpha = (light ? 0.75 : 0.42) * (1 - d / 120);
+            var lineColor = light
+              ? "oklch(0.35 0.14 266 / " + alpha.toFixed(3) + ")"
+              : "oklch(0.66 0.16 266 / " + alpha.toFixed(3) + ")";
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = light ? 1.5 : 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -233,6 +245,17 @@
     });
   }
 
+  /* ---------- theme toggle ---------- */
+  function themeToggle() {
+    document.querySelectorAll("[data-set-theme]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var theme = btn.getAttribute("data-set-theme");
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("cl_theme", theme);
+      });
+    });
+  }
+
   /* ---------- contact form ---------- */
   function contactForm() {
     var form = document.querySelector("form.card");
@@ -256,6 +279,7 @@
     reveal();
     navHighlight();
     contactForm();
+    themeToggle();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

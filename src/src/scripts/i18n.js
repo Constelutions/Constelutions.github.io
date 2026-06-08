@@ -14,6 +14,7 @@
     nav_process: { es: "Proceso", en: "Process" },
     nav_team: { es: "Equipo", en: "Team" },
     nav_contact: { es: "Contacto", en: "Contact" },
+    theme_toggle_label: { es: "Cambiar tema", en: "Toggle theme" },
     cta_book: { es: "Agenda una consulta", en: "Book a consultation" },
     cta_start: { es: "Iniciar proyecto", en: "Start a project" },
     cta_services: { es: "Ver servicios", en: "View services" },
@@ -280,12 +281,18 @@
     },
 
     proj1_industry: { es: "Fintech", en: "Fintech" },
-    proj1_title: { es: "Plataforma de pagos y conciliación", en: "Payments & reconciliation platform" },
+    proj1_title: {
+      es: "Plataforma de pagos y conciliación",
+      en: "Payments & reconciliation platform",
+    },
     proj1_desc: {
       es: "Sistema de procesamiento de pagos en tiempo real con motor de conciliación automática, paneles de control para operadores y API pública para integraciones de terceros.",
       en: "Real-time payment processing system with automatic reconciliation engine, operator dashboards and a public API for third-party integrations.",
     },
-    proj1_outcome: { es: "Reducción del 70 % en errores de conciliación manual", en: "70 % reduction in manual reconciliation errors" },
+    proj1_outcome: {
+      es: "Reducción del 70 % en errores de conciliación manual",
+      en: "70 % reduction in manual reconciliation errors",
+    },
 
     proj2_industry: { es: "Salud", en: "Healthcare" },
     proj2_title: { es: "Expediente clínico electrónico", en: "Electronic medical record system" },
@@ -293,23 +300,38 @@
       es: "Solución de expediente clínico para red de clínicas privadas: historial de pacientes, agenda de citas, recetas digitales y módulo de facturación integrado con el SAT.",
       en: "Clinical record solution for a private clinic network: patient history, appointment scheduling, digital prescriptions and a billing module integrated with the tax authority.",
     },
-    proj2_outcome: { es: "Digitalización de 120 000 expedientes en 3 clínicas", en: "120,000 records digitized across 3 clinics" },
+    proj2_outcome: {
+      es: "Digitalización de 120 000 expedientes en 3 clínicas",
+      en: "120,000 records digitized across 3 clinics",
+    },
 
     proj3_industry: { es: "Logística", en: "Logistics" },
-    proj3_title: { es: "Sistema de rastreo de flotilla en tiempo real", en: "Real-time fleet tracking system" },
+    proj3_title: {
+      es: "Sistema de rastreo de flotilla en tiempo real",
+      en: "Real-time fleet tracking system",
+    },
     proj3_desc: {
       es: "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
       en: "Vehicle monitoring platform with real-time map, geofence alerts, route efficiency reports and a mobile app for drivers.",
     },
-    proj3_outcome: { es: "Visibilidad al 100 % sobre 400 unidades activas", en: "100 % visibility across 400 active units" },
+    proj3_outcome: {
+      es: "Visibilidad al 100 % sobre 400 unidades activas",
+      en: "100 % visibility across 400 active units",
+    },
 
     proj4_industry: { es: "E-commerce", en: "E-commerce" },
-    proj4_title: { es: "Marketplace B2B con catálogo inteligente", en: "B2B marketplace with smart catalogue" },
+    proj4_title: {
+      es: "Marketplace B2B con catálogo inteligente",
+      en: "B2B marketplace with smart catalogue",
+    },
     proj4_desc: {
       es: "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
       en: "Wholesale marketplace with a configurable catalogue, volume pricing engine, ERP integration and a custom order approval workflow.",
     },
-    proj4_outcome: { es: "3× crecimiento en volumen de órdenes en el primer año", en: "3× growth in order volume in the first year" },
+    proj4_outcome: {
+      es: "3× crecimiento en volumen de órdenes en el primer año",
+      en: "3× growth in order volume in the first year",
+    },
 
     /* ---- portfolio summary (home page) ---- */
     ps_eyebrow: { es: "Proyectos destacados", en: "Featured projects" },
@@ -340,7 +362,10 @@
     demo_type_mobile: { es: "App móvil", en: "Mobile app" },
     demo_type_api: { es: "API / Backend", en: "API / Backend" },
 
-    demo1_title: { es: "Dashboard de analíticas en tiempo real", en: "Real-time analytics dashboard" },
+    demo1_title: {
+      es: "Dashboard de analíticas en tiempo real",
+      en: "Real-time analytics dashboard",
+    },
     demo1_desc: {
       es: "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
       en: "KPI visualisation, time-series charts and dynamic filters. Built with React and a WebSocket backend.",
@@ -355,12 +380,18 @@
       es: "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
       en: "B2C portal with authentication, order history, invoice downloads and integrated support chat.",
     },
-    demo4_title: { es: "API de integración ERP ↔ e-commerce", en: "ERP ↔ e-commerce integration API" },
+    demo4_title: {
+      es: "API de integración ERP ↔ e-commerce",
+      en: "ERP ↔ e-commerce integration API",
+    },
     demo4_desc: {
       es: "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
       en: "Middleware that syncs inventory, pricing and orders between a legacy ERP and an online store. Interactive documentation included.",
     },
-    demo5_title: { es: "Sistema de notificaciones multicanal", en: "Multi-channel notification system" },
+    demo5_title: {
+      es: "Sistema de notificaciones multicanal",
+      en: "Multi-channel notification system",
+    },
     demo5_desc: {
       es: "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
       en: "Rule-driven notification engine: email, SMS, push and webhooks. Admin panel with delivery metrics.",

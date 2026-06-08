@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+
 interface Props {
   activePage?: string;
 }
@@ -119,6 +121,7 @@ const pages: { href: string; pageId: string; "data-i18n": string; label: string 
     </nav>
 
     <div class="nav-right">
+      <ThemeToggle />
       <div
         class="langtoggle"
         role="group"

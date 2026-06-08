@@ -57,28 +57,38 @@ const {
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!-- Inline theme init: runs before paint to prevent flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem("cl_theme");
+        var theme = (stored === "light" || stored === "dark") ? stored : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <Header activePage={activePage} />
 
     <slot />
 
-    {activePage !== "home" && (
-      <CtaBanner>
-        <a
-          href="/#contacto"
-          class="btn btn-primary btn-lg"
-          data-i18n="cta_book">
-          Agenda una consulta
-        </a>
-        <a
-          href="/services"
-          class="btn btn-ghost btn-lg"
-          data-i18n="cta_services">
-          Ver servicios
-        </a>
-      </CtaBanner>
-    )}
+    {
+      activePage !== "home" && (
+        <CtaBanner>
+          <a
+            href="/#contacto"
+            class="btn btn-primary btn-lg"
+            data-i18n="cta_book">
+            Agenda una consulta
+          </a>
+          <a
+            href="/services"
+            class="btn btn-ghost btn-lg"
+            data-i18n="cta_services">
+            Ver servicios
+          </a>
+        </CtaBanner>
+      )
+    }
 
     <Footer />
 
