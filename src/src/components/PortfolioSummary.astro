@@ -1,0 +1,204 @@
+---
+const projects: {
+  num: string;
+  industry: string;
+  industryKey: string;
+  titleKey: string;
+  title: string;
+  outcomeKey: string;
+  outcome: string;
+  tags: string[];
+  type: string;
+  typeKey: string;
+}[] = [
+  {
+    num: "01",
+    industry: "Fintech",
+    industryKey: "proj1_industry",
+    titleKey: "proj1_title",
+    title: "Plataforma de pagos y conciliación",
+    outcomeKey: "proj1_outcome",
+    outcome: "Reducción del 70 % en errores de conciliación manual",
+    tags: ["React", "Node.js", ".NET", "PostgreSQL", "AWS"],
+    type: "Plataforma web",
+    typeKey: "ps_type_platform",
+  },
+  {
+    num: "02",
+    industry: "Salud",
+    industryKey: "proj2_industry",
+    titleKey: "proj2_title",
+    title: "Expediente clínico electrónico",
+    outcomeKey: "proj2_outcome",
+    outcome: "Digitalización de 120 000 expedientes en 3 clínicas",
+    tags: ["Vue", "Python", "FastAPI", "Azure", "SQL Server"],
+    type: "Sistema de gestión",
+    typeKey: "ps_type_management",
+  },
+  {
+    num: "03",
+    industry: "Logística",
+    industryKey: "proj3_industry",
+    titleKey: "proj3_title",
+    title: "Sistema de rastreo de flotilla en tiempo real",
+    outcomeKey: "proj3_outcome",
+    outcome: "Visibilidad al 100 % sobre 400 unidades activas",
+    tags: ["React Native", "Go", "Kafka", "GCP", "MongoDB"],
+    type: "App móvil + backend",
+    typeKey: "ps_type_mobile",
+  },
+  {
+    num: "04",
+    industry: "E-commerce",
+    industryKey: "proj4_industry",
+    titleKey: "proj4_title",
+    title: "Marketplace B2B con catálogo inteligente",
+    outcomeKey: "proj4_outcome",
+    outcome: "3× crecimiento en volumen de órdenes en el primer año",
+    tags: ["Next.js", "Node.js", "Redis", "Stripe", "AWS"],
+    type: "Marketplace B2B",
+    typeKey: "ps_type_marketplace",
+  },
+];
+---
+
+<section class="section alt" id="portafolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="ps_eyebrow">Proyectos destacados</span>
+      <h2 class="section-h" data-i18n="ps_title">Sistemas que hemos construido</h2>
+      <p class="lede" data-i18n="ps_lede">
+        Productos en producción para fintech, salud, logística y e-commerce que generan resultados
+        medibles.
+      </p>
+    </div>
+    <div class="ps-grid">
+      {
+        projects.map((p) => (
+          <div class="ps-card reveal">
+            <div class="ps-card-head">
+              <span class="industry-badge" data-i18n={p.industryKey}>
+                {p.industry}
+              </span>
+              <span class="ps-num">{p.num}</span>
+            </div>
+            <h3 data-i18n={p.titleKey}>{p.title}</h3>
+            <div class="ps-outcome">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 17l4-8 4 4 4-6 4 9" />
+              </svg>
+              <span data-i18n={p.outcomeKey}>{p.outcome}</span>
+            </div>
+            <div class="ps-tags">
+              {p.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="ps-footer reveal">
+      <a href="/portfolio" class="btn btn-ghost" data-i18n="ps_cta">Ver portafolio</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .ps-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .ps-card:hover {
+    border-color: var(--accent);
+  }
+  .ps-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .industry-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid oklch(0.5 0.16 266 / 0.4);
+    border-radius: 999px;
+    padding: 4px 12px;
+  }
+  .ps-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+  .ps-card h3 {
+    font-size: 19px;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .ps-outcome {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+    background: oklch(0.28 0.06 266 / 0.25);
+    border: 1px solid oklch(0.4 0.1 266 / 0.4);
+    border-radius: var(--radius-sm);
+  }
+  .ps-outcome svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--ok);
+    fill: none;
+    stroke-width: 2;
+    flex: 0 0 auto;
+    margin-top: 2px;
+  }
+  .ps-outcome span {
+    font-size: 13.5px;
+    color: var(--ok);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .ps-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: auto;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    background: oklch(0.28 0.06 266 / 0.45);
+    border: 1px solid oklch(0.4 0.08 266 / 0.5);
+    border-radius: 6px;
+    padding: 3px 9px;
+    letter-spacing: 0.03em;
+  }
+  .ps-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 860px) {
+    .ps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

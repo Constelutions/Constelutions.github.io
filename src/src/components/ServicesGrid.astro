@@ -10,7 +10,7 @@
       <span
         class="eyebrow"
         data-i18n="svc_eyebrow">
-        Qué hacemos
+        ¿Qué hacemos?
       </span>
       <h2
         class="section-h"
@@ -116,6 +116,13 @@
         <span class="svc-more"><span data-i18n="svc_more">Conocer más</span> →</span>
       </a>
     </div>
+    <div class="svc-footer reveal">
+      <a
+        href="/services"
+        class="btn btn-ghost"
+        data-i18n="svc_all">Ver todos los servicios</a
+      >
+    </div>
   </div>
 </section>
 
@@ -196,6 +203,12 @@
     color: var(--accent-2);
     font-family: var(--mono);
     letter-spacing: 0.04em;
+  }
+
+  .svc-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
   }
 
   @media (max-width: 1040px) {

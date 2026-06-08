@@ -63,20 +63,22 @@ const {
 
     <slot />
 
-    <CtaBanner>
-      <a
-        href="/#contacto"
-        class="btn btn-primary btn-lg"
-        data-i18n="cta_book">
-        Agenda una consulta
-      </a>
-      <a
-        href="/services"
-        class="btn btn-ghost btn-lg"
-        data-i18n="cta_services">
-        Ver servicios
-      </a>
-    </CtaBanner>
+    {activePage !== "home" && (
+      <CtaBanner>
+        <a
+          href="/#contacto"
+          class="btn btn-primary btn-lg"
+          data-i18n="cta_book">
+          Agenda una consulta
+        </a>
+        <a
+          href="/services"
+          class="btn btn-ghost btn-lg"
+          data-i18n="cta_services">
+          Ver servicios
+        </a>
+      </CtaBanner>
+    )}
 
     <Footer />
 

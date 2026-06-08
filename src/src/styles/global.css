@@ -529,6 +529,10 @@ html[data-lang="en"] [data-lang-opt="en"] {
 .foot-col a:hover {
   color: var(--ink);
 }
+.foot-location {
+  font-size: 15px;
+  color: var(--muted);
+}
 .foot-bottom {
   display: flex;
   justify-content: space-between;

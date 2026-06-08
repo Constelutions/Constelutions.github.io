@@ -21,20 +21,27 @@
 
     /* ---- hero ---- */
     hero_eyebrow: {
-      es: "Desarrollo · Diseño · Integración",
-      en: "Development · Design · Integration",
+      es: "Software a la medida",
+      en: "Custom Software",
     },
     hero_head: {
-      es: "Cada solución, una <em>constelación</em> de talento",
-      en: "Every solution, a <em>constellation</em> of talent",
+      es: "Construimos el software que <em>impulsa</em> tu negocio",
+      en: "We build the software that <em>drives</em> your business",
     },
     hero_lede: {
-      es: "Conectamos ingeniería, diseño y estrategia para construir productos digitales que escalan. Un solo equipo, alineado a tus objetivos.",
-      en: "We connect engineering, design and strategy to build digital products that scale. One team, aligned to your goals.",
+      es: "Conectamos ingeniería, diseño y estrategia para construir productos digitales que se alinean a tus objetivos.",
+      en: "We connect engineering, design and strategy to build digital products that align with your goals.",
     },
+    chip_dev: { es: "Desarrollo de Software", en: "Software Development" },
+    chip_design: { es: "Diseño UI/UX", en: "UI/UX Design" },
+    chip_api: { es: "Integración de APIs", en: "API Integration" },
+    chip_devops: { es: "DevOps", en: "DevOps" },
+    chip_security: { es: "Ciberseguridad", en: "Cyber Security" },
+    chip_cloud: { es: "Arquitectura Cloud", en: "Cloud Architecture" },
 
     /* ---- services grid ---- */
-    svc_eyebrow: { es: "Qué hacemos", en: "What we do" },
+    svc_eyebrow: { es: "¿Qué hacemos?", en: "What we do" },
+    svc_all: { es: "Ver todos los servicios", en: "View all services" },
     svc_title: {
       es: "Servicios que cubren todo el ciclo de tu producto",
       en: "Services that cover your product's full lifecycle",
@@ -67,6 +74,7 @@
 
     /* ---- consulting specialties ---- */
     spec_eyebrow: { es: "Consultoría especializada", en: "Specialized consulting" },
+    spec_all: { es: "Ver todas las consultorías", en: "View all consulting services" },
     spec_title: {
       es: "Ocho disciplinas para fortalecer tu operación técnica",
       en: "Eight disciplines to strengthen your technical operation",
@@ -117,7 +125,7 @@
     },
 
     /* ---- values / why us ---- */
-    why_eyebrow: { es: "Por qué Constelutions", en: "Why Constelutions" },
+    why_eyebrow: { es: "¿Por qué Constelutions?", en: "Why Constelutions?" },
     why_title: {
       es: "Un socio técnico en quien puedes confiar",
       en: "A technical partner you can trust",
@@ -303,6 +311,19 @@
     },
     proj4_outcome: { es: "3× crecimiento en volumen de órdenes en el primer año", en: "3× growth in order volume in the first year" },
 
+    /* ---- portfolio summary (home page) ---- */
+    ps_eyebrow: { es: "Proyectos destacados", en: "Featured projects" },
+    ps_title: { es: "Sistemas que hemos construido", en: "Systems we have built" },
+    ps_lede: {
+      es: "Productos en producción para fintech, salud, logística y e-commerce que generan resultados medibles.",
+      en: "Production products for fintech, healthcare, logistics and e-commerce that generate measurable results.",
+    },
+    ps_cta: { es: "Ver portafolio", en: "View portfolio" },
+    ps_type_platform: { es: "Plataforma web", en: "Web platform" },
+    ps_type_management: { es: "Sistema de gestión", en: "Management system" },
+    ps_type_mobile: { es: "App móvil + backend", en: "Mobile app + backend" },
+    ps_type_marketplace: { es: "Marketplace B2B", en: "B2B marketplace" },
+
     demos_eyebrow: { es: "Demos en vivo", en: "Live demos" },
     demos_title: { es: "Mira nuestro trabajo en acción", en: "See our work in action" },
     demos_lede: {
@@ -477,8 +498,8 @@
     sp_crumb: { es: "Inicio / Servicios", en: "Home / Services" },
     sp_eyebrow: { es: "Servicios", en: "Services" },
     sp_title: {
-      es: "Capacidades completas para construir, integrar y escalar.",
-      en: "Full capabilities to build, integrate and scale.",
+      es: "Capacidades completas para construir, integrar y escalar",
+      en: "Full capabilities to build, integrate and scale",
     },
     sp_lede: {
       es: "Cuatro servicios principales y ocho especialidades de consultoría, diseñados para empresas y equipos técnicos.",
