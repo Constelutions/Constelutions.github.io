@@ -1,5 +1,7 @@
 ---
+import { getServices } from "../repositories/servicesRepository";
 
+const services = await getServices();
 ---
 
 <section
@@ -103,26 +105,15 @@
               data-i18n="opt_default"
               >Selecciona una opción</option
             >
-            <option
-              value="dev"
-              data-i18n="opt_dev"
-              >Desarrollo de Software</option
-            >
-            <option
-              value="design"
-              data-i18n="opt_design"
-              >Diseño UI/UX</option
-            >
-            <option
-              value="integration"
-              data-i18n="opt_integration"
-              >Integración de APIs y Sistemas</option
-            >
-            <option
-              value="consulting"
-              data-i18n="opt_consulting"
-              >Consultoría</option
-            >
+            {
+              services.map((svc) => (
+                <option
+                  value={svc.id}
+                  data-i18n={svc.title_i18n}>
+                  {svc.title}
+                </option>
+              ))
+            }
             <option
               value="other"
               data-i18n="opt_other"
