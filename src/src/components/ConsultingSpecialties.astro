@@ -1,5 +1,8 @@
 ---
+import { getServiceById } from "../repositories/servicesRepository";
 
+const consulting = await getServiceById("consultoria");
+const specialties = consulting?.features ?? [];
 ---
 
 <section
@@ -24,52 +27,22 @@
       </p>
     </div>
     <div class="spec-grid reveal">
-      <div class="spec">
-        <span class="sn">01</span><h4 data-i18n="sp1_t">Arquitectura</h4><p data-i18n="sp1_d">
-          Diseño de sistemas escalables, resilientes y mantenibles.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">02</span><h4 data-i18n="sp2_t">Automatización</h4><p data-i18n="sp2_d">
-          CI/CD, IaC y flujos que eliminan el trabajo manual.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">03</span><h4 data-i18n="sp3_t">Revisión de Código</h4><p data-i18n="sp3_d">
-          Evaluación experta para elevar calidad y consistencia.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">04</span><h4 data-i18n="sp4_t">Ciberseguridad</h4><p data-i18n="sp4_d">
-          Auditorías, buenas prácticas y protección de datos.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">05</span><h4 data-i18n="sp5_t">Bases de Datos</h4><p data-i18n="sp5_d">
-          Modelado, optimización y alta disponibilidad.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">06</span><h4 data-i18n="sp6_t">DevOps</h4><p data-i18n="sp6_d">
-          Entrega continua y operación confiable en la nube.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">07</span><h4 data-i18n="sp7_t">Observabilidad</h4><p data-i18n="sp7_d">
-          Métricas, logs y trazas para ver todo tu sistema.
-        </p>
-      </div>
-      <div class="spec">
-        <span class="sn">08</span><h4 data-i18n="sp8_t">Rendimiento</h4><p data-i18n="sp8_d">
-          Diagnóstico y tuning para sistemas rápidos y eficientes.
-        </p>
-      </div>
+      {
+        specialties.map((s, i) => (
+          <div class="spec">
+            <span class="sn">{String(i + 1).padStart(2, "0")}</span>
+            <h4 data-i18n={s.title_i18n}>{s.title}</h4>
+            <p data-i18n={s.desc_i18n}>{s.desc}</p>
+          </div>
+        ))
+      }
     </div>
     <div class="spec-footer reveal">
       <a
         href="/services#consultoria"
         class="btn btn-ghost"
-        data-i18n="spec_all">Ver todas las consultorías</a
+        data-i18n="spec_all"
+        >Ver todas las consultorías</a
       >
     </div>
   </div>

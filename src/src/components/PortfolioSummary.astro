@@ -1,73 +1,27 @@
 ---
-const projects: {
-  num: string;
-  industry: string;
-  industryKey: string;
-  titleKey: string;
-  title: string;
-  outcomeKey: string;
-  outcome: string;
-  tags: string[];
-  type: string;
-  typeKey: string;
-}[] = [
-  {
-    num: "01",
-    industry: "Fintech",
-    industryKey: "proj1_industry",
-    titleKey: "proj1_title",
-    title: "Plataforma de pagos y conciliación",
-    outcomeKey: "proj1_outcome",
-    outcome: "Reducción del 70 % en errores de conciliación manual",
-    tags: ["React", "Node.js", ".NET", "PostgreSQL", "AWS"],
-    type: "Plataforma web",
-    typeKey: "ps_type_platform",
-  },
-  {
-    num: "02",
-    industry: "Salud",
-    industryKey: "proj2_industry",
-    titleKey: "proj2_title",
-    title: "Expediente clínico electrónico",
-    outcomeKey: "proj2_outcome",
-    outcome: "Digitalización de 120 000 expedientes en 3 clínicas",
-    tags: ["Vue", "Python", "FastAPI", "Azure", "SQL Server"],
-    type: "Sistema de gestión",
-    typeKey: "ps_type_management",
-  },
-  {
-    num: "03",
-    industry: "Logística",
-    industryKey: "proj3_industry",
-    titleKey: "proj3_title",
-    title: "Sistema de rastreo de flotilla en tiempo real",
-    outcomeKey: "proj3_outcome",
-    outcome: "Visibilidad al 100 % sobre 400 unidades activas",
-    tags: ["React Native", "Go", "Kafka", "GCP", "MongoDB"],
-    type: "App móvil + backend",
-    typeKey: "ps_type_mobile",
-  },
-  {
-    num: "04",
-    industry: "E-commerce",
-    industryKey: "proj4_industry",
-    titleKey: "proj4_title",
-    title: "Marketplace B2B con catálogo inteligente",
-    outcomeKey: "proj4_outcome",
-    outcome: "3× crecimiento en volumen de órdenes en el primer año",
-    tags: ["Next.js", "Node.js", "Redis", "Stripe", "AWS"],
-    type: "Marketplace B2B",
-    typeKey: "ps_type_marketplace",
-  },
-];
+import { getProjects } from "../repositories/projectsRepository";
+
+const projects = (await getProjects()).slice(0, 4);
 ---
 
-<section class="section alt" id="portafolio">
+<section
+  class="section"
+  id="portafolio">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" data-i18n="ps_eyebrow">Proyectos destacados</span>
-      <h2 class="section-h" data-i18n="ps_title">Sistemas que hemos construido</h2>
-      <p class="lede" data-i18n="ps_lede">
+      <span
+        class="eyebrow"
+        data-i18n="ps_eyebrow"
+        >Proyectos destacados</span
+      >
+      <h2
+        class="section-h"
+        data-i18n="ps_title">
+        Sistemas que hemos construido
+      </h2>
+      <p
+        class="lede"
+        data-i18n="ps_lede">
         Productos en producción para fintech, salud, logística y e-commerce que generan resultados
         medibles.
       </p>
@@ -77,17 +31,19 @@ const projects: {
         projects.map((p) => (
           <div class="ps-card reveal">
             <div class="ps-card-head">
-              <span class="industry-badge" data-i18n={p.industryKey}>
+              <span
+                class="industry-badge"
+                data-i18n={p.industry_i18n}>
                 {p.industry}
               </span>
               <span class="ps-num">{p.num}</span>
             </div>
-            <h3 data-i18n={p.titleKey}>{p.title}</h3>
+            <h3 data-i18n={p.title_i18n}>{p.title}</h3>
             <div class="ps-outcome">
               <svg viewBox="0 0 24 24">
                 <path d="M3 17l4-8 4 4 4-6 4 9" />
               </svg>
-              <span data-i18n={p.outcomeKey}>{p.outcome}</span>
+              <span data-i18n={p.outcome_i18n}>{p.outcome}</span>
             </div>
             <div class="ps-tags">
               {p.tags.map((tag) => (
@@ -99,7 +55,12 @@ const projects: {
       }
     </div>
     <div class="ps-footer reveal">
-      <a href="/portfolio" class="btn btn-ghost" data-i18n="ps_cta">Ver portafolio</a>
+      <a
+        href="/portfolio"
+        class="btn btn-ghost"
+        data-i18n="ps_cta"
+        >Ver portafolio</a
+      >
     </div>
   </div>
 </section>

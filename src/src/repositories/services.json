@@ -1,0 +1,175 @@
+[
+  {
+    "desc": "Construimos aplicaciones web y móviles a la medida de tu negocio, con arquitectura sólida y código mantenible que crece contigo.",
+    "desc_i18n": "sd1_desc",
+    "features": [
+      {
+        "desc": "SPA, dashboards y plataformas con React, Next.js y más.",
+        "desc_i18n": "sd1_f1_d",
+        "title": "Aplicaciones web",
+        "title_i18n": "sd1_f1_t"
+      },
+      {
+        "desc": "iOS y Android, nativo o multiplataforma.",
+        "desc_i18n": "sd1_f2_d",
+        "title": "Apps móviles",
+        "title_i18n": "sd1_f2_t"
+      },
+      {
+        "desc": "Servicios escalables, seguros y bien documentados.",
+        "desc_i18n": "sd1_f3_d",
+        "title": "Backend & APIs",
+        "title_i18n": "sd1_f3_t"
+      },
+      {
+        "desc": "Migración y refactor de sistemas heredados.",
+        "desc_i18n": "sd1_f4_d",
+        "title": "Modernización",
+        "title_i18n": "sd1_f4_t"
+      }
+    ],
+    "iconPaths": [
+      "M8 7l-5 5 5 5",
+      "M16 7l5 5-5 5",
+      "M13 4l-2 16"
+    ],
+    "id": "desarrollo",
+    "num": "01",
+    "title": "Desarrollo de Software",
+    "title_i18n": "svc1_t"
+  },
+  {
+    "desc": "Diseñamos experiencias digitales claras y atractivas, centradas en tus usuarios y en los objetivos de tu negocio.",
+    "desc_i18n": "sd2_desc",
+    "features": [
+      {
+        "desc": "Entrevistas, flujos y arquitectura de información.",
+        "desc_i18n": "sd2_f1_d",
+        "title": "Investigación UX",
+        "title_i18n": "sd2_f1_t"
+      },
+      {
+        "desc": "Sistemas de diseño consistentes y accesibles.",
+        "desc_i18n": "sd2_f2_d",
+        "title": "Diseño de interfaz",
+        "title_i18n": "sd2_f2_t"
+      },
+      {
+        "desc": "Prototipos interactivos para validar antes de construir.",
+        "desc_i18n": "sd2_f3_d",
+        "title": "Prototipado",
+        "title_i18n": "sd2_f3_t"
+      },
+      {
+        "desc": "Validación con usuarios reales e iteración.",
+        "desc_i18n": "sd2_f4_d",
+        "title": "Pruebas de usabilidad",
+        "title_i18n": "sd2_f4_t"
+      }
+    ],
+    "iconPaths": [
+      "rect:3,4,18,16,2",
+      "M3 9h18",
+      "M9 9v11"
+    ],
+    "iconType": "uiux",
+    "id": "diseno",
+    "num": "02",
+    "title": "Diseño UI/UX",
+    "title_i18n": "svc2_t"
+  },
+  {
+    "desc": "Conectamos tus herramientas, servicios y fuentes de datos para que tu operación funcione como un sistema unificado.",
+    "desc_i18n": "sd3_desc",
+    "features": [
+      {
+        "desc": "REST, GraphQL y webhooks entre plataformas.",
+        "desc_i18n": "sd3_f1_d",
+        "title": "Integración de APIs",
+        "title_i18n": "sd3_f1_t"
+      },
+      {
+        "desc": "Flujos confiables entre sistemas y bases de datos.",
+        "desc_i18n": "sd3_f2_d",
+        "title": "Sincronización de datos",
+        "title_i18n": "sd3_f2_t"
+      },
+      {
+        "desc": "Pagos, ERP, CRM y servicios de terceros.",
+        "desc_i18n": "sd3_f3_d",
+        "title": "Servicios externos",
+        "title_i18n": "sd3_f3_t"
+      },
+      {
+        "desc": "Procesos automatizados que ahorran tiempo.",
+        "desc_i18n": "sd3_f4_d",
+        "title": "Automatización",
+        "title_i18n": "sd3_f4_t"
+      }
+    ],
+    "iconType": "integrations",
+    "id": "integraciones",
+    "num": "03",
+    "title": "Integración de APIs y Sistemas",
+    "title_i18n": "svc3_t"
+  },
+  {
+    "desc": "Ponemos a tu disposición especialistas que elevan el estándar técnico de tu equipo, por proyecto o de forma continua. Estas son nuestras ocho áreas de consultoría:",
+    "desc_i18n": "sd4_desc",
+    "features": [
+      {
+        "desc": "Diseño de sistemas escalables, resilientes y mantenibles.",
+        "desc_i18n": "sp1_d",
+        "title": "Arquitectura",
+        "title_i18n": "sp1_t"
+      },
+      {
+        "desc": "CI/CD, IaC y flujos que eliminan el trabajo manual.",
+        "desc_i18n": "sp2_d",
+        "title": "Automatización",
+        "title_i18n": "sp2_t"
+      },
+      {
+        "desc": "Evaluación experta para elevar calidad y consistencia.",
+        "desc_i18n": "sp3_d",
+        "title": "Revisión de Código",
+        "title_i18n": "sp3_t"
+      },
+      {
+        "desc": "Auditorías, buenas prácticas y protección de datos.",
+        "desc_i18n": "sp4_d",
+        "title": "Ciberseguridad",
+        "title_i18n": "sp4_t"
+      },
+      {
+        "desc": "Modelado, optimización y alta disponibilidad.",
+        "desc_i18n": "sp5_d",
+        "title": "Bases de Datos",
+        "title_i18n": "sp5_t"
+      },
+      {
+        "desc": "Entrega continua y operación confiable en la nube.",
+        "desc_i18n": "sp6_d",
+        "title": "DevOps",
+        "title_i18n": "sp6_t"
+      },
+      {
+        "desc": "Métricas, logs y trazas para ver todo tu sistema.",
+        "desc_i18n": "sp7_d",
+        "title": "Observabilidad",
+        "title_i18n": "sp7_t"
+      },
+      {
+        "desc": "Diagnóstico y tuning para sistemas rápidos y eficientes.",
+        "desc_i18n": "sp8_d",
+        "title": "Rendimiento",
+        "title_i18n": "sp8_t"
+      }
+    ],
+    "iconType": "consulting",
+    "id": "consultoria",
+    "num": "04",
+    "title": "Servicios de Consultoría",
+    "title_i18n": "svc4_t"
+  }
+]

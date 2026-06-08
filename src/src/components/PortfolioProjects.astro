@@ -1,85 +1,27 @@
 ---
-const projects: {
-  num: string;
-  industry: string;
-  industryKey: string;
-  titleKey: string;
-  title: string;
-  descKey: string;
-  desc: string;
-  tags: string[];
-  tagsKey: string;
-  outcomeKey: string;
-  outcome: string;
-  flip?: boolean;
-}[] = [
-  {
-    num: "01",
-    industry: "Fintech",
-    industryKey: "proj1_industry",
-    titleKey: "proj1_title",
-    title: "Plataforma de pagos y conciliación",
-    descKey: "proj1_desc",
-    desc: "Sistema de procesamiento de pagos en tiempo real con motor de conciliación automática, paneles de control para operadores y API pública para integraciones de terceros.",
-    tags: ["React", "Node.js", ".NET", "PostgreSQL", "AWS"],
-    tagsKey: "proj1_tags",
-    outcomeKey: "proj1_outcome",
-    outcome: "Reducción del 70 % en errores de conciliación manual",
-  },
-  {
-    num: "02",
-    industry: "Salud",
-    industryKey: "proj2_industry",
-    titleKey: "proj2_title",
-    title: "Expediente clínico electrónico",
-    descKey: "proj2_desc",
-    desc: "Solución de expediente clínico para red de clínicas privadas: historial de pacientes, agenda de citas, recetas digitales y módulo de facturación integrado con el SAT.",
-    tags: ["Vue", "Python", "FastAPI", "Azure", "SQL Server"],
-    tagsKey: "proj2_tags",
-    outcomeKey: "proj2_outcome",
-    outcome: "Digitalización de 120 000 expedientes en 3 clínicas",
-    flip: true,
-  },
-  {
-    num: "03",
-    industry: "Logística",
-    industryKey: "proj3_industry",
-    titleKey: "proj3_title",
-    title: "Sistema de rastreo de flotilla en tiempo real",
-    descKey: "proj3_desc",
-    desc: "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
-    tags: ["React Native", "Go", "Kafka", "GCP", "MongoDB"],
-    tagsKey: "proj3_tags",
-    outcomeKey: "proj3_outcome",
-    outcome: "Visibilidad al 100 % sobre 400 unidades activas",
-  },
-  {
-    num: "04",
-    industry: "E-commerce",
-    industryKey: "proj4_industry",
-    titleKey: "proj4_title",
-    title: "Marketplace B2B con catálogo inteligente",
-    descKey: "proj4_desc",
-    desc: "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
-    tags: ["Next.js", "Node.js", "Redis", "Stripe", "AWS"],
-    tagsKey: "proj4_tags",
-    outcomeKey: "proj4_outcome",
-    outcome: "3× crecimiento en volumen de órdenes en el primer año",
-    flip: true,
-  },
-];
+import { getProjects } from "../repositories/projectsRepository";
+
+const projects = await getProjects();
 ---
 
 <section class="section">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" data-i18n="proj_eyebrow">Proyectos destacados</span>
-      <h2 class="section-h" data-i18n="proj_title">
+      <span
+        class="eyebrow"
+        data-i18n="proj_eyebrow"
+        >Proyectos destacados</span
+      >
+      <h2
+        class="section-h"
+        data-i18n="proj_title">
         Lo que hemos construido
       </h2>
-      <p class="lede" data-i18n="proj_lede">
-        Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y
-        generan resultados medibles para nuestros clientes.
+      <p
+        class="lede"
+        data-i18n="proj_lede">
+        Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y generan
+        resultados medibles para nuestros clientes.
       </p>
     </div>
 
@@ -89,7 +31,11 @@ const projects: {
           <div class="proj-visual">
             <div class="proj-img">
               <span class="proj-num">{p.num}</span>
-              <span class="photo-label" data-i18n="proj_screenshot">Captura de pantalla</span>
+              <span
+                class="photo-label"
+                data-i18n="proj_screenshot">
+                Captura de pantalla
+              </span>
             </div>
             <div class="proj-tags">
               {p.tags.map((tag) => (
@@ -98,23 +44,27 @@ const projects: {
             </div>
           </div>
           <div class="proj-info">
-            <span class="industry-badge" data-i18n={p.industryKey}>
+            <span
+              class="industry-badge"
+              data-i18n={p.industry_i18n}>
               {p.industry}
             </span>
-            <h3 data-i18n={p.titleKey}>{p.title}</h3>
-            <p data-i18n={p.descKey}>{p.desc}</p>
+            <h3 data-i18n={p.title_i18n}>{p.title}</h3>
+            <p data-i18n={p.desc_i18n}>{p.desc}</p>
             <div class="proj-outcome">
               <svg viewBox="0 0 24 24">
                 <path d="M3 17l4-8 4 4 4-6 4 9" />
               </svg>
-              <span data-i18n={p.outcomeKey}>{p.outcome}</span>
+              <span data-i18n={p.outcome_i18n}>{p.outcome}</span>
             </div>
           </div>
         </article>
       ))
     }
 
-    <p class="placeholder-note" data-i18n="proj_note">
+    <p
+      class="placeholder-note"
+      data-i18n="proj_note">
       Proyectos representativos — los nombres de clientes se omiten por confidencialidad.
     </p>
   </div>

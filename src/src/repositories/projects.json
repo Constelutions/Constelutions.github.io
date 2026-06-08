@@ -1,0 +1,80 @@
+[
+    {
+        "desc": "Sistema de procesamiento de pagos en tiempo real con motor de conciliación automática, paneles de control para operadores y API pública para integraciones de terceros.",
+        "desc_i18n": "proj1_desc",
+        "industry": "Fintech",
+        "industry_i18n": "proj1_industry",
+        "num": "01",
+        "outcome": "Reducción del 70 % en errores de conciliación manual",
+        "outcome_i18n": "proj1_outcome",
+        "tags": [
+            "React",
+            "Node.js",
+            ".NET",
+            "PostgreSQL",
+            "AWS"
+        ],
+        "tags_i18n": "proj1_tags",
+        "title": "Plataforma de pagos y conciliación",
+        "title_i18n": "proj1_title"
+    },
+    {
+        "desc": "Solución de expediente clínico para red de clínicas privadas: historial de pacientes, agenda de citas, recetas digitales y módulo de facturación integrado con el SAT.",
+        "desc_i18n": "proj2_desc",
+        "flip": true,
+        "industry": "Salud",
+        "industry_i18n": "proj2_industry",
+        "num": "02",
+        "outcome": "Digitalización de 120 000 expedientes en 3 clínicas",
+        "outcome_i18n": "proj2_outcome",
+        "tags": [
+            "Vue",
+            "Python",
+            "FastAPI",
+            "Azure",
+            "SQL Server"
+        ],
+        "tags_i18n": "proj2_tags",
+        "title": "Expediente clínico electrónico",
+        "title_i18n": "proj2_title"
+    },
+    {
+        "desc": "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
+        "desc_i18n": "proj3_desc",
+        "industry": "Logística",
+        "industry_i18n": "proj3_industry",
+        "num": "03",
+        "outcome": "Visibilidad al 100 % sobre 400 unidades activas",
+        "outcome_i18n": "proj3_outcome",
+        "tags": [
+            "React Native",
+            "Go",
+            "Kafka",
+            "GCP",
+            "MongoDB"
+        ],
+        "tags_i18n": "proj3_tags",
+        "title": "Sistema de rastreo de flotilla en tiempo real",
+        "title_i18n": "proj3_title"
+    },
+    {
+        "desc": "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
+        "desc_i18n": "proj4_desc",
+        "flip": true,
+        "industry": "E-commerce",
+        "industry_i18n": "proj4_industry",
+        "num": "04",
+        "outcome": "3× crecimiento en volumen de órdenes en el primer año",
+        "outcome_i18n": "proj4_outcome",
+        "tags": [
+            "Next.js",
+            "Node.js",
+            "Redis",
+            "Stripe",
+            "AWS"
+        ],
+        "tags_i18n": "proj4_tags",
+        "title": "Marketplace B2B con catálogo inteligente",
+        "title_i18n": "proj4_title"
+    }
+]
