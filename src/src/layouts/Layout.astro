@@ -61,9 +61,22 @@ const {
     <script is:inline>
       (function () {
         var stored = localStorage.getItem("cl_theme");
-        var theme = (stored === "light" || stored === "dark") ? stored : "dark";
+        var theme = stored === "light" || stored === "dark" ? stored : "dark";
         document.documentElement.setAttribute("data-theme", theme);
       })();
+    </script>
+
+    <!-- Prevent browser scroll restoration from jumping past the hero on refresh -->
+    <script is:inline>
+      if (history.scrollRestoration) history.scrollRestoration = "manual";
+      window.addEventListener("load", function () {
+        if (window.location.hash) {
+          var target = document.querySelector(window.location.hash);
+          if (target) target.scrollIntoView();
+        } else {
+          window.scrollTo(0, 0);
+        }
+      });
     </script>
   </head>
   <body>
