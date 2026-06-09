@@ -468,6 +468,34 @@ html[data-theme="light"] [data-theme-opt="light"] {
   color: white;
 }
 
+/* Shared mobile single-button style used by ThemeToggle and LangToggle */
+.toggle-mobile {
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.18s;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+.toggle-mobile:hover {
+  border-color: var(--muted);
+  background: oklch(0.24 0.03 264 / 0.5);
+}
+.toggle-mobile svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -732,11 +760,37 @@ html[data-theme="light"] [data-theme-opt="light"] {
     right: 0;
     background: var(--bg-2);
     border-bottom: 1px solid var(--line);
-    padding: 18px 40px 24px;
+    padding: 18px 22px 24px;
     align-items: flex-start;
+  }
+  .nav-links.open a {
+    padding: 10px 4px;
+    width: 100%;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav-links.open a:last-child {
+    border-bottom: 0;
   }
   .feature-list {
     grid-template-columns: 1fr;
+  }
+  .page-head {
+    padding: 130px 0 60px;
+  }
+  .page-head h1 {
+    font-size: clamp(32px, 7vw, 52px);
+    margin: 20px 0 22px;
+  }
+  .page-head .lede {
+    max-width: 100%;
+    font-size: 17px;
+  }
+  .page-head .hero-cta {
+    margin-top: 32px;
+  }
+  .section-h {
+    font-size: clamp(26px, 6vw, 40px);
   }
 }
 @media (max-width: 1040px) {
@@ -751,7 +805,7 @@ html[data-theme="light"] [data-theme-opt="light"] {
 }
 @media (max-width: 600px) {
   .wrap {
-    padding: 0 22px;
+    padding: 0 24px;
   }
   .foot-grid {
     grid-template-columns: 1fr;
@@ -762,6 +816,33 @@ html[data-theme="light"] [data-theme-opt="light"] {
     text-align: center;
   }
   .section {
-    padding: 76px 0;
+    padding: 64px 0;
+  }
+  .page-head {
+    padding: 110px 0 52px;
+  }
+  .page-head h1 {
+    font-size: clamp(28px, 8.5vw, 44px);
+    margin: 16px 0 20px;
+  }
+  .page-head .lede {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .page-head .hero-cta {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .page-head .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .section-head {
+    margin-bottom: 36px;
+  }
+  .btn-lg {
+    padding: 13px 22px;
+    font-size: 15px;
   }
 }

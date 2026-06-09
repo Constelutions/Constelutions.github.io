@@ -5,7 +5,7 @@ const stats = await getStats();
 ---
 
 <section
-  class="section"
+  class="section stats-section"
   style="padding-top:0;padding-bottom:0;transform:translateY(-55px)">
   <div class="wrap">
     <div class="stats reveal">
@@ -81,7 +81,12 @@ const stats = await getStats();
   }
   @media (max-width: 600px) {
     .stats {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    :global(.stats-section) {
+      transform: none !important;
+      padding-top: 0 !important;
+      padding-bottom: 60px !important;
     }
   }
 </style>
