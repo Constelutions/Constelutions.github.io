@@ -394,6 +394,16 @@ html[data-theme="light"] .star {
 .nav-links a.active {
   color: var(--ink);
 }
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  border-radius: 1px;
+}
 .nav-right {
   display: flex;
   align-items: center;
