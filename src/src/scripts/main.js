@@ -198,53 +198,6 @@
     });
   }
 
-  /* ---------- nav section highlight ---------- */
-  function navHighlight() {
-    var anchorLinks = document.querySelectorAll(".nav-links a[href^='/#']");
-    var homeLink = document.querySelector(".nav-links a[href='/']");
-    if (!("IntersectionObserver" in window)) return;
-
-    var allNavLinks = document.querySelectorAll(".nav-links a");
-    var sectionMap = {};
-    anchorLinks.forEach(function (a) {
-      var id = a.getAttribute("href").replace("/#", "");
-      var el = document.getElementById(id);
-      if (el) sectionMap[id] = a;
-    });
-
-    if (!Object.keys(sectionMap).length) return;
-
-    var visible = {};
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (en) {
-          visible[en.target.id] = en.intersectionRatio;
-        });
-        var best = null,
-          bestRatio = -1;
-        Object.keys(visible).forEach(function (id) {
-          if (visible[id] > bestRatio) {
-            bestRatio = visible[id];
-            best = id;
-          }
-        });
-        allNavLinks.forEach(function (a) {
-          a.classList.remove("active");
-        });
-        if (best && bestRatio > 0 && sectionMap[best]) {
-          sectionMap[best].classList.add("active");
-        } else if (homeLink) {
-          homeLink.classList.add("active");
-        }
-      },
-      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
-    );
-
-    Object.keys(sectionMap).forEach(function (id) {
-      io.observe(document.getElementById(id));
-    });
-  }
-
   /* ---------- theme toggle ---------- */
   function themeToggle() {
     document.querySelectorAll("[data-set-theme]").forEach(function (btn) {
@@ -277,7 +230,6 @@
     header();
     mobileNav();
     reveal();
-    navHighlight();
     contactForm();
     themeToggle();
   }
