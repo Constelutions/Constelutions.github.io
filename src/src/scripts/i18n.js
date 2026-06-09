@@ -422,7 +422,7 @@
       es: "Tenemos nuestra sede en México y operamos de forma remota con clientes en toda América Latina y Estados Unidos. Nuestro modelo de trabajo distribuido nos permite conformar el equipo correcto para cada proyecto, sin importar la zona horaria.",
       en: "We are headquartered in Mexico and work remotely with clients across Latin America and the United States. Our distributed work model lets us assemble the right team for every project, regardless of time zone.",
     },
-    wwa_badge_hq: { es: "México · CDMX", en: "Mexico · CDMX" },
+    wwa_badge_hq: { es: "México", en: "Mexico" },
     wwa_badge_reach: { es: "LATAM · EE. UU.", en: "LATAM · USA" },
     wwa_photo_label: { es: "Fotografía de sede", en: "Headquarters photo" },
 
