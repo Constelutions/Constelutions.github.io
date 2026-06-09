@@ -1,5 +1,7 @@
 ---
+import { getStaff } from "../repositories/companyRepository";
 
+const staff = await getStaff();
 ---
 
 <section
@@ -24,58 +26,23 @@
       </p>
     </div>
     <div class="team">
-      <div class="member reveal">
-        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
-          <div
-            class="nm"
-            data-i18n="team_name">
-            Nombre Apellido
-          </div><div
-            class="rl"
-            data-i18n="m1_r">
-            Desarrollo de Software
+      {
+        staff.map((member) => (
+          <div class="member reveal">
+            <div class="photo">
+              <span data-i18n="team_photo">Foto</span>
+            </div>
+            <div class="info">
+              <div class="nm">{member.name}</div>
+              <div
+                class="rl"
+                data-i18n={member.role_i18n}>
+                {member.role}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="member reveal">
-        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
-          <div
-            class="nm"
-            data-i18n="team_name">
-            Nombre Apellido
-          </div><div
-            class="rl"
-            data-i18n="m2_r">
-            Diseño UI/UX
-          </div>
-        </div>
-      </div>
-      <div class="member reveal">
-        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
-          <div
-            class="nm"
-            data-i18n="team_name">
-            Nombre Apellido
-          </div><div
-            class="rl"
-            data-i18n="m3_r">
-            Arquitectura &amp; DevOps
-          </div>
-        </div>
-      </div>
-      <div class="member reveal">
-        <div class="photo"><span data-i18n="team_photo">Foto</span></div><div class="info">
-          <div
-            class="nm"
-            data-i18n="team_name">
-            Nombre Apellido
-          </div><div
-            class="rl"
-            data-i18n="m4_r">
-            Consultoría &amp; Estrategia
-          </div>
-        </div>
-      </div>
+        ))
+      }
     </div>
     <p
       class="placeholder-note"

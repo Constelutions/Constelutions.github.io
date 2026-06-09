@@ -1,5 +1,7 @@
 ---
+import { getContact } from "../repositories/companyRepository";
 
+const contact = await getContact();
 ---
 
 <footer class="site-footer">
@@ -78,7 +80,7 @@
         </p>
         <div class="foot-soc">
           <a
-            href="https://linkedin.com/company/constelutions"
+            href={contact.linkedin}
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer">
@@ -91,7 +93,7 @@
             >
           </a>
           <a
-            href="https://github.com/Constelutions"
+            href={contact.github}
             aria-label="GitHub"
             target="_blank"
             rel="noopener noreferrer">
@@ -109,16 +111,32 @@
         <h5 data-i18n="foot_services">Servicios</h5>
         <ul>
           <li>
-            <a href="/services" data-i18n="svc1_t">Desarrollo de Software</a>
+            <a
+              href="/services"
+              data-i18n="svc1_t"
+              >Desarrollo de Software</a
+            >
           </li>
           <li>
-            <a href="/services" data-i18n="svc2_t">Diseño UI/UX</a>
+            <a
+              href="/services"
+              data-i18n="svc2_t"
+              >Diseño UI/UX</a
+            >
           </li>
           <li>
-            <a href="/services" data-i18n="svc3_t">Integración de APIs</a>
+            <a
+              href="/services"
+              data-i18n="svc3_t"
+              >Integración de APIs</a
+            >
           </li>
           <li>
-            <a href="/services" data-i18n="svc4_t">Consultoría</a>
+            <a
+              href="/services"
+              data-i18n="svc4_t"
+              >Consultoría</a
+            >
           </li>
         </ul>
       </div>
@@ -126,28 +144,50 @@
         <h5 data-i18n="foot_company">Empresa</h5>
         <ul>
           <li>
-            <a href="/" data-i18n="nav_home">Inicio</a>
+            <a
+              href="/"
+              data-i18n="nav_home"
+              >Inicio</a
+            >
           </li>
           <li>
-            <a href="/portfolio" data-i18n="nav_portfolio">Portafolio</a>
+            <a
+              href="/portfolio"
+              data-i18n="nav_portfolio"
+              >Portafolio</a
+            >
           </li>
           <li>
-            <a href="/about" data-i18n="nav_about">Nosotros</a>
+            <a
+              href="/about"
+              data-i18n="nav_about"
+              >Nosotros</a
+            >
           </li>
           <li>
-            <a href="/#proceso" data-i18n="nav_process">Proceso</a>
+            <a
+              href="/#proceso"
+              data-i18n="nav_process"
+              >Proceso</a
+            >
           </li>
         </ul>
       </div>
       <div class="foot-col">
         <h5 data-i18n="foot_contact">Contacto</h5>
         <ul>
-          <li><a href="mailto:hola@constelutions.com">hola@constelutions.com</a></li>
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
           <li>
-            <a href="/#contacto" data-i18n="cta_talk">Hablemos</a>
+            <a
+              href="/#contacto"
+              data-i18n="cta_talk"
+              >Hablemos</a
+            >
           </li>
           <li class="foot-location">
-            <span data-i18n="ci_loc_k">Ubicación</span>: <span data-i18n="ci_loc_v">México</span>
+            <span data-i18n="ci_loc_k">Ubicación</span>: <span data-i18n={contact.location_i18n}
+              >{contact.location}</span
+            >
           </li>
         </ul>
       </div>

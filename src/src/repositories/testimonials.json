@@ -1,0 +1,23 @@
+[
+    {
+        "quote_i18n": "q1",
+        "quote": "Constelutions entendió nuestra operación desde el primer día y entregó una plataforma que nuestro equipo realmente usa.",
+        "name": "Nombre Apellido",
+        "role_i18n": "q1_r",
+        "role": "Dirección de Operaciones"
+    },
+    {
+        "quote_i18n": "q2",
+        "quote": "El nivel técnico y la comunicación fueron excepcionales. Se sintieron como parte de nuestro equipo.",
+        "name": "Nombre Apellido",
+        "role_i18n": "q2_r",
+        "role": "CTO, Empresa de Tecnología"
+    },
+    {
+        "quote_i18n": "q3",
+        "quote": "Modernizamos sistemas críticos sin interrumpir la operación. Resultados claros y medibles.",
+        "name": "Nombre Apellido",
+        "role_i18n": "q3_r",
+        "role": "Gerente de TI"
+    }
+]

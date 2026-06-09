@@ -1,85 +1,27 @@
 ---
-const demos: {
-  num: string;
-  titleKey: string;
-  title: string;
-  descKey: string;
-  desc: string;
-  typeKey: string;
-  type: string;
-  tags: string[];
-}[] = [
-  {
-    num: "01",
-    titleKey: "demo1_title",
-    title: "Dashboard de analíticas en tiempo real",
-    descKey: "demo1_desc",
-    desc: "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
-    typeKey: "demo_type_web",
-    type: "App web",
-    tags: ["React", "D3.js", "WebSockets"],
-  },
-  {
-    num: "02",
-    titleKey: "demo2_title",
-    title: "App móvil de gestión de campo",
-    descKey: "demo2_desc",
-    desc: "Aplicación offline-first para técnicos de campo: captura de formularios, firma digital y sincronización automática al recuperar señal.",
-    typeKey: "demo_type_mobile",
-    type: "App móvil",
-    tags: ["React Native", "SQLite", "REST API"],
-  },
-  {
-    num: "03",
-    titleKey: "demo3_title",
-    title: "Portal de autoservicio para clientes",
-    descKey: "demo3_desc",
-    desc: "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
-    typeKey: "demo_type_web",
-    type: "App web",
-    tags: ["Next.js", "Auth.js", "Stripe"],
-  },
-  {
-    num: "04",
-    titleKey: "demo4_title",
-    title: "API de integración ERP ↔ e-commerce",
-    descKey: "demo4_desc",
-    desc: "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
-    typeKey: "demo_type_api",
-    type: "API / Backend",
-    tags: [".NET", "OpenAPI", "RabbitMQ"],
-  },
-  {
-    num: "05",
-    titleKey: "demo5_title",
-    title: "Sistema de notificaciones multicanal",
-    descKey: "demo5_desc",
-    desc: "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
-    typeKey: "demo_type_api",
-    type: "API / Backend",
-    tags: ["Go", "Redis", "Twilio"],
-  },
-  {
-    num: "06",
-    titleKey: "demo6_title",
-    title: "Plataforma de onboarding digital",
-    descKey: "demo6_desc",
-    desc: "Flujo de alta de clientes con validación de identidad, firma electrónica y conexión a buró de crédito. Reduce el tiempo de onboarding de días a minutos.",
-    typeKey: "demo_type_web",
-    type: "App web",
-    tags: ["Vue", "Python", "AWS Lambda"],
-  },
-];
+import { getDemos } from "../repositories/demosRepository";
+
+const demos = await getDemos();
 ---
 
-<section class="section alt" id="demos">
+<section
+  class="section alt"
+  id="demos">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" data-i18n="demos_eyebrow">Demos en vivo</span>
-      <h2 class="section-h" data-i18n="demos_title">
+      <span
+        class="eyebrow"
+        data-i18n="demos_eyebrow"
+        >Demos en vivo</span
+      >
+      <h2
+        class="section-h"
+        data-i18n="demos_title">
         Mira nuestro trabajo en acción
       </h2>
-      <p class="lede" data-i18n="demos_lede">
+      <p
+        class="lede"
+        data-i18n="demos_lede">
         Aplicaciones funcionales que puedes explorar ahora mismo. Cada demo refleja patrones reales
         que aplicamos en proyectos de clientes.
       </p>
@@ -91,16 +33,20 @@ const demos: {
           <div class="demo-card reveal">
             <div class="demo-screen">
               <span class="demo-num">{d.num}</span>
-              <span class="demo-type-pill" data-i18n={d.typeKey}>
+              <span
+                class="demo-type-pill"
+                data-i18n={d.type_i18n}>
                 {d.type}
               </span>
-              <span class="photo-label" data-i18n="demo_screenshot">
+              <span
+                class="photo-label"
+                data-i18n="demo_screenshot">
                 Demo en vivo próximamente
               </span>
             </div>
             <div class="demo-body">
-              <h3 data-i18n={d.titleKey}>{d.title}</h3>
-              <p data-i18n={d.descKey}>{d.desc}</p>
+              <h3 data-i18n={d.title_i18n}>{d.title}</h3>
+              <p data-i18n={d.desc_i18n}>{d.desc}</p>
               <div class="demo-footer">
                 <div class="demo-tags">
                   {d.tags.map((tag) => (
@@ -121,7 +67,9 @@ const demos: {
       }
     </div>
 
-    <p class="placeholder-note" data-i18n="demo_note">
+    <p
+      class="placeholder-note"
+      data-i18n="demo_note">
       Los demos estarán disponibles próximamente — contáctanos si quieres ver una demostración en
       vivo.
     </p>

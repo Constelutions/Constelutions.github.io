@@ -1,6 +1,8 @@
 ---
+import { getContact } from "../repositories/companyRepository";
 import { getServices } from "../repositories/servicesRepository";
 
+const contact = await getContact();
 const services = await getServices();
 ---
 
@@ -32,7 +34,7 @@ const services = await getServices();
           data-i18n="ci_email_k">
           Correo
         </div><div class="v">
-          <a href="mailto:hola@constelutions.com">hola@constelutions.com</a>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </div>
       </div>
       <div class="ci">
@@ -40,7 +42,7 @@ const services = await getServices();
           class="k"
           data-i18n="ci_phone_k">
           Teléfono
-        </div><div class="v"><a href="tel:+520000000000">+52 000 000 0000</a></div>
+        </div><div class="v"><a href={contact.phoneHref}>{contact.phone}</a></div>
       </div>
       <div class="ci">
         <div
@@ -50,7 +52,7 @@ const services = await getServices();
         </div><div
           class="v"
           data-i18n="ci_loc_v">
-          México
+          {contact.location}
         </div>
       </div>
       <div class="ci">
@@ -61,7 +63,7 @@ const services = await getServices();
         </div><div
           class="v"
           data-i18n="ci_hours_v">
-          Lun–Vie · 9:00–18:00 (CST)
+          {contact.hours}
         </div>
       </div>
     </div>

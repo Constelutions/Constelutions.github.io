@@ -1,0 +1,86 @@
+[
+    {
+        "num": "01",
+        "title_i18n": "demo1_title",
+        "title": "Dashboard de analíticas en tiempo real",
+        "desc_i18n": "demo1_desc",
+        "desc": "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
+        "type_i18n": "demo_type_web",
+        "type": "App web",
+        "tags": [
+            "React",
+            "D3.js",
+            "WebSockets"
+        ]
+    },
+    {
+        "num": "02",
+        "title_i18n": "demo2_title",
+        "title": "App móvil de gestión de campo",
+        "desc_i18n": "demo2_desc",
+        "desc": "Aplicación offline-first para técnicos de campo: captura de formularios, firma digital y sincronización automática al recuperar señal.",
+        "type_i18n": "demo_type_mobile",
+        "type": "App móvil",
+        "tags": [
+            "React Native",
+            "SQLite",
+            "REST API"
+        ]
+    },
+    {
+        "num": "03",
+        "title_i18n": "demo3_title",
+        "title": "Portal de autoservicio para clientes",
+        "desc_i18n": "demo3_desc",
+        "desc": "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
+        "type_i18n": "demo_type_web",
+        "type": "App web",
+        "tags": [
+            "Next.js",
+            "Auth.js",
+            "Stripe"
+        ]
+    },
+    {
+        "num": "04",
+        "title_i18n": "demo4_title",
+        "title": "API de integración ERP ↔ e-commerce",
+        "desc_i18n": "demo4_desc",
+        "desc": "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
+        "type_i18n": "demo_type_api",
+        "type": "API / Backend",
+        "tags": [
+            ".NET",
+            "OpenAPI",
+            "RabbitMQ"
+        ]
+    },
+    {
+        "num": "05",
+        "title_i18n": "demo5_title",
+        "title": "Sistema de notificaciones multicanal",
+        "desc_i18n": "demo5_desc",
+        "desc": "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
+        "type_i18n": "demo_type_api",
+        "type": "API / Backend",
+        "tags": [
+            "Go",
+            "Redis",
+            "Twilio"
+        ]
+    },
+    {
+        "num": "06",
+        "title_i18n": "demo6_title",
+        "title": "Plataforma de onboarding digital",
+        "desc_i18n": "demo6_desc",
+        "desc": "Flujo de alta de clientes con validación de identidad, firma electrónica y conexión a buró de crédito. Reduce el tiempo de onboarding de días a minutos.",
+        "type_i18n": "demo_type_web",
+        "type": "App web",
+        "tags": [
+            "Vue",
+            "Python",
+            "AWS Lambda"
+        ]
+    }
+]

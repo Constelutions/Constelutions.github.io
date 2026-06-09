@@ -1,5 +1,7 @@
 ---
+import { getStats } from "../repositories/statsRepository";
 
+const stats = await getStats();
 ---
 
 <section
@@ -7,34 +9,29 @@
   style="padding-top:0;padding-bottom:0;transform:translateY(-55px)">
   <div class="wrap">
     <div class="stats reveal">
-      <div class="stat">
-        <div class="num">4</div><div
-          class="lab"
-          data-i18n="stat1_l">
-          Servicios principales
-        </div>
-      </div>
-      <div class="stat">
-        <div class="num">8</div><div
-          class="lab"
-          data-i18n="stat2_l">
-          Especialidades de consultoría
-        </div>
-      </div>
-      <div class="stat">
-        <div class="num"><em>ES / EN</em></div><div
-          class="lab"
-          data-i18n="stat3_l">
-          Equipo bilingüe
-        </div>
-      </div>
-      <div class="stat">
-        <div class="num">100<em>%</em></div><div
-          class="lab"
-          data-i18n="stat4_l">
-          Enfocados en tu éxito
-        </div>
-      </div>
+      {
+        stats.map((s) => (
+          <div class="stat">
+            <div class="num">
+              {s.suffix === true ? (
+                <em>{s.value}</em>
+              ) : typeof s.suffix === "string" ? (
+                <>
+                  {s.value}
+                  <em>{s.suffix}</em>
+                </>
+              ) : (
+                s.value
+              )}
+            </div>
+            <div
+              class="lab"
+              data-i18n={s.label_i18n}>
+              {s.label}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

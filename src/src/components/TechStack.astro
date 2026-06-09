@@ -1,31 +1,7 @@
 ---
-const tech: { category: string; "data-i18n": string; items: string[] }[] = [
-  {
-    category: "Frontend",
-    "data-i18n": "tech_frontend",
-    items: ["React", "Next.js", "Vue", "Svelte", "Angular"],
-  },
-  {
-    category: "Backend",
-    "data-i18n": "tech_backend",
-    items: ["Node.js", "Python", "Go", ".NET", "Java"],
-  },
-  {
-    category: "Móvil",
-    "data-i18n": "tech_mobile",
-    items: ["Android & iOS", "Flutter", "React Native", ".NET MAUI", "GraphQL"],
-  },
-  {
-    category: "Cloud & DevOps",
-    "data-i18n": "tech_cloud",
-    items: ["AWS", "Azure", "Kubernetes", "GCP", "Terraform"],
-  },
-  {
-    category: "Base de datos",
-    "data-i18n": "tech_database",
-    items: ["PostgreSQL", "Microsoft SQL Server", "My SQL", "MongoDB", "Redis"],
-  },
-];
+import { getTechStack } from "../repositories/techStackRepository";
+
+const tech = await getTechStack();
 ---
 
 <section class="section">
@@ -51,7 +27,7 @@ const tech: { category: string; "data-i18n": string; items: string[] }[] = [
       {
         tech.map((t) => (
           <div class="tech-col">
-            <h4 data-i18n={t["data-i18n"]}>{t.category}</h4>
+            <h4 data-i18n={t.category_i18n}>{t.category}</h4>
             <ul>
               {t.items.map((i) => (
                 <li>{i}</li>
