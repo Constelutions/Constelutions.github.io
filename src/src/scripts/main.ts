@@ -6,16 +6,16 @@
   "use strict";
 
   /* ---------- starfield ---------- */
-  function buildStars() {
-    document.querySelectorAll("[data-stars]").forEach(function (field) {
+  function buildStars(): void {
+    document.querySelectorAll<HTMLElement>("[data-stars]").forEach(function (field) {
       if (field.dataset.built) return;
       field.dataset.built = "1";
-      var n = parseInt(field.dataset.stars, 10) || 60;
-      var html = "";
-      for (var i = 0; i < n; i++) {
-        var size = Math.random() < 0.85 ? Math.random() * 1.4 + 0.6 : Math.random() * 1.6 + 1.8;
-        var base = (Math.random() * 0.3 + 0.1).toFixed(2);
-        var peak = (Math.random() * 0.4 + 0.5).toFixed(2);
+      const n = parseInt(field.dataset.stars ?? "60", 10) || 60;
+      let html = "";
+      for (let i = 0; i < n; i++) {
+        const size = Math.random() < 0.85 ? Math.random() * 1.4 + 0.6 : Math.random() * 1.6 + 1.8;
+        const base = (Math.random() * 0.3 + 0.1).toFixed(2);
+        const peak = (Math.random() * 0.4 + 0.5).toFixed(2);
         html +=
           '<span class="star" style="left:' +
           (Math.random() * 100).toFixed(2) +
@@ -40,30 +40,42 @@
   }
 
   /* ---------- live constellation canvas ---------- */
-  function buildConstellation() {
-    var canvas = document.querySelector("[data-constellation]");
+  interface ConstellationNode {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    r: number;
+    big: boolean;
+  }
+
+  function buildConstellation(): void {
+    const canvas = document.querySelector<HTMLCanvasElement>("[data-constellation]");
     if (!canvas || canvas.dataset.built) return;
     canvas.dataset.built = "1";
-    var ctx = canvas.getContext("2d");
-    var W,
-      H,
-      dpr,
-      mx = -999,
-      my = -999;
-    var N = 36;
-    var nodes = [];
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    function resize() {
+    // Both canvas and ctx are verified non-null above; closures below capture them safely.
+    const safeCanvas = canvas as HTMLCanvasElement;
+    const safeCtx = ctx as CanvasRenderingContext2D;
+
+    let W = 0, H = 0, dpr = 1;
+    let mx = -999, my = -999;
+    const N = 36;
+    const nodes: ConstellationNode[] = [];
+
+    function resize(): void {
       dpr = window.devicePixelRatio || 1;
-      var r = canvas.getBoundingClientRect();
+      const r = safeCanvas.getBoundingClientRect();
       W = r.width;
       H = r.height;
-      canvas.width = Math.max(1, W * dpr);
-      canvas.height = Math.max(1, H * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      safeCanvas.width = Math.max(1, W * dpr);
+      safeCanvas.height = Math.max(1, H * dpr);
+      safeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     resize();
-    for (var i = 0; i < N; i++) {
+    for (let i = 0; i < N; i++) {
       nodes.push({
         x: Math.random() * W,
         y: Math.random() * H,
@@ -73,85 +85,85 @@
         big: Math.random() < 0.18,
       });
     }
-    canvas.addEventListener("mousemove", function (e) {
-      var r = canvas.getBoundingClientRect();
+    safeCanvas.addEventListener("mousemove", function (e: MouseEvent) {
+      const r = safeCanvas.getBoundingClientRect();
       mx = e.clientX - r.left;
       my = e.clientY - r.top;
     });
-    canvas.addEventListener("mouseleave", function () {
+    safeCanvas.addEventListener("mouseleave", function () {
       mx = -999;
       my = -999;
     });
 
-    function isLight() {
-      var t = document.documentElement.getAttribute("data-theme");
+    function isLight(): boolean {
+      const t = document.documentElement.getAttribute("data-theme");
       if (t === "light") return true;
       if (t === "dark") return false;
       return window.matchMedia("(prefers-color-scheme: light)").matches;
     }
 
-    function frame() {
-      ctx.clearRect(0, 0, W, H);
-      var light = isLight();
-      for (var i = 0; i < N; i++) {
-        var a = nodes[i];
+    function frame(): void {
+      safeCtx.clearRect(0, 0, W, H);
+      const light = isLight();
+      for (let i = 0; i < N; i++) {
+        const a = nodes[i];
         a.x += a.vx;
         a.y += a.vy;
         if (a.x < 0 || a.x > W) a.vx *= -1;
         if (a.y < 0 || a.y > H) a.vy *= -1;
-        var ddx = mx - a.x,
+        const ddx = mx - a.x,
           ddy = my - a.y,
           dd = Math.hypot(ddx, ddy);
         if (dd < 140) {
           a.x += ddx * 0.002;
           a.y += ddy * 0.002;
         }
-        for (var j = i + 1; j < N; j++) {
-          var b = nodes[j];
-          var dx = a.x - b.x,
+        for (let j = i + 1; j < N; j++) {
+          const b = nodes[j];
+          const dx = a.x - b.x,
             dy = a.y - b.y,
             d = Math.hypot(dx, dy);
           if (d < 120) {
-            var alpha = (light ? 0.75 : 0.42) * (1 - d / 120);
-            var lineColor = light
+            const alpha = (light ? 0.75 : 0.42) * (1 - d / 120);
+            const lineColor = light
               ? "oklch(0.35 0.14 266 / " + alpha.toFixed(3) + ")"
               : "oklch(0.66 0.16 266 / " + alpha.toFixed(3) + ")";
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = light ? 1.5 : 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
+            safeCtx.strokeStyle = lineColor;
+            safeCtx.lineWidth = light ? 1.5 : 1;
+            safeCtx.beginPath();
+            safeCtx.moveTo(a.x, a.y);
+            safeCtx.lineTo(b.x, b.y);
+            safeCtx.stroke();
           }
         }
       }
-      for (var k = 0; k < N; k++) {
-        var n = nodes[k];
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.big ? n.r * 1.8 : n.r, 0, Math.PI * 2);
-        ctx.fillStyle = n.big ? "oklch(0.8 0.11 228)" : "oklch(0.92 0.02 240 / 0.85)";
+      for (let k = 0; k < N; k++) {
+        const n = nodes[k];
+        safeCtx.beginPath();
+        safeCtx.arc(n.x, n.y, n.big ? n.r * 1.8 : n.r, 0, Math.PI * 2);
+        safeCtx.fillStyle = n.big ? "oklch(0.8 0.11 228)" : "oklch(0.92 0.02 240 / 0.85)";
         if (n.big) {
-          ctx.shadowColor = "oklch(0.8 0.11 228)";
-          ctx.shadowBlur = 10;
+          safeCtx.shadowColor = "oklch(0.8 0.11 228)";
+          safeCtx.shadowBlur = 10;
         }
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        safeCtx.fill();
+        safeCtx.shadowBlur = 0;
       }
       requestAnimationFrame(frame);
     }
     frame();
     if (window.ResizeObserver) {
-      new ResizeObserver(resize).observe(canvas);
+      new ResizeObserver(resize).observe(safeCanvas);
     } else {
       window.addEventListener("resize", resize);
     }
   }
 
   /* ---------- header scroll state ---------- */
-  function header() {
-    var h = document.querySelector(".site-header");
+  function header(): void {
+    const h = document.querySelector<HTMLElement>(".site-header");
     if (!h) return;
-    var on = function () {
+    const on = function () {
       h.classList.toggle("scrolled", window.scrollY > 12);
     };
     on();
@@ -159,9 +171,9 @@
   }
 
   /* ---------- mobile nav ---------- */
-  function mobileNav() {
-    var btn = document.querySelector(".nav-toggle");
-    var links = document.querySelector(".nav-links");
+  function mobileNav(): void {
+    const btn = document.querySelector<HTMLElement>(".nav-toggle");
+    const links = document.querySelector<HTMLElement>(".nav-links");
     if (!btn || !links) return;
     btn.addEventListener("click", function () {
       links.classList.toggle("open");
@@ -174,15 +186,15 @@
   }
 
   /* ---------- reveal on scroll ---------- */
-  function reveal() {
-    var els = document.querySelectorAll(".reveal");
+  function reveal(): void {
+    const els = document.querySelectorAll<HTMLElement>(".reveal");
     if (!("IntersectionObserver" in window) || !els.length) {
       els.forEach(function (e) {
         e.classList.add("in");
       });
       return;
     }
-    var io = new IntersectionObserver(
+    const io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (en) {
           if (en.isIntersecting) {
@@ -199,10 +211,11 @@
   }
 
   /* ---------- theme toggle ---------- */
-  function themeToggle() {
-    document.querySelectorAll("[data-set-theme]").forEach(function (btn) {
+  function themeToggle(): void {
+    document.querySelectorAll<HTMLElement>("[data-set-theme]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var theme = btn.getAttribute("data-set-theme");
+        const theme = btn.getAttribute("data-set-theme");
+        if (!theme) return;
         document.documentElement.setAttribute("data-theme", theme);
         localStorage.setItem("cl_theme", theme);
       });
@@ -210,13 +223,13 @@
   }
 
   /* ---------- contact form ---------- */
-  function contactForm() {
-    var form = document.querySelector("form.card");
+  function contactForm(): void {
+    const form = document.querySelector<HTMLFormElement>("form.card");
     if (!form) return;
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", function (e: Event) {
       e.preventDefault();
-      var fields = form.querySelector(".form-fields");
-      var ok = form.querySelector(".form-success");
+      const fields = form.querySelector<HTMLElement>(".form-fields");
+      const ok = form.querySelector<HTMLElement>(".form-success");
       if (fields && ok) {
         fields.style.display = "none";
         ok.classList.add("show");
@@ -224,7 +237,7 @@
     });
   }
 
-  function init() {
+  function init(): void {
     buildStars();
     buildConstellation();
     header();

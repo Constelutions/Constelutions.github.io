@@ -5,7 +5,14 @@
 (function () {
   "use strict";
 
-  var DICT = {
+  type Lang = "es" | "en";
+
+  interface Translation {
+    es: string;
+    en: string;
+  }
+
+  const DICT: Record<string, Translation> = {
     /* ---- nav / global ---- */
     nav_home: { es: "Inicio", en: "Home" },
     nav_services: { es: "Servicios", en: "Services" },
@@ -618,54 +625,54 @@
     },
   };
 
-  function get(k, lang) {
-    return DICT[k] && DICT[k][lang] != null ? DICT[k][lang] : null;
+  function get(k: string, lang: Lang): string | null {
+    return DICT[k]?.[lang] ?? null;
   }
 
-  function apply(lang) {
-    var html = document.documentElement;
+  function apply(lang: Lang): void {
+    const html = document.documentElement;
     html.setAttribute("data-lang", lang);
     html.setAttribute("lang", lang);
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var v = get(el.getAttribute("data-i18n"), lang);
+    document.querySelectorAll<HTMLElement>("[data-i18n]").forEach(function (el) {
+      const v = get(el.getAttribute("data-i18n") ?? "", lang);
       if (v != null) el.textContent = v;
     });
-    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-      var v = get(el.getAttribute("data-i18n-html"), lang);
+    document.querySelectorAll<HTMLElement>("[data-i18n-html]").forEach(function (el) {
+      const v = get(el.getAttribute("data-i18n-html") ?? "", lang);
       if (v != null) el.innerHTML = v;
     });
-    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
-      el.getAttribute("data-i18n-attr")
+    document.querySelectorAll<HTMLElement>("[data-i18n-attr]").forEach(function (el) {
+      (el.getAttribute("data-i18n-attr") ?? "")
         .split(";")
         .forEach(function (pair) {
-          var p = pair.split(":");
+          const p = pair.split(":");
           if (p.length < 2) return;
-          var v = get(p[1].trim(), lang);
+          const v = get(p[1].trim(), lang);
           if (v != null) el.setAttribute(p[0].trim(), v);
         });
     });
     try {
       localStorage.setItem("cl_lang", lang);
-    } catch (e) {}
+    } catch (_e) { }
   }
 
-  function getLang() {
+  function getLang(): Lang {
     try {
-      return localStorage.getItem("cl_lang") || "es";
-    } catch (e) {
+      return (localStorage.getItem("cl_lang") as Lang) || "es";
+    } catch (_e) {
       return "es";
     }
   }
 
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-set-lang]");
+  document.addEventListener("click", function (e: MouseEvent) {
+    const b = (e.target as Element).closest<HTMLElement>("[data-set-lang]");
     if (b) {
       e.preventDefault();
-      apply(b.getAttribute("data-set-lang"));
+      apply(b.getAttribute("data-set-lang") as Lang);
     }
   });
 
-  var initial = getLang();
+  const initial = getLang();
   if (initial !== "es") {
     if (document.readyState === "loading")
       document.addEventListener("DOMContentLoaded", function () {
@@ -676,5 +683,8 @@
     document.documentElement.setAttribute("data-lang", "es");
   }
 
-  window.CLI18N = { apply: apply, getLang: getLang };
+  (window as Window & { CLI18N?: { apply: typeof apply; getLang: typeof getLang; }; }).CLI18N = {
+    apply,
+    getLang,
+  };
 })();
