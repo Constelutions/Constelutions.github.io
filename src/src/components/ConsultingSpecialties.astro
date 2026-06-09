@@ -1,13 +1,13 @@
 ---
 import { getServiceById } from "../repositories/servicesRepository";
 
-const consulting = await getServiceById("consultoria");
+const consulting = await getServiceById("consulting");
 const specialties = consulting?.features ?? [];
 ---
 
 <section
   class="section alt"
-  id="especialidades">
+  id="specialties">
   <div class="wrap">
     <div class="section-head reveal">
       <span
@@ -39,7 +39,7 @@ const specialties = consulting?.features ?? [];
     </div>
     <div class="spec-footer reveal">
       <a
-        href="/services#consultoria"
+        href="/services#consulting"
         class="btn btn-ghost"
         data-i18n="spec_all"
         >Ver todas las consultorías</a

@@ -6,7 +6,7 @@ const services = await getServices();
 
 <section
   class="section"
-  id="servicios">
+  id="services-section">
   <div class="wrap">
     <div class="section-head reveal">
       <span
@@ -34,14 +34,14 @@ const services = await getServices();
             class="svc-card reveal">
             <span class="svc-num">{svc.num}</span>
             <div class="svc-icon">
-              {svc.id === "desarrollo" && (
+              {svc.id === "development" && (
                 <svg viewBox="0 0 24 24">
                   <path d="M8 7l-5 5 5 5" />
                   <path d="M16 7l5 5-5 5" />
                   <path d="M13 4l-2 16" />
                 </svg>
               )}
-              {svc.id === "diseno" && (
+              {svc.id === "design" && (
                 <svg viewBox="0 0 24 24">
                   <rect
                     x="3"
@@ -54,7 +54,7 @@ const services = await getServices();
                   <path d="M9 9v11" />
                 </svg>
               )}
-              {svc.id === "integraciones" && (
+              {svc.id === "integrations" && (
                 <svg viewBox="0 0 24 24">
                   <circle
                     cx="5"
@@ -74,7 +74,7 @@ const services = await getServices();
                   <path d="M6.8 7.2 17.2 8M6.4 7.8 9.6 16M17.6 10.6 12.4 16.4" />
                 </svg>
               )}
-              {svc.id === "consultoria" && (
+              {svc.id === "consulting" && (
                 <svg viewBox="0 0 24 24">
                   <circle
                     cx="12"
