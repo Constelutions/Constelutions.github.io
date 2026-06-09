@@ -1,0 +1,75 @@
+---
+
+---
+
+<!-- Desktop: pill with ES / EN buttons -->
+<div
+  class="langtoggle"
+  role="group"
+  aria-label="Idioma / Language">
+  <button
+    type="button"
+    data-set-lang="es"
+    data-lang-opt="es"
+    >ES</button
+  >
+  <button
+    type="button"
+    data-set-lang="en"
+    data-lang-opt="en"
+    >EN</button
+  >
+</div>
+
+<!-- Mobile: single icon-button that shows the active language and cycles on click -->
+<button
+  class="toggle-mobile lang-toggle-mobile"
+  type="button"
+  aria-label="Idioma / Language"
+  data-lang-mobile>
+  <!-- ES label (shown when ES is active) -->
+  <span data-lang-mobile-label="es">ES</span>
+  <!-- EN label (shown when EN is active) -->
+  <span data-lang-mobile-label="en">EN</span>
+</button>
+
+<style>
+  /* Mobile button hidden on desktop */
+  .lang-toggle-mobile {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    /* Hide desktop pill */
+    .langtoggle {
+      display: none;
+    }
+    /* Show mobile button */
+    .lang-toggle-mobile {
+      display: inline-flex;
+    }
+    /* Show only the label for the active language */
+    [data-lang-mobile-label] {
+      display: none;
+    }
+    html[data-lang="es"] [data-lang-mobile-label="es"],
+    html[data-lang="en"] [data-lang-mobile-label="en"] {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const btn = document.querySelector<HTMLButtonElement>("[data-lang-mobile]");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      const current = document.documentElement.getAttribute("data-lang") ?? "es";
+      const next = current === "es" ? "en" : "es";
+      // Reuse the same apply() exposed by i18n.ts
+      const i18n = (window as Window & { CLI18N?: { apply: (l: string) => void } }).CLI18N;
+      if (i18n) i18n.apply(next as "es" | "en");
+    });
+  })();
+</script>

@@ -1,0 +1,152 @@
+---
+
+---
+
+<section
+  class="section"
+  id="about-us">
+  <div class="wrap split">
+    <div
+      class="section-head reveal"
+      style="margin-bottom:0">
+      <span
+        class="eyebrow"
+        data-i18n="why_eyebrow">
+        ¿Por qué Constelutions?
+      </span>
+      <h2
+        class="section-h"
+        data-i18n="why_title">
+        Un socio técnico en quien puedes confiar
+      </h2>
+      <p
+        class="lede"
+        data-i18n="why_lede">
+        No solo entregamos software: construimos relaciones de largo plazo basadas en transparencia
+        y resultados.
+      </p>
+    </div>
+    <div class="values reveal">
+      <div class="value">
+        <div class="vi">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2 7 7 2-7 2-2 7-2-7-7-2 7-2z"></path></svg>
+        </div>
+        <div>
+          <h4 data-i18n="val1_t">Equipo senior</h4><p data-i18n="val1_d">
+            Ingenieros y diseñadores con experiencia real en producción.
+          </p>
+        </div>
+      </div>
+      <div class="value">
+        <div class="vi">
+          <svg viewBox="0 0 24 24"
+            ><circle
+              cx="12"
+              cy="12"
+              r="9"
+            ></circle><path d="M3 12h18"></path><path d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"
+            ></path></svg
+          >
+        </div>
+        <div>
+          <h4 data-i18n="val2_t">Bilingüe ES / EN</h4><p data-i18n="val2_d">
+            Comunicación fluida con clientes en México, LATAM y EE. UU.
+          </p>
+        </div>
+      </div>
+      <div class="value">
+        <div class="vi">
+          <svg viewBox="0 0 24 24"
+            ><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"></path><path d="M9 12l2 2 4-4"
+            ></path></svg
+          >
+        </div>
+        <div>
+          <h4 data-i18n="val3_t">Rigor de ingeniería</h4><p data-i18n="val3_d">
+            Pruebas, revisión de código y estándares en cada entrega.
+          </p>
+        </div>
+      </div>
+      <div class="value">
+        <div class="vi">
+          <svg viewBox="0 0 24 24"
+            ><circle
+              cx="12"
+              cy="12"
+              r="3"
+            ></circle><ellipse
+              cx="12"
+              cy="12"
+              rx="9.5"
+              ry="4.2"
+            ></ellipse></svg
+          >
+        </div>
+        <div>
+          <h4 data-i18n="val4_t">Visión de largo plazo</h4><p data-i18n="val4_d">
+            Soluciones mantenibles que crecen junto con tu negocio.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .values {
+    display: grid;
+    gap: 14px;
+  }
+  .value {
+    display: flex;
+    gap: 20px;
+    padding: 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+  .value:hover {
+    border-color: var(--accent);
+  }
+  .value .vi {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: oklch(0.28 0.06 266);
+    border: 1px solid var(--line);
+  }
+  .value .vi svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--accent-2);
+    fill: none;
+    stroke-width: 1.6;
+  }
+  .value h4 {
+    font-size: 19px;
+    margin-bottom: 7px;
+  }
+  .value p {
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 1040px) {
+    .split {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>

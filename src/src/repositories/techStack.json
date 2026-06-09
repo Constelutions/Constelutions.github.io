@@ -1,0 +1,57 @@
+[
+    {
+        "category": "Frontend",
+        "category_i18n": "tech_frontend",
+        "items": [
+            "React",
+            "Next.js",
+            "Vue",
+            "Svelte",
+            "Angular"
+        ]
+    },
+    {
+        "category": "Backend",
+        "category_i18n": "tech_backend",
+        "items": [
+            "Node.js",
+            "Python",
+            "Go",
+            ".NET",
+            "Java"
+        ]
+    },
+    {
+        "category": "Móvil",
+        "category_i18n": "tech_mobile",
+        "items": [
+            "Android & iOS",
+            "Flutter",
+            "React Native",
+            ".NET MAUI",
+            "GraphQL"
+        ]
+    },
+    {
+        "category": "Cloud & DevOps",
+        "category_i18n": "tech_cloud",
+        "items": [
+            "AWS",
+            "Azure",
+            "Kubernetes",
+            "GCP",
+            "Terraform"
+        ]
+    },
+    {
+        "category": "Base de datos",
+        "category_i18n": "tech_database",
+        "items": [
+            "PostgreSQL",
+            "Microsoft SQL Server",
+            "My SQL",
+            "MongoDB",
+            "Redis"
+        ]
+    }
+]

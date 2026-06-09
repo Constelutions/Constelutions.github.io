@@ -1,0 +1,93 @@
+---
+
+---
+
+<section class="section alt">
+  <div class="wrap mv-grid">
+    <div class="mv-card reveal">
+      <div class="mv-icon">
+        <svg viewBox="0 0 24 24"
+          ><path d="M12 22V12"></path><path
+            d="M12 12C12 8 8 5 4 6c0 4 3 7 8 6z"></path><path
+            d="M12 12c0-4 4-7 8-6 0 4-3 7-8 6z"></path></svg
+        >
+      </div>
+      <span class="eyebrow" data-i18n="mv_mission_eyebrow">Misión</span>
+      <h2 class="section-h" data-i18n="mv_mission_title">
+        Construir software que importa
+      </h2>
+      <p class="lede" data-i18n="mv_mission_body">
+        Conectar ingeniería, diseño y estrategia para entregar productos digitales robustos,
+        escalables y alineados a los objetivos de cada cliente. Trabajamos como una extensión del
+        equipo de nuestros clientes, con transparencia, rigor técnico y compromiso real con los
+        resultados.
+      </p>
+    </div>
+
+    <div class="mv-card reveal">
+      <div class="mv-icon">
+        <svg viewBox="0 0 24 24"
+          ><circle cx="12" cy="12" r="2.5"></circle><circle
+            cx="12"
+            cy="12"
+            r="7"></circle><circle cx="12" cy="12" r="10.5"></circle></svg
+        >
+      </div>
+      <span class="eyebrow" data-i18n="mv_vision_eyebrow">Visión</span>
+      <h2 class="section-h" data-i18n="mv_vision_title">
+        Ser el socio técnico de referencia en LATAM
+      </h2>
+      <p class="lede" data-i18n="mv_vision_body">
+        Convertirnos en el equipo al que empresas y emprendedores de América Latina acuden cuando
+        enfrentan sus retos digitales más complejos — reconocidos por la calidad de nuestro trabajo,
+        la solidez de nuestras relaciones y el impacto medible que generamos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .mv-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: border-color 0.2s;
+  }
+  .mv-card:hover {
+    border-color: var(--accent);
+  }
+  .mv-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: oklch(0.28 0.06 266);
+    border: 1px solid var(--line);
+  }
+  .mv-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--accent-2);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  .mv-card .section-h {
+    font-size: clamp(24px, 3vw, 32px);
+  }
+
+  @media (max-width: 860px) {
+    .mv-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

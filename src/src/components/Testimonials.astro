@@ -1,0 +1,125 @@
+---
+import { getTestimonials } from "../repositories/testimonialsRepository";
+
+const testimonials = await getTestimonials();
+---
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span
+        class="eyebrow center"
+        data-i18n="test_eyebrow">
+        Lo que dicen
+      </span>
+      <h2
+        class="section-h"
+        style="margin-left:auto;margin-right:auto"
+        data-i18n="test_title">
+        Confianza que se construye proyecto a proyecto
+      </h2>
+    </div>
+    <div class="quotes">
+      {
+        testimonials.map((t) => (
+          <div class="quote reveal">
+            <div class="mark">"</div>
+            <p data-i18n={t.quote_i18n}>{t.quote}</p>
+            <div class="who">
+              <div class="av" />
+              <div>
+                <div class="nm">{t.name}</div>
+                <div
+                  class="rl"
+                  data-i18n={t.role_i18n}>
+                  {t.role}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p
+      class="placeholder-note"
+      data-i18n="test_note">
+      Testimonios de ejemplo — reemplázalos con reseñas reales de tus clientes.
+    </p>
+  </div>
+</section>
+
+<style>
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .quote {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+  }
+  .quote .mark {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 0.5;
+    color: var(--accent);
+    height: 22px;
+  }
+  .quote p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 18px 0 24px;
+    flex: 1;
+  }
+  .quote .who {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  .quote .av {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--surface-hi);
+    border: 1px solid var(--line);
+    flex: 0 0 auto;
+    background-image: repeating-linear-gradient(
+      45deg,
+      oklch(0.3 0.03 264) 0 6px,
+      oklch(0.26 0.03 264) 6px 12px
+    );
+  }
+  .quote .who .nm {
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .quote .who .rl {
+    font-size: 12.5px;
+    color: var(--faint);
+    font-family: var(--mono);
+  }
+  .placeholder-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+    margin-top: 22px;
+    text-align: center;
+  }
+
+  @media (max-width: 1040px) {
+    .quotes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .quotes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

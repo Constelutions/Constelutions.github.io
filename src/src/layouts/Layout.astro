@@ -1,0 +1,117 @@
+---
+import CtaBanner from "../components/CtaBanner.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  activePage?: string;
+}
+
+const {
+  title,
+  description = "Constelutions — Desarrollo de software, diseño UI/UX, integración de sistemas y consultoría técnica. Desde México para el mundo.",
+  activePage = "home",
+} = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang="es"
+  data-lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content={description}
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <link
+      rel="icon"
+      href="/favicon.ico"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Inline theme init: runs before paint to prevent flash of wrong theme -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem("cl_theme");
+        var theme = stored === "light" || stored === "dark" ? stored : "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!-- Prevent browser scroll restoration from jumping past the hero on refresh -->
+    <script is:inline>
+      if (history.scrollRestoration) history.scrollRestoration = "manual";
+      window.addEventListener("load", function () {
+        if (window.location.hash) {
+          var target = document.querySelector(window.location.hash);
+          if (target) target.scrollIntoView();
+        } else {
+          window.scrollTo(0, 0);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <Header activePage={activePage} />
+
+    <slot />
+
+    {
+      activePage !== "home" && (
+        <CtaBanner>
+          <a
+            href="/#contact"
+            class="btn btn-primary btn-lg"
+            data-i18n="cta_book">
+            Agenda una consulta
+          </a>
+          <a
+            href="/services"
+            class="btn btn-ghost btn-lg"
+            data-i18n="cta_services">
+            Ver servicios
+          </a>
+        </CtaBanner>
+      )
+    }
+
+    <Footer />
+
+    <script>
+      import "../scripts/i18n.ts";
+      import "../scripts/main.ts";
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

@@ -1,0 +1,35 @@
+{
+    "contact": {
+        "email": "hola@constelutions.com",
+        "phone": "+52 000 000 0000",
+        "phoneHref": "tel:+520000000000",
+        "location": "México",
+        "location_i18n": "ci_loc_v",
+        "hours": "Lun–Vie · 9:00–18:00 (CST)",
+        "hours_i18n": "ci_hours_v",
+        "linkedin": "https://linkedin.com/company/constelutions",
+        "github": "https://github.com/Constelutions"
+    },
+    "staff": [
+        {
+            "name": "Nombre Apellido",
+            "role": "Desarrollo de Software",
+            "role_i18n": "m1_r"
+        },
+        {
+            "name": "Nombre Apellido",
+            "role": "Diseño UI/UX",
+            "role_i18n": "m2_r"
+        },
+        {
+            "name": "Nombre Apellido",
+            "role": "Arquitectura & DevOps",
+            "role_i18n": "m3_r"
+        },
+        {
+            "name": "Nombre Apellido",
+            "role": "Consultoría & Estrategia",
+            "role_i18n": "m4_r"
+        }
+    ]
+}

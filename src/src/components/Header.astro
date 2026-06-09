@@ -1,0 +1,170 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import LangToggle from "./LangToggle.astro";
+
+interface Props {
+  activePage?: string;
+}
+
+const { activePage = "home" } = Astro.props;
+
+const pages: { href: string; pageId: string; "data-i18n": string; label: string }[] = [
+  {
+    href: "/",
+    pageId: "home",
+    "data-i18n": "nav_home",
+    label: "Inicio",
+  },
+  {
+    href: "/services",
+    pageId: "services",
+    "data-i18n": "nav_services",
+    label: "Servicios",
+  },
+  {
+    href: "/portfolio",
+    pageId: "portfolio",
+    "data-i18n": "nav_portfolio",
+    label: "Portafolio",
+  },
+  {
+    href: "/about",
+    pageId: "about",
+    "data-i18n": "nav_about",
+    label: "Nosotros",
+  },
+] as const;
+---
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a
+      class="brand"
+      href="/"
+      aria-label="Constelutions — inicio">
+      <svg
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <line
+          x1="7"
+          y1="9"
+          x2="16"
+          y2="6"
+          stroke="var(--accent)"
+          stroke-width="1.1"
+        ></line>
+        <line
+          x1="16"
+          y1="6"
+          x2="25"
+          y2="13"
+          stroke="var(--accent)"
+          stroke-width="1.1"
+        ></line>
+        <line
+          x1="25"
+          y1="13"
+          x2="19"
+          y2="24"
+          stroke="var(--accent)"
+          stroke-width="1.1"
+        ></line>
+        <line
+          x1="19"
+          y1="24"
+          x2="7"
+          y2="9"
+          stroke="var(--accent)"
+          stroke-width="1.1"
+        ></line>
+        <circle
+          cx="7"
+          cy="9"
+          r="2.4"
+          fill="var(--accent-2)"
+        ></circle>
+        <circle
+          cx="16"
+          cy="6"
+          r="3"
+          fill="var(--star)"
+        ></circle>
+        <circle
+          cx="25"
+          cy="13"
+          r="2.1"
+          fill="var(--accent-2)"
+        ></circle>
+        <circle
+          cx="19"
+          cy="24"
+          r="2.6"
+          fill="var(--accent-2)"
+        ></circle>
+      </svg>
+      <span class="wm">Conste<b>lutions</b></span>
+    </a>
+    <nav
+      class="nav-links"
+      aria-label="Principal">
+      {
+        pages.map((page) => (
+          <a
+            href={page.href}
+            class={activePage === page.pageId ? "active" : ""}
+            data-i18n={page["data-i18n"]}>
+            {page.label}
+          </a>
+        ))
+      }
+      <a
+        href="/#contact"
+        class="btn btn-primary nav-cta-mobile"
+        data-i18n="cta_book"
+        >Agenda una consulta</a
+      >
+    </nav>
+
+    <div class="nav-right">
+      <ThemeToggle />
+      <LangToggle />
+      <a
+        href="/#contact"
+        class="btn btn-primary nav-cta"
+        data-i18n="cta_book"
+        >Agenda una consulta</a
+      >
+      <button
+        class="nav-toggle"
+        aria-label="Menú"
+        type="button">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          ><path d="M4 7h16M4 12h16M4 17h16"></path></svg
+        >
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-cta-mobile {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .nav-cta {
+      display: none;
+    }
+    .nav-cta-mobile {
+      display: inline-flex;
+      margin-top: 10px;
+      align-self: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,212 @@
+---
+
+---
+
+<section
+  class="section"
+  id="who-we-are">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span
+        class="eyebrow"
+        data-i18n="wwa_eyebrow"
+        >Quiénes somos</span
+      >
+      <h2
+        class="section-h"
+        data-i18n="wwa_title">
+        Un equipo construido para resolver los retos de software más exigentes
+      </h2>
+      <p
+        class="lede"
+        data-i18n="wwa_lede">
+        Nacimos en México con una convicción clara: los equipos técnicos de alto nivel no deberían
+        estar reservados solo para las grandes corporaciones.
+      </p>
+    </div>
+
+    <div class="wwa-body">
+      <!-- Story + Location -->
+      <div class="wwa-text reveal">
+        <div class="wwa-block">
+          <h3 data-i18n="wwa_story_title">Cómo empezamos</h3>
+          <p data-i18n="wwa_story_body">
+            Constelutions nació de la colaboración entre ingenieros y diseñadores que compartían una
+            visión: construir una empresa donde el rigor técnico y el cuidado por el cliente fueran
+            inseparables. Lo que comenzó como un pequeño equipo resolviendo proyectos puntuales
+            creció hasta convertirse en una firma de consultoría y desarrollo con presencia
+            regional, capaz de acompañar a clientes desde la idea inicial hasta la operación en
+            producción.
+          </p>
+        </div>
+        <div class="wwa-block">
+          <h3 data-i18n="wwa_location_title">Dónde estamos</h3>
+          <p data-i18n="wwa_location_body">
+            Tenemos nuestra sede en México y operamos de forma remota con clientes en toda América
+            Latina y Estados Unidos. Nuestro modelo de trabajo distribuido nos permite conformar el
+            equipo correcto para cada proyecto, sin importar la zona horaria.
+          </p>
+          <div class="wwa-badges">
+            <span class="badge">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                ></path>
+                <circle
+                  cx="12"
+                  cy="9"
+                  r="2.5">
+                </circle>
+              </svg>
+              <span data-i18n="wwa_badge_hq">México</span>
+            </span>
+            <span class="badge">
+              <svg viewBox="0 0 24 24"
+                ><circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                ></circle><path d="M3 12h18"></path><path
+                  d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"></path></svg
+              >
+              <span data-i18n="wwa_badge_reach">LATAM · EE. UU.</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HQ Photos -->
+      <div class="wwa-photos reveal">
+        <div class="photo-main">
+          <span
+            class="photo-label"
+            data-i18n="wwa_photo_label"
+            >Fotografía de sede</span
+          >
+        </div>
+        <div class="photo-row">
+          <div class="photo-sm">
+            <span
+              class="photo-label"
+              data-i18n="wwa_photo_label"
+              >Fotografía de sede</span
+            >
+          </div>
+          <div class="photo-sm">
+            <span
+              class="photo-label"
+              data-i18n="wwa_photo_label"
+              >Fotografía de sede</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wwa-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .wwa-text {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .wwa-block h3 {
+    font-size: 20px;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .wwa-block p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .wwa-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .badge svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent-2);
+    fill: none;
+    stroke-width: 1.8;
+    flex: 0 0 auto;
+  }
+
+  /* Photos */
+  .wwa-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .photo-main {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      oklch(0.2 0.03 264) 0 14px,
+      oklch(0.18 0.03 264) 14px 28px
+    );
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .photo-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .photo-sm {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      oklch(0.2 0.03 264) 0 14px,
+      oklch(0.18 0.03 264) 14px 28px
+    );
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .photo-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1040px) {
+    .wwa-body {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .wwa-photos {
+      order: -1;
+    }
+  }
+</style>

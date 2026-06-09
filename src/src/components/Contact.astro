@@ -1,0 +1,284 @@
+---
+import { getContact } from "../repositories/companyRepository";
+import { getServices } from "../repositories/servicesRepository";
+
+const contact = await getContact();
+const services = await getServices();
+---
+
+<section
+  class="section alt"
+  id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span
+        class="eyebrow"
+        data-i18n="contact_eyebrow"
+        >Contacto</span
+      >
+      <h2
+        class="section-h"
+        style="margin-top:18px"
+        data-i18n="contact_title">
+        Cuéntanos sobre tu proyecto
+      </h2>
+      <p
+        class="lede"
+        style="margin-top:20px"
+        data-i18n="contact_lede">
+        Responderemos en menos de 24 horas hábiles. Sin compromisos.
+      </p>
+      <div class="ci">
+        <div
+          class="k"
+          data-i18n="ci_email_k">
+          Correo
+        </div><div class="v">
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </div>
+      </div>
+      <div class="ci">
+        <div
+          class="k"
+          data-i18n="ci_phone_k">
+          Teléfono
+        </div><div class="v"><a href={contact.phoneHref}>{contact.phone}</a></div>
+      </div>
+      <div class="ci">
+        <div
+          class="k"
+          data-i18n="ci_loc_k">
+          Ubicación
+        </div><div
+          class="v"
+          data-i18n="ci_loc_v">
+          {contact.location}
+        </div>
+      </div>
+      <div class="ci">
+        <div
+          class="k"
+          data-i18n="ci_hours_k">
+          Horario
+        </div><div
+          class="v"
+          data-i18n="ci_hours_v">
+          {contact.hours}
+        </div>
+      </div>
+    </div>
+    <form
+      class="card reveal"
+      novalidate>
+      <div class="form-fields">
+        <div class="field row">
+          <div>
+            <label data-i18n="f_name">Nombre</label><input
+              type="text"
+              name="name"
+              required
+              data-i18n-attr="placeholder:f_name_ph"
+              placeholder="Tu nombre"
+            />
+          </div>
+          <div>
+            <label data-i18n="f_email">Correo</label><input
+              type="email"
+              name="email"
+              required
+              data-i18n-attr="placeholder:f_email_ph"
+              placeholder="tu@empresa.com"
+            />
+          </div>
+        </div>
+        <div class="field">
+          <label data-i18n="f_company">Empresa</label><input
+            type="text"
+            name="company"
+            data-i18n-attr="placeholder:f_company_ph"
+            placeholder="Nombre de tu empresa"
+          />
+        </div>
+        <div class="field">
+          <label data-i18n="f_service">Servicio de interés</label>
+          <select name="service">
+            <option
+              value=""
+              data-i18n="opt_default"
+              >Selecciona una opción</option
+            >
+            {
+              services.map((svc) => (
+                <option
+                  value={svc.id}
+                  data-i18n={svc.title_i18n}>
+                  {svc.title}
+                </option>
+              ))
+            }
+            <option
+              value="other"
+              data-i18n="opt_other"
+              >Otro</option
+            >
+          </select>
+        </div>
+        <div class="field">
+          <label data-i18n="f_message">Mensaje</label><textarea
+            name="message"
+            required
+            data-i18n-attr="placeholder:f_message_ph"
+            placeholder="Cuéntanos qué necesitas…"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          style="width:100%;justify-content:center"
+          data-i18n="f_submit"
+          >Enviar mensaje</button
+        >
+      </div>
+      <div class="form-success">
+        <div class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg></div>
+        <h3
+          style="font-size:22px;margin-bottom:10px"
+          data-i18n="f_success_t">
+          ¡Gracias! Hemos recibido tu mensaje.
+        </h3>
+        <p
+          class="muted"
+          data-i18n="f_success_d">
+          Te contactaremos muy pronto.
+        </p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .contact-info .ci {
+    margin-top: 30px;
+  }
+  .contact-info .ci .k {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 7px;
+  }
+  .contact-info .ci .v {
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .contact-info .ci .v a {
+    color: var(--accent-2);
+    text-decoration: none;
+  }
+  .contact-info .ci .v a:hover {
+    text-decoration: underline;
+  }
+
+  form.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px;
+  }
+  .field {
+    margin-bottom: 20px;
+  }
+  .field.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .field label {
+    display: block;
+    font-size: 13.5px;
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15.5px;
+    padding: 12px 14px;
+    transition:
+      border-color 0.18s,
+      box-shadow 0.18s;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--faint);
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%237b7f96' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 30px 0;
+  }
+  .form-success.show {
+    display: block;
+  }
+  .form-success .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: oklch(0.28 0.08 152);
+    border: 1px solid var(--ok);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+  }
+  .form-success .check svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--ok);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  @media (max-width: 1040px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  @media (max-width: 600px) {
+    .field.row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
