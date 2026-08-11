@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 import LangToggle from "./LangToggle.astro";
+import Logo from "./Logo.astro";
 
 interface Props {
   activePage?: string;
@@ -42,68 +43,7 @@ const pages: { href: string; pageId: string; "data-i18n": string; label: string 
       class="brand"
       href="/"
       aria-label="Constelutions — inicio">
-      <svg
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <line
-          x1="7"
-          y1="9"
-          x2="16"
-          y2="6"
-          stroke="var(--accent)"
-          stroke-width="1.1"
-        ></line>
-        <line
-          x1="16"
-          y1="6"
-          x2="25"
-          y2="13"
-          stroke="var(--accent)"
-          stroke-width="1.1"
-        ></line>
-        <line
-          x1="25"
-          y1="13"
-          x2="19"
-          y2="24"
-          stroke="var(--accent)"
-          stroke-width="1.1"
-        ></line>
-        <line
-          x1="19"
-          y1="24"
-          x2="7"
-          y2="9"
-          stroke="var(--accent)"
-          stroke-width="1.1"
-        ></line>
-        <circle
-          cx="7"
-          cy="9"
-          r="2.4"
-          fill="var(--accent-2)"
-        ></circle>
-        <circle
-          cx="16"
-          cy="6"
-          r="3"
-          fill="var(--star)"
-        ></circle>
-        <circle
-          cx="25"
-          cy="13"
-          r="2.1"
-          fill="var(--accent-2)"
-        ></circle>
-        <circle
-          cx="19"
-          cy="24"
-          r="2.6"
-          fill="var(--accent-2)"
-        ></circle>
-      </svg>
+      <Logo />
       <span class="wm">Conste<b>lutions</b></span>
     </a>
     <nav

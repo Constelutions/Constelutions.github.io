@@ -1,0 +1,27 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <style>
+    /* Inlined into the site: the page's theme tokens drive the colors. */
+    .logo-edge { stroke: var(--accent, #648cf3); }
+    .logo-node { fill: var(--accent-2, #68ccf5); }
+    .logo-core { fill: var(--star, #e6f4fe); }
+
+    /* svg:root matches only when this file is opened as its own document, never
+       when it is inlined into the page. Browsers paint a standalone SVG on a
+       white canvas, so pin the light-theme tokens there — prefers-color-scheme
+       reports the OS preference, not the canvas, so it is the wrong signal. */
+    svg:root { background: #fff; }
+    svg:root .logo-edge { stroke: #375ecf; }
+    svg:root .logo-node { fill: #006191; }
+    svg:root .logo-core { fill: #1a3040; }
+  </style>
+
+  <line class="logo-edge" x1="7" y1="9" x2="16" y2="6" stroke-width="1.1"></line>
+  <line class="logo-edge" x1="16" y1="6" x2="25" y2="13" stroke-width="1.1"></line>
+  <line class="logo-edge" x1="25" y1="13" x2="19" y2="24" stroke-width="1.1"></line>
+  <line class="logo-edge" x1="19" y1="24" x2="7" y2="9" stroke-width="1.1"></line>
+
+  <circle class="logo-node" cx="7" cy="9" r="2.4"></circle>
+  <circle class="logo-core" cx="16" cy="6" r="3"></circle>
+  <circle class="logo-node" cx="25" cy="13" r="2.1"></circle>
+  <circle class="logo-node" cx="19" cy="24" r="2.6"></circle>
+</svg>

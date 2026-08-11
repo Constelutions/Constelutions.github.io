@@ -31,14 +31,17 @@ const {
       name="description"
       content={description}
     />
+    <!-- sizes="any" on the .ico keeps browsers that support SVG icons from
+         preferring it, so the theme-aware favicon.svg wins where available. -->
+    <link
+      rel="icon"
+      href="/favicon.ico"
+      sizes="any"
+    />
     <link
       rel="icon"
       type="image/svg+xml"
       href="/favicon.svg"
-    />
-    <link
-      rel="icon"
-      href="/favicon.ico"
     />
     <meta
       name="generator"
