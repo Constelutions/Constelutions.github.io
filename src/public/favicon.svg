@@ -1,5 +1,5 @@
 <svg viewBox="2.5 1.4 26.8 26.8" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Same constellation as src/assets/logo.svg (identical node coordinates),
+  <!-- Same constellation as logo.svg (identical node coordinates),
        optically adjusted for favicon sizes: the viewBox crops to the mark's
        bounds instead of the logo's 0 0 32 32 padding, and the nodes are enlarged
        relative to the edges so they still read as distinct stars at 16px.

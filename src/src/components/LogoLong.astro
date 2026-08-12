@@ -1,0 +1,13 @@
+---
+// Inlined rather than referenced via <img> so the mark's colors resolve against
+// the page's theme tokens — that is what lets it follow the theme toggle live.
+// The wrapper is aria-hidden because the enclosing link carries the accessible
+// name; without it the mark would be announced twice.
+import logoLongMarkup from "../../public/logo-long.svg?raw";
+---
+
+<span
+  class="brand-lockup"
+  aria-hidden="true"
+  set:html={logoLongMarkup}
+/>

@@ -378,6 +378,18 @@ html[data-theme="light"] .star {
   color: var(--accent-2);
   font-weight: 600;
 }
+/* Header brand: one wide lockup instead of the icon + live text the footer
+   still uses, so it needs its own size — .brand svg above would squash it into
+   a square. The lockup's viewBox is cropped to the mark's ink, so matching the
+   28px icon box means 28 x 23.6/32 = 20.65px, which also lands its wordmark at
+   the same 20px it had as live text and keeps the brand's width unchanged. */
+.brand .brand-lockup {
+  display: flex;
+}
+.brand .brand-lockup svg {
+  width: auto;
+  height: 20.65px;
+}
 .nav-links {
   display: flex;
   align-items: center;

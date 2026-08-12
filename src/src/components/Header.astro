@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 import LangToggle from "./LangToggle.astro";
-import Logo from "./Logo.astro";
+import LogoLong from "./LogoLong.astro";
 
 interface Props {
   activePage?: string;
@@ -43,8 +43,7 @@ const pages: { href: string; pageId: string; "data-i18n": string; label: string 
       class="brand"
       href="/"
       aria-label="Constelutions — inicio">
-      <Logo />
-      <span class="wm">Conste<b>lutions</b></span>
+      <LogoLong />
     </a>
     <nav
       class="nav-links"
