@@ -1,5 +1,6 @@
 ---
 import logoMarkup from "../../public/logo.svg?raw";
+import { inlineSvg } from "../utils/inlineSvg";
 ---
 
-<Fragment set:html={logoMarkup} />
+<Fragment set:html={inlineSvg(logoMarkup)} />

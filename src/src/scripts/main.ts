@@ -109,21 +109,55 @@
       return window.matchMedia("(prefers-color-scheme: light)").matches;
     }
 
-    function frame(): void {
+    // Decorative background animation, so it is capped at ~30fps instead of
+    // running at whatever the display refreshes at (often 60-120Hz) — that
+    // roughly halves its ongoing script + paint cost.
+    //
+    // Motion below MUST be scaled by `step` rather than applied once per
+    // frame. Every velocity here is expressed per frame, so a frame cap
+    // silently doubles as a speed cap: capping 60fps -> 30fps halved the
+    // drift AND halved the cursor attraction, and on a 120Hz display the
+    // quantised interval lands nearer 24fps, making the speed depend on the
+    // viewer's monitor. Scaling by elapsed time decouples the two, so the cap
+    // saves the CPU without touching the apparent speed.
+    // 2ms of slack, because a 30fps target falls exactly on every 2nd frame of
+    // a 60Hz display: comparing ~33.333 against ~33.333 flips on float error,
+    // so it painted every 2nd frame sometimes and every 3rd other times,
+    // averaging 24fps with visible judder. The slack makes it every 2nd frame,
+    // deterministically, and still lands near 30fps at 120/144Hz.
+    const FRAME_INTERVAL = 1000 / 30 - 2;
+    const REFERENCE_FRAME = 1000 / 60; // the rate the velocities were tuned at
+    let lastFrameTime = 0;
+    function frame(now: number): void {
+      requestAnimationFrame(frame);
+
+      // First callback: seed the clock instead of treating the whole
+      // navigation-to-now span as one elapsed frame.
+      if (lastFrameTime === 0) {
+        lastFrameTime = now;
+        return;
+      }
+      const elapsed = now - lastFrameTime;
+      if (elapsed < FRAME_INTERVAL) return;
+      lastFrameTime = now;
+      // Clamped: rAF is paused while the tab is backgrounded, so on return
+      // `elapsed` can be many seconds and would teleport every node.
+      const step = Math.min(elapsed, 100) / REFERENCE_FRAME;
+
       safeCtx.clearRect(0, 0, W, H);
       const light = isLight();
       for (let i = 0; i < N; i++) {
         const a = nodes[i];
-        a.x += a.vx;
-        a.y += a.vy;
+        a.x += a.vx * step;
+        a.y += a.vy * step;
         if (a.x < 0 || a.x > W) a.vx *= -1;
         if (a.y < 0 || a.y > H) a.vy *= -1;
         const ddx = mx - a.x,
           ddy = my - a.y,
           dd = Math.hypot(ddx, ddy);
         if (dd < 140) {
-          a.x += ddx * 0.002;
-          a.y += ddy * 0.002;
+          a.x += ddx * 0.002 * step;
+          a.y += ddy * 0.002 * step;
         }
         for (let j = i + 1; j < N; j++) {
           const b = nodes[j];
@@ -156,9 +190,8 @@
         safeCtx.fill();
         safeCtx.shadowBlur = 0;
       }
-      requestAnimationFrame(frame);
     }
-    frame();
+    requestAnimationFrame(frame);
     if (window.ResizeObserver) {
       new ResizeObserver(resize).observe(wrap);
     } else {
@@ -245,8 +278,11 @@
   }
 
   function init(): void {
-    buildStars();
+    // buildConstellation() reads layout (getBoundingClientRect) to size its
+    // canvas; running it before buildStars()'s DOM writes avoids forcing a
+    // synchronous reflow (a write immediately followed by a geometry read).
     buildConstellation();
+    buildStars();
     header();
     mobileNav();
     reveal();

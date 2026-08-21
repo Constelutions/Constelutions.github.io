@@ -3,7 +3,25 @@
    Dark & cosmic · cool indigo · Space Grotesk + IBM Plex
    ============================================================ */
 
-:root {
+/* ============================================================
+   PALETTE
+
+   Two roles the accent has to serve, which one token cannot:
+     --accent      a FILL that white text sits on (buttons, active pills,
+                   ::selection). Capped in lightness by that white text —
+                   in dark mode anything above ~L 0.57 drops white below
+                   the 4.5:1 AA threshold.
+     --accent-ink  the accent used AS TEXT on a surface. Pulled the other
+                   way: it has to stay clear of the surfaces behind it.
+   They move in opposite directions, so they are separate tokens. Using
+   --accent for coloured text (or --accent-ink for a fill) reintroduces
+   the contrast failure — see .claude/rules/web-performance-and-a11y.md.
+
+   Every text/background pair below clears WCAG AA (4.5:1) against the
+   darkest surface it can land on, --surface-hi.
+   ============================================================ */
+:root,
+html[data-theme="dark"] {
   /* base / surfaces */
   --bg: oklch(0.155 0.022 264);
   --bg-2: oklch(0.182 0.027 264);
@@ -14,19 +32,24 @@
   /* ink */
   --ink: oklch(0.972 0.008 250);
   --muted: oklch(0.745 0.02 256);
-  --faint: oklch(0.6 0.02 258);
+  --faint: oklch(0.67 0.02 258); /* 4.81:1 on --surface-hi */
 
   /* lines */
   --line: oklch(0.33 0.028 264);
   --line-soft: oklch(0.3 0.025 264 / 0.55);
 
   /* accents */
-  --accent: oklch(0.66 0.16 266);
-  --accent-bright: oklch(0.72 0.16 264);
+  --accent: oklch(0.56 0.16 266); /* white on it: 4.79:1 */
+  --accent-hover: oklch(0.5 0.16 266); /* white on it: 6.20:1 */
+  --accent-ink: oklch(0.72 0.16 266); /* 5.60:1 on --surface-hi */
   --accent-2: oklch(0.8 0.11 228);
   --accent-dim: oklch(0.5 0.16 266 / 0.4);
   --star: oklch(0.96 0.02 240);
   --ok: oklch(0.72 0.14 152);
+
+  /* translucent hover wash over a surface — has to invert per theme, or a
+     dark veil lands under dark --ink text in light mode */
+  --hover-veil: oklch(0.24 0.03 264 / 0.5);
 
   /* type — the actual font-family stacks (incl. fallback) come from the
      Astro Fonts API, see astro.config.mjs + the <Font> tags in Layout.astro */
@@ -40,34 +63,8 @@
 }
 
 /* ============================================================
-   LIGHT THEME — system default via media query; overridden by
-   html[data-theme="dark"] / html[data-theme="light"]
+   LIGHT THEME
    ============================================================ */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: oklch(0.97 0.008 264);
-    --bg-2: oklch(0.94 0.012 264);
-    --surface: oklch(0.91 0.015 264);
-    --surface-2: oklch(0.87 0.018 264);
-    --surface-hi: oklch(0.83 0.02 264);
-
-    --ink: oklch(0.18 0.025 264);
-    --muted: oklch(0.42 0.022 264);
-    --faint: oklch(0.58 0.018 258);
-
-    --line: oklch(0.8 0.02 264);
-    --line-soft: oklch(0.8 0.02 264 / 0.55);
-
-    --accent: oklch(0.52 0.18 266);
-    --accent-bright: oklch(0.58 0.18 264);
-    --accent-2: oklch(0.45 0.14 228);
-    --accent-dim: oklch(0.42 0.18 266 / 0.3);
-    --star: oklch(0.3 0.04 240);
-    --ok: oklch(0.45 0.14 152);
-  }
-}
-
-/* Manual overrides — explicit data-theme wins over media query */
 html[data-theme="light"] {
   --bg: oklch(0.97 0.008 264);
   --bg-2: oklch(0.94 0.012 264);
@@ -77,39 +74,51 @@ html[data-theme="light"] {
 
   --ink: oklch(0.18 0.025 264);
   --muted: oklch(0.42 0.022 264);
-  --faint: oklch(0.58 0.018 258);
+  --faint: oklch(0.44 0.018 258); /* 4.60:1 on --surface-hi */
 
   --line: oklch(0.8 0.02 264);
   --line-soft: oklch(0.8 0.02 264 / 0.55);
 
-  --accent: oklch(0.52 0.18 266);
-  --accent-bright: oklch(0.58 0.18 264);
-  --accent-2: oklch(0.45 0.14 228);
+  --accent: oklch(0.52 0.18 266); /* white on it: 5.73:1 */
+  --accent-hover: oklch(0.46 0.18 266); /* white on it: 7.46:1 */
+  --accent-ink: oklch(0.44 0.18 266); /* 4.82:1 on --surface-hi */
+  --accent-2: oklch(0.42 0.14 228); /* 4.54:1 on --surface-hi */
   --accent-dim: oklch(0.42 0.18 266 / 0.3);
   --star: oklch(0.3 0.04 240);
-  --ok: oklch(0.45 0.14 152);
+  --ok: oklch(0.42 0.14 152); /* 4.56:1 on --surface-hi */
+
+  --hover-veil: oklch(0.72 0.02 264 / 0.5);
 }
 
-html[data-theme="dark"] {
-  --bg: oklch(0.155 0.022 264);
-  --bg-2: oklch(0.182 0.027 264);
-  --surface: oklch(0.214 0.029 264);
-  --surface-2: oklch(0.247 0.031 264);
-  --surface-hi: oklch(0.285 0.033 264);
+/* No-JS fallback only. The inline script in Layout.astro stamps data-theme on
+   <html> before first paint, so in a JS browser one of the two blocks above
+   always wins and this never applies; without JS nothing sets the attribute,
+   and :not([data-theme]) is what lets the OS preference through. */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) {
+    --bg: oklch(0.97 0.008 264);
+    --bg-2: oklch(0.94 0.012 264);
+    --surface: oklch(0.91 0.015 264);
+    --surface-2: oklch(0.87 0.018 264);
+    --surface-hi: oklch(0.83 0.02 264);
 
-  --ink: oklch(0.972 0.008 250);
-  --muted: oklch(0.745 0.02 256);
-  --faint: oklch(0.6 0.02 258);
+    --ink: oklch(0.18 0.025 264);
+    --muted: oklch(0.42 0.022 264);
+    --faint: oklch(0.44 0.018 258);
 
-  --line: oklch(0.33 0.028 264);
-  --line-soft: oklch(0.3 0.025 264 / 0.55);
+    --line: oklch(0.8 0.02 264);
+    --line-soft: oklch(0.8 0.02 264 / 0.55);
 
-  --accent: oklch(0.66 0.16 266);
-  --accent-bright: oklch(0.72 0.16 264);
-  --accent-2: oklch(0.8 0.11 228);
-  --accent-dim: oklch(0.5 0.16 266 / 0.4);
-  --star: oklch(0.96 0.02 240);
-  --ok: oklch(0.72 0.14 152);
+    --accent: oklch(0.52 0.18 266);
+    --accent-hover: oklch(0.46 0.18 266);
+    --accent-ink: oklch(0.44 0.18 266);
+    --accent-2: oklch(0.42 0.14 228);
+    --accent-dim: oklch(0.42 0.18 266 / 0.3);
+    --star: oklch(0.3 0.04 240);
+    --ok: oklch(0.42 0.14 152);
+
+    --hover-veil: oklch(0.72 0.02 264 / 0.5);
+  }
 }
 
 * {
@@ -232,7 +241,7 @@ h3 em {
   box-shadow: 0 8px 24px var(--accent-dim);
 }
 .btn-primary:hover {
-  background: var(--accent-bright);
+  background: var(--accent-hover);
   transform: translateY(-1px);
 }
 .btn-ghost {
@@ -242,7 +251,7 @@ h3 em {
 }
 .btn-ghost:hover {
   border-color: var(--muted);
-  background: oklch(0.24 0.03 264 / 0.5);
+  background: var(--hover-veil);
 }
 .btn-lg {
   padding: 15px 28px;
@@ -501,7 +510,7 @@ html[data-theme="light"] [data-theme-opt="light"] {
 }
 .toggle-mobile:hover {
   border-color: var(--muted);
-  background: oklch(0.24 0.03 264 / 0.5);
+  background: var(--hover-veil);
 }
 .toggle-mobile svg {
   width: 15px;
@@ -586,7 +595,7 @@ html[data-theme="light"] [data-theme-opt="light"] {
 .svc-detail .sd-left .eyebrow {
   margin-bottom: 18px;
 }
-.svc-detail .sd-left h3 {
+.svc-detail .sd-left h2 {
   font-size: clamp(26px, 3vw, 34px);
   margin-bottom: 18px;
 }
@@ -692,9 +701,14 @@ html[data-theme="light"] [data-theme-opt="light"] {
   width: 18px;
   height: 18px;
 }
-.foot-col h5 {
+/* h2, not h5: the footer's column headings used to be <h5> purely for their
+   size, which made the document jump h2/h3 -> h5 (axe: heading-order). They
+   are h2 now and sized here instead. font-weight is pinned because the
+   h1-h4 reset above would otherwise decide it. */
+.foot-col h2 {
   font-family: var(--mono);
   font-size: 12px;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);

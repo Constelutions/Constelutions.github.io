@@ -32,8 +32,8 @@ const {
       name="description"
       content={description}
     />
-    <!-- sizes="any" on the .ico keeps browsers that support SVG icons from
-         preferring it, so the theme-aware favicon.svg wins where available. -->
+    {/* sizes="any" on the .ico keeps browsers that support SVG icons from
+         preferring it, so the theme-aware favicon.svg wins where available. */}
     <link
       rel="icon"
       href="/favicon.ico"
@@ -48,9 +48,9 @@ const {
       name="generator"
       content={Astro.generator}
     />
-    <!-- Self-hosted via Astro's Fonts API (astro.config.mjs): fetched from
+    {/* Self-hosted via Astro's Fonts API (astro.config.mjs): fetched from
          Google at build time, served from our own origin, and paired with an
-         auto-generated metric-matched fallback so the swap doesn't reflow. -->
+         auto-generated metric-matched fallback so the swap doesn't reflow. */}
     <Font
       cssVariable="--font-space-grotesk"
       preload
@@ -60,32 +60,46 @@ const {
       preload
     />
     <Font cssVariable="--font-ibm-plex-mono" />
-    <!-- Inline theme init: runs before paint to prevent flash of wrong theme -->
+    {/*
+      The only two things that must run before first paint, so they stay
+      inline (Astro emits is:inline verbatim, bypassing Vite - it is neither
+      bundled nor minified, which is why this is written compactly and kept
+      as small as it can be):
+        1. theme init - reads the stored theme and stamps data-theme on <html>
+           before the first paint, so there is no flash of the wrong theme.
+        2. scrollRestoration = "manual" - has to be set before the browser
+           restores the previous scroll offset on a refresh, which would
+           otherwise land the user somewhere past the hero.
+      Everything else is deferred into the bundled, minified module below.
+    */}
     <script is:inline>
-      (function () {
-        var stored = localStorage.getItem("cl_theme");
-        var theme = stored === "light" || stored === "dark" ? stored : "dark";
-        document.documentElement.setAttribute("data-theme", theme);
-      })();
-    </script>
-
-    <!-- Prevent browser scroll restoration from jumping past the hero on refresh -->
-    <script is:inline>
-      if (history.scrollRestoration) history.scrollRestoration = "manual";
-      window.addEventListener("load", function () {
-        if (window.location.hash) {
-          var target = document.querySelector(window.location.hash);
-          if (target) target.scrollIntoView();
-        } else {
-          window.scrollTo(0, 0);
-        }
-      });
+      (function (d) {
+        // Guarded: reading localStorage throws outright when the browser
+        // blocks storage for the origin, and an uncaught throw here would
+        // take the scroll fix below down with it.
+        var t;
+        try {
+          t = localStorage.getItem("cl_theme");
+        } catch (e) {}
+        d.documentElement.setAttribute("data-theme", t === "light" ? t : "dark");
+        if (history.scrollRestoration) history.scrollRestoration = "manual";
+        addEventListener("load", function () {
+          var h = location.hash && d.querySelector(location.hash);
+          h ? h.scrollIntoView() : scrollTo(0, 0);
+        });
+      })(document);
     </script>
   </head>
   <body>
     <Header activePage={activePage} />
 
-    <slot />
+    {/* Every page needs exactly one <main>: it is the landmark screen-reader
+         users jump to in order to skip the header/nav. The CTA banner and
+         footer stay outside it - they are site-wide furniture, not this
+         page's primary content. */}
+    <main id="main">
+      <slot />
+    </main>
 
     {
       activePage !== "home" && (
@@ -97,7 +111,7 @@ const {
             Agenda una consulta
           </a>
           <a
-            href="/services"
+            href="/services/"
             class="btn btn-ghost btn-lg"
             data-i18n="cta_services">
             Ver servicios

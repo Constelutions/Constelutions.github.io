@@ -74,7 +74,9 @@ const services = await getServices();
                 </svg>
               )}
             </div>
-            <h3 data-i18n={svc.title_i18n}>{svc.title}</h3>
+            {/* h2, not h3: these are the top-level sections of the services
+                 page, sitting directly under its <h1> with no h2 between. */}
+            <h2 data-i18n={svc.title_i18n}>{svc.title}</h2>
             <p data-i18n={svc.desc_i18n}>{svc.desc}</p>
           </div>
           <div class="feature-list">
