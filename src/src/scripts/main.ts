@@ -65,9 +65,16 @@
     const N = 36;
     const nodes: ConstellationNode[] = [];
 
+    // Measured from the parent wrapper, never from the canvas itself: the
+    // canvas's own width/height attributes (set below) must never be able to
+    // feed back into the box size we read here, or a ResizeObserver on the
+    // canvas can end up in a self-sustaining resize loop (observed in some
+    // Chromium forks that don't fully ignore a canvas's intrinsic size once
+    // CSS gives it an explicit width/height).
+    const wrap = safeCanvas.parentElement ?? safeCanvas;
     function resize(): void {
       dpr = window.devicePixelRatio || 1;
-      const r = safeCanvas.getBoundingClientRect();
+      const r = wrap.getBoundingClientRect();
       W = r.width;
       H = r.height;
       safeCanvas.width = Math.max(1, W * dpr);
@@ -153,7 +160,7 @@
     }
     frame();
     if (window.ResizeObserver) {
-      new ResizeObserver(resize).observe(safeCanvas);
+      new ResizeObserver(resize).observe(wrap);
     } else {
       window.addEventListener("resize", resize);
     }

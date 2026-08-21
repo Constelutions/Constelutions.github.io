@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import CtaBanner from "../components/CtaBanner.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
@@ -47,19 +48,18 @@ const {
       name="generator"
       content={Astro.generator}
     />
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
+    <!-- Self-hosted via Astro's Fonts API (astro.config.mjs): fetched from
+         Google at build time, served from our own origin, and paired with an
+         auto-generated metric-matched fallback so the swap doesn't reflow. -->
+    <Font
+      cssVariable="--font-space-grotesk"
+      preload
     />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
+    <Font
+      cssVariable="--font-ibm-plex-sans"
+      preload
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <Font cssVariable="--font-ibm-plex-mono" />
     <!-- Inline theme init: runs before paint to prevent flash of wrong theme -->
     <script is:inline>
       (function () {
