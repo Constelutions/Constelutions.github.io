@@ -28,10 +28,11 @@
   --star: oklch(0.96 0.02 240);
   --ok: oklch(0.72 0.14 152);
 
-  /* type */
-  --display: "Space Grotesk", sans-serif;
-  --body: "IBM Plex Sans", sans-serif;
-  --mono: "IBM Plex Mono", monospace;
+  /* type — the actual font-family stacks (incl. fallback) come from the
+     Astro Fonts API, see astro.config.mjs + the <Font> tags in Layout.astro */
+  --display: var(--font-space-grotesk), sans-serif;
+  --body: var(--font-ibm-plex-sans), sans-serif;
+  --mono: var(--font-ibm-plex-mono), monospace;
 
   --maxw: 1240px;
   --radius: 14px;
