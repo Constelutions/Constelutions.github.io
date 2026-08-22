@@ -1,5 +1,8 @@
+name: constelutions
+
 services:
-  web:
+  marketing-site:
+    container_name: marketing-site
     build: .
     ports:
       - "8080:8080"
