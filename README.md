@@ -4,7 +4,7 @@ Source for the Constelutions marketing site, built with [Astro](https://astro.bu
 
 ## Project structure
 
-```
+```txt
 /
 ├── .github/workflows/deploy.yml   # GitHub Pages CI/CD
 └── src/                           # Astro project
@@ -27,11 +27,11 @@ pnpm install
 pnpm dev          # http://localhost:4321
 ```
 
-| Command         | Action                                   |
-| :--------------- | :---------------------------------------- |
-| `pnpm dev`       | Start the local dev server                |
-| `pnpm build`     | Build the production site to `src/dist/`  |
-| `pnpm preview`   | Preview the production build locally      |
+| Command        | Action                                   |
+| :------------- | :--------------------------------------- |
+| `pnpm dev`     | Start the local dev server               |
+| `pnpm build`   | Build the production site to `src/dist/` |
+| `pnpm preview` | Preview the production build locally     |
 
 ## Running with Docker
 
@@ -44,7 +44,7 @@ cd src
 docker compose up --build -d
 ```
 
-The site is then available at http://localhost:8080. Stop it with `docker compose down`. Since the image bakes in a static production build, re-run `docker compose up --build -d` after making changes.
+The site is then available at <http://localhost:8080>. Stop it with `docker compose down`. Since the image bakes in a static production build, re-run `docker compose up --build -d` after making changes.
 
 ### Plain Docker
 
@@ -54,4 +54,4 @@ docker build -t constelutions-site .
 docker run --rm -p 8080:8080 constelutions-site
 ```
 
-Then open http://localhost:8080.
+Then open <http://localhost:8080>.
