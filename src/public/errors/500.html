@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>500 · Constelutions</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #14151b;
+    --bg: oklch(0.155 0.022 264);
+    --surface: #1e2029;
+    --surface: oklch(0.214 0.029 264);
+    --ink: #f5f6fa;
+    --ink: oklch(0.972 0.008 250);
+    --muted: #a8adba;
+    --muted: oklch(0.745 0.02 256);
+    --faint: #7b8092;
+    --faint: oklch(0.6 0.02 258);
+    --line: #383b47;
+    --line: oklch(0.33 0.028 264 / 0.7);
+    --accent: #6f7cf5;
+    --accent: oklch(0.66 0.16 266);
+    --accent-bright: #7f8bf7;
+    --accent-bright: oklch(0.72 0.16 264);
+    --accent-2: #7fd0f0;
+    --accent-2: oklch(0.8 0.11 228);
+    --accent-dim: rgba(111, 124, 245, 0.35);
+    --accent-dim: oklch(0.5 0.16 266 / 0.4);
+    --display: "Space Grotesk", sans-serif;
+    --body: "IBM Plex Sans", sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+  }
+  body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1px 1px at 26% 62%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 38% 30%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1px 1px at 52% 78%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 64% 22%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1px 1px at 76% 58%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 88% 40%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1px 1px at 8% 82%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 94% 76%, #e6f4fe 100%, transparent 60%),
+      radial-gradient(1px 1px at 45% 12%, #e6f4fe 100%, transparent 60%);
+    opacity: 0.5;
+  }
+  .glow {
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    width: 640px;
+    height: 640px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--accent-dim) 0%, transparent 62%);
+    filter: blur(10px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .card {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    text-align: center;
+  }
+  .mark {
+    margin: 0 auto 28px;
+    width: 56px;
+    height: 56px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--accent-2);
+    opacity: 0.55;
+  }
+  .code {
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-size: clamp(64px, 14vw, 108px);
+    line-height: 1;
+    margin: 18px 0 6px;
+    background: linear-gradient(180deg, var(--ink), var(--muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: clamp(21px, 3vw, 26px);
+    margin: 0 0 16px;
+  }
+  p.es {
+    color: var(--muted);
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin: 0 0 6px;
+  }
+  p.en {
+    color: var(--faint);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 34px;
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--body);
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 9px;
+    padding: 12px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 8px 24px var(--accent-dim);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .foot {
+    margin-top: 40px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+</style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <main class="card">
+    <a href="/" class="mark" aria-label="Constelutions — inicio"><svg width="56" height="56" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line x1="7" y1="9" x2="16" y2="6" stroke="#6f7cf5" stroke-width="1.1"></line>
+  <line x1="16" y1="6" x2="25" y2="13" stroke="#6f7cf5" stroke-width="1.1"></line>
+  <line x1="25" y1="13" x2="19" y2="24" stroke="#6f7cf5" stroke-width="1.1"></line>
+  <line x1="19" y1="24" x2="7" y2="9" stroke="#6f7cf5" stroke-width="1.1"></line>
+  <circle cx="7" cy="9" r="2.4" fill="#7fd0f0"></circle>
+  <circle cx="16" cy="6" r="3" fill="#eef4fb"></circle>
+  <circle cx="25" cy="13" r="2.1" fill="#7fd0f0"></circle>
+  <circle cx="19" cy="24" r="2.6" fill="#7fd0f0"></circle>
+</svg></a>
+    <span class="eyebrow">Error 500</span>
+    <div class="code">500</div>
+    <h1>Error interno del servidor</h1>
+    <p class="es">Algo salió mal de nuestro lado. Ya lo estamos revisando.</p>
+    <p class="en">Something went wrong on our end. We’re already looking into it.</p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Volver al inicio</a>
+      <a href="/#contact" class="btn btn-ghost">Contactar soporte</a>
+    </div>
+    <div class="foot">Constelutions</div>
+  </main>
+</body>
+</html>

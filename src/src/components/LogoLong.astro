@@ -4,10 +4,11 @@
 // The wrapper is aria-hidden because the enclosing link carries the accessible
 // name; without it the mark would be announced twice.
 import logoLongMarkup from "../../public/logo-long.svg?raw";
+import { inlineSvg } from "../utils/inlineSvg";
 ---
 
 <span
   class="brand-lockup"
   aria-hidden="true"
-  set:html={logoLongMarkup}
+  set:html={inlineSvg(logoLongMarkup)}
 />

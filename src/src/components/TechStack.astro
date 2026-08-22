@@ -27,7 +27,7 @@ const tech = await getTechStack();
       {
         tech.map((t) => (
           <div class="tech-col">
-            <h4 data-i18n={t.category_i18n}>{t.category}</h4>
+            <h3 data-i18n={t.category_i18n}>{t.category}</h3>
             <ul>
               {t.items.map((i) => (
                 <li>{i}</li>
@@ -46,7 +46,7 @@ const tech = await getTechStack();
     grid-template-columns: repeat(5, 1fr);
     gap: 22px;
   }
-  .tech-col h4 {
+  .tech-col h3 {
     font-family: var(--mono);
     font-size: 12.5px;
     letter-spacing: 0.12em;
