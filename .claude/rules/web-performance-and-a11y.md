@@ -198,9 +198,9 @@ Using them together sends two `Cache-Control` lines. Pick one — spell out
 
 ### `absolute_redirect off` behind a proxy
 
-Coolify terminates TLS and proxies to `:8080`, so nginx's own scheme/host/port
+Coolify terminates TLS and proxies to `:80`, so nginx's own scheme/host/port
 are not the client's. Left on, the directory redirect answered `Location:
-http://localhost:8080/about/`. Relative `Location` values resolve against the
+http://localhost:80/about/`. Relative `Location` values resolve against the
 URL the browser actually requested and are correct under any proxy.
 
 ### Spell both JavaScript media types in `*_types`
