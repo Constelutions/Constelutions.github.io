@@ -124,13 +124,20 @@
     position: relative;
     height: 100%;
     min-height: 520px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
+  /* The canvas is positioned (not width/height:100%) so its own drawing-buffer
+     size can never feed back into hero-canvas-wrap's layout height: a
+     percentage height on an in-flow replaced element can fall back to the
+     element's intrinsic width/height attributes when the ancestor chain is
+     indefinite, and scripts/main.ts's resize() writes those very attributes -
+     that created a live ResizeObserver feedback loop at fractional
+     devicePixelRatio (e.g. 110% Windows display scaling): the canvas grew a
+     little every tick, which grew the wrap, which re-fired the observer,
+     forever. Inset-based sizing resolves purely against the containing
+     block's already-settled box, so the canvas can no longer influence it. */
   .hero-canvas-wrap canvas {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     display: block;
   }
 
@@ -157,10 +164,6 @@
       opacity: 0.4;
       pointer-events: none;
       z-index: 1;
-    }
-    .hero-canvas-wrap canvas {
-      width: 100%;
-      height: 100%;
     }
     /* Text column fills full width, sits on top of the canvas */
     .hero-left {
