@@ -44,14 +44,14 @@ cd src
 docker compose up --build -d
 ```
 
-The site is then available at <http://localhost:8080>. Stop it with `docker compose down`. Since the image bakes in a static production build, re-run `docker compose up --build -d` after making changes.
+The site is then available at <http://localhost:80>. Stop it with `docker compose down`. Since the image bakes in a static production build, re-run `docker compose up --build -d` after making changes.
 
 ### Plain Docker
 
 ```sh
 cd src
 docker build -t constelutions-site .
-docker run --rm -p 8080:8080 constelutions-site
+docker run --rm -p 80:80 constelutions-site
 ```
 
-Then open <http://localhost:8080>.
+Then open <http://localhost:80>.
