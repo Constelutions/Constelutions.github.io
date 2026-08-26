@@ -68,6 +68,7 @@ const services = await getServices();
       </div>
     </div>
     <form
+      id="contact-form"
       class="card reveal"
       novalidate>
       <div class="form-fields">
@@ -82,7 +83,14 @@ const services = await getServices();
               required
               data-i18n-attr="placeholder:f_name_ph"
               placeholder="Tu nombre"
-            />
+              aria-describedby="contact-name-err"
+            /><p
+              id="contact-name-err"
+              class="field-err"
+              data-i18n="f_err_name"
+              hidden>
+              Ingresa tu nombre.
+            </p>
           </div>
           <div>
             <label
@@ -94,7 +102,14 @@ const services = await getServices();
               required
               data-i18n-attr="placeholder:f_email_ph"
               placeholder="tu@empresa.com"
-            />
+              aria-describedby="contact-email-err"
+            /><p
+              id="contact-email-err"
+              class="field-err"
+              data-i18n="f_err_email"
+              hidden>
+              Ingresa un correo válido.
+            </p>
           </div>
         </div>
         <div class="field">
@@ -145,7 +160,14 @@ const services = await getServices();
             required
             data-i18n-attr="placeholder:f_message_ph"
             placeholder="Cuéntanos qué necesitas…"
-          ></textarea>
+            aria-describedby="contact-message-err"
+          ></textarea><p
+            id="contact-message-err"
+            class="field-err"
+            data-i18n="f_err_message"
+            hidden>
+            Cuéntanos qué necesitas.
+          </p>
         </div>
         <button
           type="submit"
@@ -155,7 +177,10 @@ const services = await getServices();
           >Enviar mensaje</button
         >
       </div>
-      <div class="form-success">
+      <div
+        class="form-success"
+        role="status"
+        aria-live="polite">
         <div class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg></div>
         <h3
           style="font-size:22px;margin-bottom:10px"
@@ -167,6 +192,30 @@ const services = await getServices();
           data-i18n="f_success_d">
           Te contactaremos muy pronto.
         </p>
+      </div>
+      <div
+        class="form-error"
+        role="alert"
+        aria-live="assertive">
+        <div class="cross"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+        <h3
+          style="font-size:22px;margin-bottom:10px"
+          data-i18n="f_error_t">
+          No pudimos enviar tu mensaje.
+        </h3>
+        <p
+          class="muted"
+          data-i18n="f_error_d">
+          Inténtalo de nuevo o escríbenos directamente por correo.
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="margin-top:20px"
+          data-form-retry
+          data-i18n="f_retry"
+          >Reintentar</button
+        >
       </div>
     </form>
   </div>
@@ -284,6 +333,57 @@ const services = await getServices();
     stroke: var(--ok);
     fill: none;
     stroke-width: 2;
+  }
+
+  /* Mirrors .form-success. Both are display:none until main.ts adds .show. */
+  .form-error {
+    display: none;
+    text-align: center;
+    padding: 30px 0;
+  }
+  .form-error.show {
+    display: block;
+  }
+  .form-error .cross {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    /* colour-mix keeps the disc tinted from the theme token instead of a
+       hardcoded dark wash, which would survive the light-theme switch and
+       put a dark circle under dark ink (the known gap called out in
+       .claude/rules/web-performance-and-a11y.md). */
+    background: color-mix(in oklab, var(--danger) 22%, transparent);
+    border: 1px solid var(--danger);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+  }
+  .form-error .cross svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--danger);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .field-err {
+    color: var(--danger);
+    font-size: 13px;
+    font-family: var(--mono);
+    margin-top: 7px;
+  }
+  .field-err[hidden] {
+    display: none;
+  }
+  .field input[aria-invalid="true"],
+  .field textarea[aria-invalid="true"] {
+    border-color: var(--danger);
+  }
+  .field input[aria-invalid="true"]:focus,
+  .field textarea[aria-invalid="true"]:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--danger) 30%, transparent);
   }
 
   @media (max-width: 1040px) {

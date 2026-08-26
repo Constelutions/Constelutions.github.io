@@ -263,17 +263,207 @@
   }
 
   /* ---------- contact form ---------- */
+
+  /** Endpoint nginx proxies to the mailer container. No trailing slash: the
+   *  site's trailingSlash:"always" governs Astro page routes, while /api/ is
+   *  proxied straight through, so a slash here would not be redirected — it
+   *  would simply miss the route. */
+  const CONTACT_ENDPOINT = "/api/contact";
+
+  /** Abandon a submission that has not answered in this long. Without a cap a
+   *  stalled connection leaves the button disabled with no way back. */
+  const CONTACT_TIMEOUT_MS = 15000;
+
+  /** Mirrors the server-side rules in mailer/lib/contact_request.dart. The
+   *  server is authoritative — this only spares the user a round trip. */
+  const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  interface ContactField {
+    readonly name: string;
+    readonly input: HTMLInputElement | HTMLTextAreaElement;
+    readonly error: HTMLElement | null;
+    readonly isValid: (value: string) => boolean;
+  }
+
   function contactForm(): void {
-    const form = document.querySelector<HTMLFormElement>("form.card");
+    const form = document.querySelector<HTMLFormElement>("#contact-form");
     if (!form) return;
+
+    const fieldsPane = form.querySelector<HTMLElement>(".form-fields");
+    const successPane = form.querySelector<HTMLElement>(".form-success");
+    const errorPane = form.querySelector<HTMLElement>(".form-error");
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!fieldsPane || !successPane || !errorPane || !submit) return;
+
+    const byName = <T extends HTMLElement>(name: string): T | null =>
+      form.querySelector<T>(`[name="${name}"]`);
+
+    const nameInput = byName<HTMLInputElement>("name");
+    const emailInput = byName<HTMLInputElement>("email");
+    const messageInput = byName<HTMLTextAreaElement>("message");
+    if (!nameInput || !emailInput || !messageInput) return;
+
+    const fields: ContactField[] = [
+      {
+        name: "name",
+        input: nameInput,
+        error: document.getElementById("contact-name-err"),
+        isValid: (value) => value.length > 0 && value.length <= 100,
+      },
+      {
+        name: "email",
+        input: emailInput,
+        error: document.getElementById("contact-email-err"),
+        isValid: (value) => value.length <= 254 && EMAIL_PATTERN.test(value),
+      },
+      {
+        name: "message",
+        input: messageInput,
+        error: document.getElementById("contact-message-err"),
+        isValid: (value) => value.length > 0 && value.length <= 5000,
+      },
+    ];
+
+    // The submit label is swapped to "Enviando…" during the request, so the
+    // original has to be captured before the first send. Reading it back from
+    // the DOM later would return whatever the sending state left behind.
+    const submitLabelKey = submit.getAttribute("data-i18n");
+    const submitLabel = submit.textContent ?? "";
+
+    // These are const arrow functions, not function declarations, so that the
+    // non-null narrowing established by the guards above survives inside them.
+    // A hoisted `function` is treated as declared before those guards ran, and
+    // every element reference would widen back to `T | null`.
+
+    const markField = (field: ContactField, invalid: boolean): void => {
+      if (invalid) field.input.setAttribute("aria-invalid", "true");
+      else field.input.removeAttribute("aria-invalid");
+      if (field.error) field.error.hidden = !invalid;
+    };
+
+    const clearErrors = (): void => {
+      for (const field of fields) markField(field, false);
+    };
+
+    /** Marks the named fields and focuses the first one, so a keyboard or
+     *  screen-reader user lands on the problem instead of hunting for it. */
+    const showFieldErrors = (names: readonly string[]): void => {
+      let focused = false;
+      for (const field of fields) {
+        const invalid = names.indexOf(field.name) !== -1;
+        markField(field, invalid);
+        if (invalid && !focused) {
+          field.input.focus();
+          focused = true;
+        }
+      }
+    };
+
+    const setSending = (sending: boolean): void => {
+      submit.disabled = sending;
+      if (sending) {
+        // data-i18n has to move with the text, or a language toggle mid-flight
+        // would repaint the button back to "Enviar mensaje" while it is still
+        // disabled and sending.
+        submit.setAttribute("data-i18n", "f_sending");
+        submit.textContent = "Enviando…";
+      } else {
+        if (submitLabelKey) submit.setAttribute("data-i18n", submitLabelKey);
+        submit.textContent = submitLabel;
+      }
+    };
+
+    const showPane = (pane: HTMLElement | null): void => {
+      successPane.classList.remove("show");
+      errorPane.classList.remove("show");
+      fieldsPane.style.display = pane ? "none" : "";
+      if (pane) pane.classList.add("show");
+    };
+
+    /** Pulls {"error":"validation","fields":[...]} out of an unknown body,
+     *  keeping only names this form actually renders an error element for. */
+    const readInvalidFields = (body: unknown): string[] => {
+      if (typeof body !== "object" || body === null) return [];
+      const raw = (body as { fields?: unknown }).fields;
+      if (!Array.isArray(raw)) return [];
+      const known = fields.map((field) => field.name);
+      return raw.filter(
+        (value): value is string =>
+          typeof value === "string" && known.indexOf(value) !== -1,
+      );
+    };
+
+    const send = async (values: Record<string, string>): Promise<void> => {
+      // AbortController rather than Promise.race: the latter would leave the
+      // request running and its connection open after the UI gave up on it.
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), CONTACT_TIMEOUT_MS);
+
+      try {
+        const response = await fetch(CONTACT_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+          signal: controller.signal,
+        });
+
+        if (response.ok) {
+          showPane(successPane);
+          return;
+        }
+
+        // 400 means the server disagreed with the client-side check above —
+        // return to the fields with the offending ones marked rather than
+        // showing a dead end the visitor cannot act on.
+        if (response.status === 400) {
+          const body: unknown = await response.json().catch(() => null);
+          const names = readInvalidFields(body);
+          if (names.length > 0) showFieldErrors(names);
+          else showPane(errorPane);
+          return;
+        }
+
+        showPane(errorPane);
+      } catch {
+        // Network failure, DNS failure, or the abort above. All are the same
+        // to the visitor: it did not send, and retrying is worth a try.
+        showPane(errorPane);
+      } finally {
+        window.clearTimeout(timer);
+        if (!successPane.classList.contains("show")) setSending(false);
+      }
+    };
+
+    errorPane
+      .querySelector<HTMLButtonElement>("[data-form-retry]")
+      ?.addEventListener("click", function () {
+        showPane(null);
+        setSending(false);
+        nameInput.focus();
+      });
+
     form.addEventListener("submit", function (e: Event) {
       e.preventDefault();
-      const fields = form.querySelector<HTMLElement>(".form-fields");
-      const ok = form.querySelector<HTMLElement>(".form-success");
-      if (fields && ok) {
-        fields.style.display = "none";
-        ok.classList.add("show");
+      clearErrors();
+
+      const values: Record<string, string> = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        message: messageInput.value.trim(),
+        company: byName<HTMLInputElement>("company")?.value.trim() ?? "",
+        service: byName<HTMLSelectElement>("service")?.value ?? "",
+      };
+
+      const invalid = fields
+        .filter((field) => !field.isValid(values[field.name] ?? ""))
+        .map((field) => field.name);
+      if (invalid.length > 0) {
+        showFieldErrors(invalid);
+        return;
       }
+
+      setSending(true);
+      void send(values);
     });
   }
 
