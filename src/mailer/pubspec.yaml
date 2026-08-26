@@ -1,0 +1,16 @@
+name: mailer
+description: Contact-form mail relay for the Constelutions marketing site.
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  dart_resend: ^2.0.0
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.0

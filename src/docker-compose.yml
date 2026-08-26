@@ -6,3 +6,44 @@ services:
     build: .
     ports:
       - "80:80"
+    restart: unless-stopped
+    healthcheck:
+      # BusyBox wget is in the alpine base; curl is not. --spider issues the
+      # request and discards the body, and exits non-zero on a non-2xx.
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    # Ordering only — deliberately NOT `condition: service_healthy`. Gating the
+    # site on the mailer's health would take every page offline whenever the
+    # contact form's backend is unwell, which inverts the intended blast radius.
+    depends_on:
+      - mailer
+
+  mailer:
+    container_name: mailer
+    build: ./mailer
+    restart: unless-stopped
+    # No `ports:` on purpose. The service is reachable only as
+    # http://mailer:8080 on the compose network, so RESEND_API_KEY has no
+    # inbound path from the internet — nginx is the only way in.
+    environment:
+      RESEND_API_KEY: ${RESEND_API_KEY:?RESEND_API_KEY is required}
+      # Spelled with defaults rather than hardcoded, so the deployed values
+      # stay visible here while .env can still redirect them — e.g. pointing
+      # CONTACT_TO at delivered@resend.dev to exercise the form without
+      # mailing the real inbox.
+      CONTACT_FROM: ${CONTACT_FROM:-Constelutions <no-reply@constelutions.tech>}
+      CONTACT_TO: ${CONTACT_TO:-theconstelutions@gmail.com}
+      PORT: "8080"
+    healthcheck:
+      # The binary probes itself rather than shelling out to wget: it proves
+      # the actual server process is answering, needs no extra package in the
+      # image, and skips config validation so a probe never depends on the
+      # API key being present.
+      test: ["CMD", "/app/bin/server", "--health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
