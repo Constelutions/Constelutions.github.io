@@ -10,6 +10,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# The mailer is a separate image with its own build context.
-mailer

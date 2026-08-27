@@ -9,33 +9,35 @@ The contact form is backed by a small Dart service in [`src/mailer/`](src/mailer
 ```txt
 /
 ├── .github/workflows/deploy.yml   # GitHub Pages CI/CD
-└── src/                           # Astro project
-    ├── src/pages/                 # Routes (each file = one page)
-    ├── public/                    # Static assets, served as-is
+└── src/
+    ├── site/                      # Astro project
+    │   ├── src/pages/             # Routes (each file = one page)
+    │   ├── public/                # Static assets, served as-is
+    │   ├── Dockerfile             # Build + nginx runtime image
+    │   └── nginx.conf             # Security headers / routing / /api proxy
     ├── mailer/                    # Dart contact-form relay (own image + README)
-    ├── Dockerfile                 # Build + nginx runtime image
-    ├── nginx.conf                 # Security headers / routing / /api proxy
-    └── docker-compose.yml         # nginx + mailer
+    └── docker-compose.yml         # Builds and runs both
 ```
 
-All commands below are run from the `src/` directory.
+Docker commands are run from `src/`, where `docker-compose.yml` and `.env` live.
+Astro commands are run from `src/site/`.
 
 ## Local development
 
 Requires Node.js 22+ and [pnpm](https://pnpm.io/).
 
 ```sh
-cd src
+cd src/site
 pnpm install
 pnpm dev          # http://localhost:4321
 ```
 
-| Command                 | Action                                   |
-| :---------------------- | :--------------------------------------- |
-| `pnpm dev`              | Start the local dev server               |
-| `pnpm build`            | Build the production site to `src/dist/` |
-| `pnpm preview`          | Preview the production build locally     |
-| `pnpm exec astro check` | Type-check `.astro` and `.ts` files      |
+| Command                 | Action                                        |
+| :---------------------- | :-------------------------------------------- |
+| `pnpm dev`              | Start the local dev server                    |
+| `pnpm build`            | Build the production site to `src/site/dist/` |
+| `pnpm preview`          | Preview the production build locally          |
+| `pnpm exec astro check` | Type-check `.astro` and `.ts` files           |
 
 > `pnpm dev` serves the static site only. There is no `/api/contact` route in
 > `astro dev`, so submitting the contact form will show its error state. To
@@ -59,8 +61,8 @@ Full variable list: [`src/mailer/README.md`](src/mailer/README.md#configuration)
 
 ## Running with Docker
 
-`src/Dockerfile` builds the Astro site and serves it with a hardened nginx
-image (see `src/nginx.conf`). `src/mailer/Dockerfile` builds the mail relay.
+`src/site/Dockerfile` builds the Astro site and serves it with a hardened nginx
+image (see `src/site/nginx.conf`). `src/mailer/Dockerfile` builds the mail relay.
 `docker compose` builds and runs both.
 
 ### Docker Compose (recommended)
@@ -122,7 +124,7 @@ The mailer publishes no port and probes itself via `/app/bin/server --health`.
 ### Plain Docker
 
 ```sh
-cd src
+cd src/site
 docker build -t constelutions-site .
 docker run --rm -p 80:80 constelutions-site
 ```

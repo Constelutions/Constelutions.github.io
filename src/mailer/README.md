@@ -125,7 +125,7 @@ for anything reaching the service without passing through it.
 
 ### `service` is an allowlist
 
-The submitted service id must be one of the ids in `../src/repositories/services.json`,
+The submitted service id must be one of the ids in `../site/src/repositories/services.json`,
 or `other`, or empty. It is interpolated into the email subject, so an allowlist
 keeps a crafted payload from smuggling arbitrary text there.
 
@@ -138,7 +138,7 @@ needless obstacle when correlating a report against a Resend request id, so
 
 Logs go to stdout/stderr because Docker captures only those — a file-based log
 would leave `docker logs` and Coolify's log view silent while the service runs
-fine. This mirrors the same choice in `../nginx.conf`.
+fine. This mirrors the same choice in `../site/nginx.conf`.
 
 ### The service emits no security headers
 
@@ -215,7 +215,7 @@ Resulting image: ~25 MB.
 verified; `constelutions.com` is not.
 
 When running under Compose, set these in `../.env` — see `../.env.example`.
-`PORT` is pinned to `8080` there to match the port `../nginx.conf` proxies to.
+`PORT` is pinned to `8080` there to match the port `../site/nginx.conf` proxies to.
 
 ## Development
 

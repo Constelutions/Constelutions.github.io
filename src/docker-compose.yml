@@ -3,7 +3,7 @@ name: constelutions
 services:
   marketing-site:
     container_name: marketing-site
-    build: .
+    build: ./site
     ports:
       - "80:80"
     restart: unless-stopped
