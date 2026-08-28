@@ -71,6 +71,23 @@ const services = await getServices();
       id="contact-form"
       class="card reveal"
       novalidate>
+      {/* Bot trap: off-screen (not display:none — form-filler bots skip
+          non-rendered inputs), out of the a11y tree and tab order. The label
+          is deliberately static English with no data-i18n: it must never
+          surface in the dictionary or be announced. Server counterpart:
+          honeypotField in mailer/lib/contact_request.dart. */}
+      <div
+        class="hp-field"
+        aria-hidden="true">
+        <label for="contact-website">Website</label>
+        <input
+          id="contact-website"
+          type="text"
+          name="website"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
       <div class="form-fields">
         <div class="field row">
           <div>
@@ -169,6 +186,28 @@ const services = await getServices();
             Cuéntanos qué necesitas.
           </p>
         </div>
+        <div class="field cap-field">
+          <cap-widget
+            id="contact-cap"
+            data-cap-api-endpoint={`/cap/${import.meta.env.PUBLIC_CAP_SITE_KEY}/`}
+            data-cap-i18n-initial-state="Verifica que eres humano"
+            data-cap-i18n-verifying-label="Verificando…"
+            data-cap-i18n-solved-label="Verificado"
+            data-cap-i18n-error-label="Error, inténtalo de nuevo"
+            data-cap-i18n-verify-aria-label="Haz clic para verificar que eres humano"
+            data-cap-i18n-verifying-aria-label="Verificando, espera un momento"
+            data-cap-i18n-verified-aria-label="Verificado"
+            data-cap-i18n-error-aria-label="Ocurrió un error, inténtalo de nuevo"
+            data-i18n-attr="data-cap-i18n-initial-state:cap_initial;data-cap-i18n-verifying-label:cap_verifying;data-cap-i18n-solved-label:cap_solved;data-cap-i18n-error-label:cap_error;data-cap-i18n-verify-aria-label:cap_verify_aria;data-cap-i18n-verifying-aria-label:cap_verifying_aria;data-cap-i18n-verified-aria-label:cap_verified_aria;data-cap-i18n-error-aria-label:cap_error_aria"
+          ></cap-widget>
+          <p
+            id="contact-cap-err"
+            class="field-err"
+            data-i18n="f_err_captcha"
+            hidden>
+            Completa la verificación antes de enviar.
+          </p>
+        </div>
         <button
           type="submit"
           class="btn btn-primary btn-lg"
@@ -256,6 +295,22 @@ const services = await getServices();
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 36px;
+  }
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  /* align-items: center (rather than text-align) centers the widget
+     regardless of its own display value — cap-widget is a custom element
+     whose internal styles are injected by the library at runtime, so this
+     cannot rely on a fixed width to margin: auto against. */
+  .cap-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .field {
     margin-bottom: 20px;

@@ -295,6 +295,26 @@
     const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     if (!fieldsPane || !successPane || !errorPane || !submit) return;
 
+    const capWidget = form.querySelector<HTMLElementTagNameMap["cap-widget"]>("cap-widget");
+    const capError = document.getElementById("contact-cap-err");
+
+    /** The widget chunk is loaded lazily — the entry bundle ships only what
+     *  first render needs — the moment the form scrolls into view, so it has
+     *  time to solve before the visitor reaches the submit button. */
+    if (capWidget) {
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer.disconnect();
+            void import("./capWidget").then((m) => m.loadCapWidget());
+          }
+        }, { rootMargin: "200px" });
+        observer.observe(form);
+      } else {
+        void import("./capWidget").then((m) => m.loadCapWidget());
+      }
+    }
+
     const byName = <T extends HTMLElement>(name: string): T | null =>
       form.querySelector<T>(`[name="${name}"]`);
 
@@ -330,6 +350,13 @@
     const submitLabelKey = submit.getAttribute("data-i18n");
     const submitLabel = submit.textContent ?? "";
 
+    // Same reasoning for the error pane's description: a 429 swaps it to the
+    // rate-limited message, so the original key/text must be captured before
+    // that can ever happen.
+    const errorDesc = errorPane.querySelector<HTMLElement>('[data-i18n="f_error_d"]');
+    const errorDescKey = errorDesc?.getAttribute("data-i18n") ?? null;
+    const errorDescText = errorDesc?.textContent ?? "";
+
     // These are const arrow functions, not function declarations, so that the
     // non-null narrowing established by the guards above survives inside them.
     // A hoisted `function` is treated as declared before those guards ran, and
@@ -343,6 +370,7 @@
 
     const clearErrors = (): void => {
       for (const field of fields) markField(field, false);
+      if (capError) capError.hidden = true;
     };
 
     /** Marks the named fields and focuses the first one, so a keyboard or
@@ -378,6 +406,24 @@
       errorPane.classList.remove("show");
       fieldsPane.style.display = pane ? "none" : "";
       if (pane) pane.classList.add("show");
+    };
+
+    /** Swaps the error pane's description to the rate-limited message and
+     *  shows it. Restored to the original key/text by the retry handler and
+     *  the next submit, the same as setSending() restores the button label. */
+    const showRateLimited = (): void => {
+      if (errorDesc) {
+        errorDesc.setAttribute("data-i18n", "f_error_rate_d");
+        errorDesc.textContent =
+          "Has enviado demasiadas solicitudes. Espera unos minutos e inténtalo de nuevo.";
+      }
+      showPane(errorPane);
+    };
+
+    const restoreErrorDesc = (): void => {
+      if (!errorDesc) return;
+      if (errorDescKey) errorDesc.setAttribute("data-i18n", errorDescKey);
+      errorDesc.textContent = errorDescText;
     };
 
     /** Pulls {"error":"validation","fields":[...]} out of an unknown body,
@@ -423,6 +469,21 @@
           return;
         }
 
+        // 403 means the one-time Cap token was stale or already redeemed.
+        // Reset the widget so the visitor can re-solve, and return to the
+        // fields rather than the dead-end error pane.
+        if (response.status === 403) {
+          capWidget?.reset();
+          showPane(null);
+          if (capError) capError.hidden = false;
+          return;
+        }
+
+        if (response.status === 429) {
+          showRateLimited();
+          return;
+        }
+
         showPane(errorPane);
       } catch {
         // Network failure, DNS failure, or the abort above. All are the same
@@ -437,6 +498,7 @@
     errorPane
       .querySelector<HTMLButtonElement>("[data-form-retry]")
       ?.addEventListener("click", function () {
+        restoreErrorDesc();
         showPane(null);
         setSending(false);
         nameInput.focus();
@@ -445,6 +507,7 @@
     form.addEventListener("submit", function (e: Event) {
       e.preventDefault();
       clearErrors();
+      restoreErrorDesc();
 
       const values: Record<string, string> = {
         name: nameInput.value.trim(),
@@ -462,8 +525,23 @@
         return;
       }
 
+      // The widget auto-injects this hidden input once a challenge is
+      // solved. Its absence means the visitor has not solved it yet (or the
+      // chunk has not loaded) — surface that instead of sending a request
+      // the mailer will just answer 403 to.
+      const capToken = byName<HTMLInputElement>("cap-token")?.value ?? "";
+      if (capWidget && !capToken) {
+        if (capError) capError.hidden = false;
+        capWidget.focus();
+        return;
+      }
+
       setSending(true);
-      void send(values);
+      void send({
+        ...values,
+        website: byName<HTMLInputElement>("website")?.value ?? "",
+        capToken,
+      });
     });
   }
 

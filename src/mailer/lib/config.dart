@@ -15,6 +15,9 @@ final class MailerConfig {
     required this.from,
     required this.to,
     required this.port,
+    required this.capSiteverifyUrl,
+    required this.capSecretKey,
+    required this.maxSendsPerHour,
   });
 
   /// Reads configuration from [environment], throwing [MailerConfigException]
@@ -33,11 +36,41 @@ final class MailerConfig {
       throw MailerConfigException('PORT must be 1-65535, got "$rawPort".');
     }
 
+    // Presence enables captcha enforcement. Unset skips the check entirely,
+    // which keeps local dev and the first-deploy bootstrap working before a
+    // Cap site key exists — see specs/contact-form-anti-spam.md.
+    final String rawCapUrl = (environment['CAP_SITEVERIFY_URL'] ?? '').trim();
+    final String? capSiteverifyUrl = rawCapUrl.isEmpty ? null : rawCapUrl;
+    if (capSiteverifyUrl != null && Uri.tryParse(capSiteverifyUrl) == null) {
+      throw MailerConfigException(
+        'CAP_SITEVERIFY_URL must be a valid URL, got "$rawCapUrl".',
+      );
+    }
+
+    final String capSecretKey = (environment['CAP_SECRET_KEY'] ?? '').trim();
+    if (capSiteverifyUrl != null && capSecretKey.isEmpty) {
+      throw const MailerConfigException(
+        'CAP_SECRET_KEY is required when CAP_SITEVERIFY_URL is set.',
+      );
+    }
+
+    final String rawMaxSends = (environment['MAX_SENDS_PER_HOUR'] ?? '4')
+        .trim();
+    final int? maxSendsPerHour = int.tryParse(rawMaxSends);
+    if (maxSendsPerHour == null || maxSendsPerHour < 1) {
+      throw MailerConfigException(
+        'MAX_SENDS_PER_HOUR must be a positive integer, got "$rawMaxSends".',
+      );
+    }
+
     return MailerConfig(
       resendApiKey: apiKey,
       from: _orDefault(environment['CONTACT_FROM'], defaultFrom),
       to: _orDefault(environment['CONTACT_TO'], defaultTo),
       port: port,
+      capSiteverifyUrl: capSiteverifyUrl,
+      capSecretKey: capSiteverifyUrl == null ? null : capSecretKey,
+      maxSendsPerHour: maxSendsPerHour,
     );
   }
 
@@ -65,4 +98,16 @@ final class MailerConfig {
 
   /// TCP port to listen on.
   final int port;
+
+  /// Cap Standalone's siteverify endpoint, e.g.
+  /// `http://cap:3000/<site_key>/siteverify`. Null skips captcha enforcement
+  /// entirely (local dev, first-deploy bootstrap).
+  final String? capSiteverifyUrl;
+
+  /// The Cap site key's secret. Never logged. Null iff [capSiteverifyUrl] is.
+  final String? capSecretKey;
+
+  /// Global cap on verified sends per hour, protecting the Resend quota from
+  /// distributed spam that per-IP limiting cannot see.
+  final int maxSendsPerHour;
 }

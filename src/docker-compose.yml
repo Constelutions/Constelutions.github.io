@@ -3,7 +3,12 @@ name: constelutions
 services:
   marketing-site:
     container_name: marketing-site
-    build: ./site
+    build:
+      context: ./site
+      args:
+        # Public by nature — baked into the built HTML, not a secret. See
+        # specs/contact-form-anti-spam.md.
+        PUBLIC_CAP_SITE_KEY: ${PUBLIC_CAP_SITE_KEY:?PUBLIC_CAP_SITE_KEY is required}
     ports:
       - "80:80"
     restart: unless-stopped
@@ -16,10 +21,12 @@ services:
       retries: 3
       start_period: 5s
     # Ordering only — deliberately NOT `condition: service_healthy`. Gating the
-    # site on the mailer's health would take every page offline whenever the
-    # contact form's backend is unwell, which inverts the intended blast radius.
+    # site on the mailer's/cap's health would take every page offline whenever
+    # the contact form's backend is unwell, which inverts the intended blast
+    # radius.
     depends_on:
       - mailer
+      - cap
 
   mailer:
     container_name: mailer
@@ -37,6 +44,11 @@ services:
       CONTACT_FROM: ${CONTACT_FROM:-Constelutions <no-reply@constelutions.tech>}
       CONTACT_TO: ${CONTACT_TO:-theconstelutions@gmail.com}
       PORT: "8080"
+      # Unset by default (captcha enforcement off) until the first-deploy
+      # bootstrap in specs/contact-form-anti-spam.md mints a Cap site key.
+      CAP_SITEVERIFY_URL: ${CAP_SITEVERIFY_URL:-}
+      CAP_SECRET_KEY: ${CAP_SECRET_KEY:-}
+      MAX_SENDS_PER_HOUR: ${MAX_SENDS_PER_HOUR:-4}
     healthcheck:
       # The binary probes itself rather than shelling out to wget: it proves
       # the actual server process is answering, needs no extra package in the
@@ -47,3 +59,51 @@ services:
       timeout: 5s
       retries: 3
       start_period: 5s
+
+  cap:
+    container_name: cap
+    image: tiago2/cap:3.1.9
+    # Dashboard is reachable only from the host itself (SSH tunnel:
+    # ssh -L 3000:127.0.0.1:3000 <host> — see specs/contact-form-anti-spam.md).
+    # The widget's traffic goes through nginx's /cap/ proxy on this compose
+    # network instead. This container must never be internet-reachable
+    # directly — it trusts X-Forwarded-For as-is for its own rate limiting.
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      ADMIN_KEY: ${CAP_ADMIN_KEY:?CAP_ADMIN_KEY is required}
+      REDIS_URL: redis://valkey:6379
+      # Self-hosts the widget's WASM at /assets/ so the browser never touches
+      # jsdelivr at runtime. Versions pinned: "latest" can ship breaking
+      # changes on a container restart.
+      ENABLE_ASSETS_SERVER: "true"
+      WIDGET_VERSION: "0.1.57"
+      WASM_VERSION: "0.0.7"
+      # Defaults to Cap's own "*" when unset. The real page always reaches
+      # Cap same-origin through nginx's /cap/ proxy, so this doesn't gate the
+      # legitimate flow either way — it only stops a third-party page from
+      # embedding this site's widget to farm valid tokens in visitors'
+      # browsers. It does NOT stop a script calling the challenge/redeem
+      # endpoints directly (CORS is browser-enforced only) — that's what the
+      # instrumentation challenges and headless-browser detection are for.
+      CORS_ORIGIN: ${CAP_CORS_ORIGIN:-}
+    depends_on:
+      valkey:
+        condition: service_healthy
+    restart: unless-stopped
+
+  valkey:
+    container_name: cap-valkey
+    image: valkey/valkey:9-alpine
+    volumes:
+      - valkey-data:/data
+    command: valkey-server --save 60 1 --loglevel warning --maxmemory-policy noeviction
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  valkey-data:

@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:dart_resend/dart_resend.dart';
+import 'package:mailer/cap_verifier.dart';
 import 'package:mailer/config.dart';
 import 'package:mailer/contact_handler.dart';
 import 'package:mailer/log.dart';
 import 'package:mailer/mail_sender.dart';
+import 'package:mailer/send_throttle.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 
@@ -29,9 +31,24 @@ Future<void> main(List<String> arguments) async {
     timeout: const Duration(seconds: 10),
   );
 
+  final SendThrottle throttle = SendThrottle(
+    maxPerHour: config.maxSendsPerHour,
+  );
+
+  final String? capUrl = config.capSiteverifyUrl;
+  final CapVerifier? capVerifier = capUrl == null
+      ? null
+      : CapVerifier(siteverifyUrl: capUrl, secretKey: config.capSecretKey!);
+
   final Handler handler = const Pipeline()
       .addMiddleware(requestLogger())
-      .addHandler(buildRouter(MailSender(resend: resend, config: config)).call);
+      .addHandler(
+        buildRouter(
+          MailSender(resend: resend, config: config),
+          throttle,
+          capVerifier,
+        ).call,
+      );
 
   final HttpServer server = await shelf_io.serve(
     handler,
@@ -54,6 +71,8 @@ Future<void> main(List<String> arguments) async {
     'port': server.port,
     'from': config.from,
     'to': config.to,
+    'maxSendsPerHour': config.maxSendsPerHour,
+    'capEnforced': capVerifier != null,
   });
 
   for (final ProcessSignal signal in <ProcessSignal>[
@@ -64,6 +83,7 @@ Future<void> main(List<String> arguments) async {
       logInfo('shutting down');
       await server.close();
       resend.close();
+      capVerifier?.close();
       exit(0);
     });
   }
