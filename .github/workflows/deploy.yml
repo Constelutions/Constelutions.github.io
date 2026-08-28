@@ -27,12 +27,12 @@ jobs:
           version: 10
           run_install: false
       - run: pnpm install --frozen-lockfile
-        working-directory: src
+        working-directory: src/site
       - run: pnpm run build
-        working-directory: src
+        working-directory: src/site
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: src/dist
+          path: src/site/dist
 
   deploy:
     needs: build

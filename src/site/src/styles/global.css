@@ -46,6 +46,7 @@ html[data-theme="dark"] {
   --accent-dim: oklch(0.5 0.16 266 / 0.4);
   --star: oklch(0.96 0.02 240);
   --ok: oklch(0.72 0.14 152);
+  --danger: oklch(0.72 0.15 25); /* 5.43:1 on --surface-hi */
 
   /* translucent hover wash over a surface — has to invert per theme, or a
      dark veil lands under dark --ink text in light mode */
@@ -86,6 +87,7 @@ html[data-theme="light"] {
   --accent-dim: oklch(0.42 0.18 266 / 0.3);
   --star: oklch(0.3 0.04 240);
   --ok: oklch(0.42 0.14 152); /* 4.56:1 on --surface-hi */
+  --danger: oklch(0.44 0.17 25); /* 5.03:1 on --surface-hi */
 
   --hover-veil: oklch(0.72 0.02 264 / 0.5);
 }
@@ -116,6 +118,7 @@ html[data-theme="light"] {
     --accent-dim: oklch(0.42 0.18 266 / 0.3);
     --star: oklch(0.3 0.04 240);
     --ok: oklch(0.42 0.14 152);
+    --danger: oklch(0.44 0.17 25);
 
     --hover-veil: oklch(0.72 0.02 264 / 0.5);
   }
