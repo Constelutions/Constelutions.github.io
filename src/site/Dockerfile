@@ -3,6 +3,11 @@ FROM node:22-alpine AS build
 WORKDIR /app
 ENV CI=true
 
+# Public by nature — baked into the built HTML by Astro's import.meta.env,
+# not read at runtime. See specs/contact-form-anti-spam.md.
+ARG PUBLIC_CAP_SITE_KEY
+ENV PUBLIC_CAP_SITE_KEY=$PUBLIC_CAP_SITE_KEY
+
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./

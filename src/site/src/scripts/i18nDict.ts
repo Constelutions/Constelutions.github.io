@@ -489,10 +489,32 @@ export const DICT: Record<string, Translation> = {
     es: "Inténtalo de nuevo o escríbenos directamente por correo.",
     en: "Please try again, or email us directly.",
   },
+  f_error_rate_d: {
+    es: "Has enviado demasiadas solicitudes. Espera unos minutos e inténtalo de nuevo.",
+    en: "Too many requests. Please wait a few minutes and try again.",
+  },
   f_retry: { es: "Reintentar", en: "Try again" },
   f_err_name: { es: "Ingresa tu nombre.", en: "Please enter your name." },
   f_err_email: { es: "Ingresa un correo válido.", en: "Please enter a valid email." },
   f_err_message: { es: "Cuéntanos qué necesitas.", en: "Please tell us what you need." },
+  f_err_captcha: {
+    es: "Completa la verificación antes de enviar.",
+    en: "Complete the verification before sending.",
+  },
+  cap_initial: { es: "Verifica que eres humano", en: "Verify you're human" },
+  cap_verifying: { es: "Verificando…", en: "Verifying…" },
+  cap_solved: { es: "Verificado", en: "Verified" },
+  cap_error: { es: "Error, inténtalo de nuevo", en: "Error, try again" },
+  cap_verify_aria: {
+    es: "Haz clic para verificar que eres humano",
+    en: "Click to verify you're human",
+  },
+  cap_verifying_aria: { es: "Verificando, espera un momento", en: "Verifying, please wait" },
+  cap_verified_aria: { es: "Verificado", en: "Verified" },
+  cap_error_aria: {
+    es: "Ocurrió un error, inténtalo de nuevo",
+    en: "An error occurred, please try again",
+  },
 
   /* ---- CTA banner ---- */
   cta_title: {

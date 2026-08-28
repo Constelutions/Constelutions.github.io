@@ -17,6 +17,10 @@ const int _maxMessageLength = 5000;
 
 final RegExp _emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 
+/// Honeypot field rendered off-screen by Contact.astro. A human never sees
+/// it; any non-empty value marks the submission as a bot.
+const String honeypotField = 'website';
+
 /// A validated contact-form submission.
 final class ContactRequest {
   const ContactRequest({
@@ -41,6 +45,13 @@ final class ContactRequest {
   static ContactValidation validate(Object? body) {
     if (body is! Map<String, Object?>) {
       return const ContactRejected(<String>['body']);
+    }
+
+    // Checked before any field validation: a bot with a filled honeypot
+    // AND an invalid email must get the fake success below, never the
+    // helpful 400 field list — that would hand it its exact fix.
+    if (_readString(body[honeypotField]).isNotEmpty) {
+      return const ContactTrapped('honeypot');
     }
 
     final String name = _readString(body['name']);
@@ -96,4 +107,13 @@ final class ContactRejected extends ContactValidation {
   const ContactRejected(this.fields);
 
   final List<String> fields;
+}
+
+/// The submission tripped a bot trap. The caller must answer with a fake
+/// success so the bot learns nothing.
+final class ContactTrapped extends ContactValidation {
+  const ContactTrapped(this.reason);
+
+  /// Currently only 'honeypot'.
+  final String reason;
 }

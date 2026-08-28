@@ -12,7 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.2.7"
+    "astro": "^7.2.7",
+    "cap-widget": "0.1.57"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

@@ -13,6 +13,7 @@ Map<String, Object?> validBody() => <String, Object?>{
   'message': 'Hola, me interesa su servicio.',
   'company': 'Analytical Engines',
   'service': 'development',
+  'website': '',
 };
 
 void main() {
@@ -67,6 +68,27 @@ void main() {
 
     test('treats non-string JSON values as missing', () {
       expect(rejectedFields(validBody()..['name'] = 42), <String>['name']);
+    });
+
+    test('traps a submission with the honeypot filled', () {
+      final ContactValidation result = ContactRequest.validate(
+        validBody()..['website'] = 'http://spam.example',
+      );
+
+      expect(result, isA<ContactTrapped>());
+      expect((result as ContactTrapped).reason, 'honeypot');
+    });
+
+    test('honeypot outranks field validation', () {
+      final ContactValidation result =
+          ContactRequest.validate(<String, Object?>{
+            'name': '',
+            'email': 'not-an-email',
+            'message': '',
+            'website': 'http://spam.example',
+          });
+
+      expect(result, isA<ContactTrapped>());
     });
   });
 
