@@ -216,7 +216,13 @@ settings the first time you set the resource up.
    `PUBLIC_CAP_SITE_KEY` (placeholder for now — see the bootstrap below),
    `CAP_SITEVERIFY_URL`, `CAP_SECRET_KEY`, and optionally `CONTACT_FROM`,
    `CONTACT_TO`, `MAX_SENDS_PER_HOUR`, `CAP_CORS_ORIGIN`.
-3. Assign a **public domain only to `marketing-site`**. If Coolify offers to
+3. Assign a **public domain only to `marketing-site`**. `marketing-site`
+   deliberately has no `ports:` publish in the compose file — only
+   `expose: "80"` — because `coolify-proxy` already owns host `0.0.0.0:80`/
+   `:443`; the assigned domain is what makes Coolify route traffic to the
+   container over the internal network instead. Publishing the container's
+   port straight to the host as well would fight `coolify-proxy` for the
+   same port and fail with `port is already allocated`. If Coolify offers to
    map a domain to `cap` too (it publishes `127.0.0.1:3000:3000`), decline
    it — that binding is host-loopback-only by design, and Cap must never be
    reachable from the internet directly (it trusts `X-Forwarded-For` as-is
