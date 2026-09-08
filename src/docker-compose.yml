@@ -11,7 +11,8 @@ services:
         PUBLIC_CAP_SITE_KEY: ${PUBLIC_CAP_SITE_KEY:?PUBLIC_CAP_SITE_KEY is required}
     # No host port publish: coolify-proxy already owns 0.0.0.0:80/:443 on the
     # VPS, so this container is reached over the internal Docker network via
-    # the Traefik labels Coolify injects for the assigned domain instead.
+    # the Traefik labels below instead (hand-maintained — see the comment on
+    # `labels:` further down for why).
     expose:
       - "80"
     restart: unless-stopped
@@ -30,6 +31,43 @@ services:
     depends_on:
       - mailer
       - cap
+    # This resource's "Container Labels Readonly" is off in Coolify, so it
+    # will not auto-generate Traefik routing labels or attach this container
+    # to its "coolify" network from the Domains field — both were verified
+    # missing (docker inspect showed no traefik.* labels; the container was
+    # absent from `docker network inspect coolify`), which is why the
+    # assigned domain 503'd with "no available server" despite nginx running
+    # healthy. Values below (network name "coolify", certresolver
+    # "letsencrypt") are copied from another working service's own labels on
+    # this same host, not guessed. If "Container Labels Readonly" is ever
+    # re-enabled for this resource, remove this block — Coolify will
+    # regenerate its own and a leftover duplicate can conflict. Known Coolify
+    # gap for raw multi-service docker-compose resources:
+    # https://github.com/coollabsio/coolify/issues/3466
+    labels:
+      - "traefik.enable=true"
+      # Only marketing-site joins a second network (below), so Traefik must
+      # be told which one to route through — with more than one attached
+      # network it otherwise refuses to pick.
+      - "traefik.docker.network=coolify"
+      - "traefik.http.middlewares.marketing-site-redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.http-0-marketing-site.rule=(Host(`constelutions.tech`) || Host(`www.constelutions.tech`)) && PathPrefix(`/`)"
+      - "traefik.http.routers.http-0-marketing-site.entryPoints=http"
+      - "traefik.http.routers.http-0-marketing-site.middlewares=marketing-site-redirect-to-https"
+      - "traefik.http.routers.http-0-marketing-site.service=http-0-marketing-site"
+      - "traefik.http.services.http-0-marketing-site.loadbalancer.server.port=80"
+      - "traefik.http.routers.https-0-marketing-site.rule=(Host(`constelutions.tech`) || Host(`www.constelutions.tech`)) && PathPrefix(`/`)"
+      - "traefik.http.routers.https-0-marketing-site.entryPoints=https"
+      - "traefik.http.routers.https-0-marketing-site.tls=true"
+      - "traefik.http.routers.https-0-marketing-site.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.https-0-marketing-site.service=https-0-marketing-site"
+      - "traefik.http.services.https-0-marketing-site.loadbalancer.server.port=80"
+    # default keeps it reachable from mailer/cap by service name (unchanged);
+    # coolify is the network coolify-proxy itself watches — mailer and cap
+    # deliberately stay off of it, only marketing-site needs the public path.
+    networks:
+      - default
+      - coolify
 
   mailer:
     container_name: mailer
@@ -107,6 +145,12 @@ services:
       timeout: 3s
       retries: 5
     restart: unless-stopped
+
+networks:
+  # Pre-existing network coolify-proxy and Coolify's own services already run
+  # on — not created by this file, only joined.
+  coolify:
+    external: true
 
 volumes:
   valkey-data:
