@@ -39,11 +39,7 @@ services:
     # http://mailer:8080 on the compose network, so RESEND_API_KEY has no
     # inbound path from the internet — nginx is the only way in.
     environment:
-      # TEMPORARILY REMOVED: RESEND_API_KEY — Coolify won't let go of a
-      # stuck/wrong stored value while the variable name is still referenced
-      # anywhere in this file. Restore this line once the stale row is
-      # confirmed gone from Coolify's Environment Variables list.
-      # RESEND_API_KEY: ${RESEND_API_KEY}
+      RESEND_API_KEY: ${RESEND_API_KEY}
       # Spelled with defaults rather than hardcoded, so the deployed values
       # stay visible here while .env can still redirect them — e.g. pointing
       # CONTACT_TO at delivered@resend.dev to exercise the form without
@@ -78,9 +74,7 @@ services:
     ports:
       - "127.0.0.1:3000:3000"
     environment:
-      # TEMPORARILY REMOVED: CAP_ADMIN_KEY — same stuck-value issue as
-      # RESEND_API_KEY above. Restore once the stale row is confirmed gone.
-      # ADMIN_KEY: ${CAP_ADMIN_KEY}
+      ADMIN_KEY: ${CAP_ADMIN_KEY}
       REDIS_URL: redis://valkey:6379
       # Self-hosts the widget's WASM at /assets/ so the browser never touches
       # jsdelivr at runtime. Versions pinned: "latest" can ship breaking
