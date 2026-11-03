@@ -1,5 +1,5 @@
 # ---- Build stage: compile the Astro static site ----
-FROM node:22-alpine AS build
+FROM node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914 AS build
 WORKDIR /app
 ENV CI=true
 
@@ -34,7 +34,7 @@ RUN apk add --no-cache brotli \
 # nginx binary is built upstream by nginx, Inc., not by Alpine, so its version
 # rarely matches whatever build Alpine's own module package was compiled
 # against (this mismatch fails at startup with a version-check error).
-FROM alpine:3.21
+FROM alpine:3.21@sha256:ee16d92f96db08d9d2d07da48555a27f3a69d8f0759021dbc601195ed0d2b5bd
 
 # nginx-mod-http-headers-more lets us clear the "Server" response header
 # entirely (server_tokens off only hides the version number, not the

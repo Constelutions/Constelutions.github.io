@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Keep the digest-pinned base images in the Dockerfiles current. Dependabot
+  # rewrites both the tag and the @sha256 digest in one PR.
+  - package-ecosystem: docker
+    directory: /src/site
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /src/mailer
+    schedule:
+      interval: weekly
