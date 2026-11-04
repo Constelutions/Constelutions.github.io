@@ -26,7 +26,7 @@ RUN dart pub get --offline \
 # Alpine matches the musl the binary was linked against, and unlike `scratch`
 # it supplies a real user account and a shell — worth ~8 MB when the only way
 # to inspect a misbehaving container on Coolify is `docker exec`.
-FROM alpine:3.21@sha256:ee16d92f96db08d9d2d07da48555a27f3a69d8f0759021dbc601195ed0d2b5bd
+FROM alpine:3.24@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
 
 # ca-certificates is load-bearing: without root certs the outbound TLS
 # handshake to api.resend.com fails, and that fault would first appear on a
