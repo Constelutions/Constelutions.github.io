@@ -34,7 +34,7 @@ RUN apk add --no-cache brotli \
 # nginx binary is built upstream by nginx, Inc., not by Alpine, so its version
 # rarely matches whatever build Alpine's own module package was compiled
 # against (this mismatch fails at startup with a version-check error).
-FROM alpine:3.21@sha256:ee16d92f96db08d9d2d07da48555a27f3a69d8f0759021dbc601195ed0d2b5bd
+FROM alpine:3.24@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
 
 # nginx-mod-http-headers-more lets us clear the "Server" response header
 # entirely (server_tokens off only hides the version number, not the
