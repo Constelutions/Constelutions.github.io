@@ -1,0 +1,33 @@
+---
+
+---
+
+<span
+  class="live-badge"
+  data-i18n="proj_live"
+  >Producto en vivo</span
+>
+
+<style>
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ok);
+    border: 1px solid var(--ok);
+    border-radius: 999px;
+    padding: 4px 12px;
+    width: fit-content;
+  }
+  .live-badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ok);
+  }
+</style>

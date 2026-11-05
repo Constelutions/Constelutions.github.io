@@ -1,5 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { getProjects } from "../repositories/projectsRepository";
+import LiveBadge from "./LiveBadge.astro";
+import ProductLink from "./ProductLink.astro";
 
 const projects = await getProjects();
 ---
@@ -20,8 +23,8 @@ const projects = await getProjects();
       <p
         class="lede"
         data-i18n="proj_lede">
-        Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y generan
-        resultados medibles para nuestros clientes.
+        Nuestros propios productos en producción, junto con sistemas que hemos construido para
+        clientes en distintas industrias.
       </p>
     </div>
 
@@ -30,12 +33,23 @@ const projects = await getProjects();
         <article class={`proj reveal${p.flip ? " flip" : ""}`}>
           <div class="proj-visual">
             <div class="proj-img">
-              <span class="proj-num">{p.num}</span>
-              <span
-                class="photo-label"
-                data-i18n="proj_screenshot">
-                Captura de pantalla
-              </span>
+              {p.live ? (
+                <Image
+                  class="proj-shot"
+                  src={p.live.image}
+                  alt={p.live.imageAlt}
+                  data-i18n-attr={`alt:${p.live.imageAlt_i18n}`}
+                  widths={[640, 960, 1280]}
+                  sizes="(max-width: 1040px) 92vw, 560px"
+                />
+              ) : (
+                <span
+                  class="photo-label"
+                  data-i18n="proj_screenshot">
+                  Captura de pantalla
+                </span>
+              )}
+              {!p.live && <span class="proj-num">{p.num}</span>}
             </div>
             <div class="proj-tags">
               {p.tags.map((tag) => (
@@ -44,19 +58,29 @@ const projects = await getProjects();
             </div>
           </div>
           <div class="proj-info">
-            <span
-              class="industry-badge"
-              data-i18n={p.industry_i18n}>
-              {p.industry}
-            </span>
+            <div class="proj-badges">
+              <span
+                class="industry-badge"
+                data-i18n={p.industry_i18n}>
+                {p.industry}
+              </span>
+              {p.live && <LiveBadge />}
+            </div>
             <h3 data-i18n={p.title_i18n}>{p.title}</h3>
             <p data-i18n={p.desc_i18n}>{p.desc}</p>
             <div class="proj-outcome">
               <svg viewBox="0 0 24 24">
-                <path d="M3 17l4-8 4 4 4-6 4 9" />
+                <path d={p.live ? "M5 13l4 4L19 7" : "M3 17l4-8 4 4 4-6 4 9"} />
               </svg>
               <span data-i18n={p.outcome_i18n}>{p.outcome}</span>
             </div>
+            {p.live && (
+              <ProductLink
+                url={p.live.url}
+                label={p.live.cta}
+                labelKey={p.live.cta_i18n}
+              />
+            )}
           </div>
         </article>
       ))
@@ -65,7 +89,7 @@ const projects = await getProjects();
     <p
       class="placeholder-note"
       data-i18n="proj_note">
-      Proyectos representativos — los nombres de clientes se omiten por confidencialidad.
+      Los proyectos para clientes son representativos — los nombres se omiten por confidencialidad.
     </p>
   </div>
 </section>
@@ -109,6 +133,14 @@ const projects = await getProjects();
     position: relative;
     overflow: hidden;
   }
+  .proj-img :global(.proj-shot) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
   .proj-num {
     position: absolute;
     top: 16px;
@@ -117,6 +149,11 @@ const projects = await getProjects();
     font-size: 11px;
     color: var(--accent-ink);
     letter-spacing: 0.12em;
+  }
+  .proj-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
   .photo-label {
     font-family: var(--mono);

@@ -1,0 +1,52 @@
+---
+interface Props {
+  url: string;
+  label: string;
+  labelKey: string;
+}
+
+const { url, label, labelKey } = Astro.props;
+---
+
+<a
+  href={url}
+  class="product-link"
+  target="_blank"
+  rel="noopener">
+  <span data-i18n={labelKey}>{label}</span>
+  <span
+    class="visually-hidden"
+    data-i18n="proj_new_tab"
+    >(se abre en una pestaña nueva)</span
+  >
+</a>
+
+<style>
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--accent-ink);
+    text-decoration: none;
+  }
+  .product-link::after {
+    content: "\2197";
+  }
+  .product-link:hover,
+  .product-link:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

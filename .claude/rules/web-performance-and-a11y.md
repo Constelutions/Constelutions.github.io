@@ -73,7 +73,7 @@ theme blocks (e.g. `--hover-veil`).
 
 **Known gap:** several components still carry hardcoded dark chip/tile
 backgrounds (`oklch(0.28 0.06 266 / …)`, `oklch(0.4 0.08 266 / …)`) behind
-`--accent-2`/`--faint` text — see `PortfolioProjects`, `PortfolioDemos`,
+`--accent-2`/`--faint` text — see `PortfolioProjects`,
 `PortfolioSummary`, `ServicesGrid`, `WhyUs`, `MisionVision`, `Process`,
 `Contact`. These fail contrast in light mode and want tokenizing.
 
