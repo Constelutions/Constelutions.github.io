@@ -1,5 +1,7 @@
 ---
 import { getProjects } from "../repositories/projectsRepository";
+import LiveBadge from "./LiveBadge.astro";
+import ProductLink from "./ProductLink.astro";
 
 const projects = (await getProjects()).slice(0, 4);
 ---
@@ -22,8 +24,8 @@ const projects = (await getProjects()).slice(0, 4);
       <p
         class="lede"
         data-i18n="ps_lede">
-        Productos en producción para fintech, salud, logística y e-commerce que generan resultados
-        medibles.
+        Nuestros productos en vivo y los sistemas que hemos construido para clientes de fintech y
+        salud.
       </p>
     </div>
     <div class="ps-grid">
@@ -31,17 +33,20 @@ const projects = (await getProjects()).slice(0, 4);
         projects.map((p) => (
           <div class="ps-card reveal">
             <div class="ps-card-head">
-              <span
-                class="industry-badge"
-                data-i18n={p.industry_i18n}>
-                {p.industry}
-              </span>
+              <div class="ps-badges">
+                <span
+                  class="industry-badge"
+                  data-i18n={p.industry_i18n}>
+                  {p.industry}
+                </span>
+                {p.live && <LiveBadge />}
+              </div>
               <span class="ps-num">{p.num}</span>
             </div>
             <h3 data-i18n={p.title_i18n}>{p.title}</h3>
             <div class="ps-outcome">
               <svg viewBox="0 0 24 24">
-                <path d="M3 17l4-8 4 4 4-6 4 9" />
+                <path d={p.live ? "M5 13l4 4L19 7" : "M3 17l4-8 4 4 4-6 4 9"} />
               </svg>
               <span data-i18n={p.outcome_i18n}>{p.outcome}</span>
             </div>
@@ -50,6 +55,13 @@ const projects = (await getProjects()).slice(0, 4);
                 <span class="tag">{tag}</span>
               ))}
             </div>
+            {p.live && (
+              <ProductLink
+                url={p.live.url}
+                label={p.live.cta}
+                labelKey={p.live.cta_i18n}
+              />
+            )}
           </div>
         ))
       }
@@ -88,6 +100,12 @@ const projects = (await getProjects()).slice(0, 4);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+  }
+  .ps-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .industry-badge {
     display: inline-block;

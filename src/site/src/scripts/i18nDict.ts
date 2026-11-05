@@ -252,20 +252,57 @@ export const DICT: Record<string, Translation> = {
     en: "Real products, measurable impact",
   },
   port_lede: {
-    es: "Una selección de los sistemas, plataformas y aplicaciones que hemos construido para clientes en distintas industrias.",
-    en: "A selection of the systems, platforms and applications we have built for clients across industries.",
+    es: "Nuestros productos en vivo y una selección de los sistemas que hemos construido para clientes en distintas industrias.",
+    en: "Our live products and a selection of the systems we have built for clients across industries.",
   },
 
   proj_eyebrow: { es: "Proyectos destacados", en: "Featured projects" },
   proj_title: { es: "Lo que hemos construido", en: "What we have built" },
   proj_lede: {
-    es: "Sistemas en producción que procesan transacciones reales, sirven a usuarios reales y generan resultados medibles para nuestros clientes.",
-    en: "Production systems that process real transactions, serve real users and generate measurable results for our clients.",
+    es: "Nuestros propios productos en producción, junto con sistemas que hemos construido para clientes en distintas industrias.",
+    en: "Our own live products, alongside systems we have built for clients across industries.",
   },
   proj_screenshot: { es: "Captura de pantalla", en: "Screenshot" },
   proj_note: {
-    es: "Proyectos representativos — los nombres de clientes se omiten por confidencialidad.",
-    en: "Representative projects — client names omitted for confidentiality.",
+    es: "Los proyectos para clientes son representativos — los nombres se omiten por confidencialidad.",
+    en: "Client projects are representative — names are omitted for confidentiality.",
+  },
+  proj_live: { es: "Producto en vivo", en: "Live product" },
+  proj_new_tab: { es: "(se abre en una pestaña nueva)", en: "(opens in a new tab)" },
+
+  fincaapp_industry: { es: "Agrotech", en: "Agtech" },
+  fincaapp_title: {
+    es: "FincaApp: gestión ganadera en el celular",
+    en: "FincaApp: livestock management on your phone",
+  },
+  fincaapp_desc: {
+    es: "Ganado, alimentación, salud, inventario, finanzas y equipo en una sola app. Reemplaza libretas y hojas de cálculo.",
+    en: "Livestock, feeding, health, inventory, finances and your team in a single app. Replaces notebooks and spreadsheets.",
+  },
+  fincaapp_status: { es: "En producción", en: "In production" },
+  fincaapp_cta: { es: "Visitar FincaApp", en: "Visit FincaApp" },
+  fincaapp_alt: {
+    es: "Pantallas de la app FincaApp con el listado de animales, los corrales y los planes de alimentación",
+    en: "FincaApp screens showing the animal list, the pens and the feeding plans",
+  },
+
+  rebasar_industry: { es: "Herramientas para desarrolladores", en: "Developer tools" },
+  rebasar_title: {
+    es: "Rebasar: cliente Git de escritorio",
+    en: "Rebasar: desktop Git client",
+  },
+  rebasar_desc: {
+    es: "Cliente Git rápido y gratuito para quienes trabajan con muchos repositorios, ramas, worktrees y pull requests a la vez.",
+    en: "A fast, free Git client for people who work across many repositories, branches, worktrees and pull requests at once.",
+  },
+  rebasar_status: {
+    es: "Beta pública · Windows y Linux · gratis",
+    en: "Public beta · Windows and Linux · free",
+  },
+  rebasar_cta: { es: "Visitar Rebasar", en: "Visit Rebasar" },
+  rebasar_alt: {
+    es: "Ventana de Rebasar con el historial de commits de varias ramas y el panel de detalle de un commit",
+    en: "Rebasar window showing the commit history across several branches and a commit detail panel",
   },
 
   proj1_industry: { es: "Fintech", en: "Fintech" },
@@ -293,98 +330,14 @@ export const DICT: Record<string, Translation> = {
     en: "120,000 records digitized across 3 clinics",
   },
 
-  proj3_industry: { es: "Logística", en: "Logistics" },
-  proj3_title: {
-    es: "Sistema de rastreo de flotilla en tiempo real",
-    en: "Real-time fleet tracking system",
-  },
-  proj3_desc: {
-    es: "Plataforma de monitoreo de vehículos con mapa en tiempo real, alertas por geocerca, reportes de eficiencia de rutas y app móvil para conductores.",
-    en: "Vehicle monitoring platform with real-time map, geofence alerts, route efficiency reports and a mobile app for drivers.",
-  },
-  proj3_outcome: {
-    es: "Visibilidad al 100 % sobre 400 unidades activas",
-    en: "100 % visibility across 400 active units",
-  },
-
-  proj4_industry: { es: "E-commerce", en: "E-commerce" },
-  proj4_title: {
-    es: "Marketplace B2B con catálogo inteligente",
-    en: "B2B marketplace with smart catalogue",
-  },
-  proj4_desc: {
-    es: "Marketplace mayorista con catálogo configurable, motor de precios por volumen, integración con ERP y flujo de aprobación de órdenes a medida.",
-    en: "Wholesale marketplace with a configurable catalogue, volume pricing engine, ERP integration and a custom order approval workflow.",
-  },
-  proj4_outcome: {
-    es: "3× crecimiento en volumen de órdenes en el primer año",
-    en: "3× growth in order volume in the first year",
-  },
-
   /* ---- portfolio summary (home page) ---- */
   ps_eyebrow: { es: "Proyectos destacados", en: "Featured projects" },
   ps_title: { es: "Sistemas que hemos construido", en: "Systems we have built" },
   ps_lede: {
-    es: "Productos en producción para fintech, salud, logística y e-commerce que generan resultados medibles.",
-    en: "Production products for fintech, healthcare, logistics and e-commerce that generate measurable results.",
+    es: "Nuestros productos en vivo y los sistemas que hemos construido para clientes de fintech y salud.",
+    en: "Our live products and the systems we have built for fintech and healthcare clients.",
   },
   ps_cta: { es: "Ver portafolio", en: "View portfolio" },
-
-  demos_eyebrow: { es: "Demos en vivo", en: "Live demos" },
-  demos_title: { es: "Mira nuestro trabajo en acción", en: "See our work in action" },
-  demos_lede: {
-    es: "Aplicaciones funcionales que puedes explorar ahora mismo. Cada demo refleja patrones reales que aplicamos en proyectos de clientes.",
-    en: "Functional applications you can explore right now. Each demo reflects real patterns we apply on client projects.",
-  },
-  demo_screenshot: { es: "Demo en vivo próximamente", en: "Live demo coming soon" },
-  demo_soon: { es: "Próximamente", en: "Coming soon" },
-  demo_note: {
-    es: "Los demos estarán disponibles próximamente — contáctanos si quieres ver una demostración en vivo.",
-    en: "Demos coming soon — contact us if you'd like to see a live walkthrough.",
-  },
-  demo_type_web: { es: "App web", en: "Web app" },
-  demo_type_mobile: { es: "App móvil", en: "Mobile app" },
-  demo_type_api: { es: "API / Backend", en: "API / Backend" },
-
-  demo1_title: {
-    es: "Dashboard de analíticas en tiempo real",
-    en: "Real-time analytics dashboard",
-  },
-  demo1_desc: {
-    es: "Visualización de KPIs, gráficas de series de tiempo y filtros dinámicos. Construido con React y un backend de WebSockets.",
-    en: "KPI visualisation, time-series charts and dynamic filters. Built with React and a WebSocket backend.",
-  },
-  demo2_title: { es: "App móvil de gestión de campo", en: "Field management mobile app" },
-  demo2_desc: {
-    es: "Aplicación offline-first para técnicos de campo: captura de formularios, firma digital y sincronización automática al recuperar señal.",
-    en: "Offline-first application for field technicians: form capture, digital signature and automatic sync on reconnection.",
-  },
-  demo3_title: { es: "Portal de autoservicio para clientes", en: "Customer self-service portal" },
-  demo3_desc: {
-    es: "Portal B2C con autenticación, historial de órdenes, descarga de facturas y chat de soporte integrado.",
-    en: "B2C portal with authentication, order history, invoice downloads and integrated support chat.",
-  },
-  demo4_title: {
-    es: "API de integración ERP ↔ e-commerce",
-    en: "ERP ↔ e-commerce integration API",
-  },
-  demo4_desc: {
-    es: "Middleware que sincroniza inventario, precios y órdenes entre un ERP legacy y una tienda en línea. Documentación interactiva incluida.",
-    en: "Middleware that syncs inventory, pricing and orders between a legacy ERP and an online store. Interactive documentation included.",
-  },
-  demo5_title: {
-    es: "Sistema de notificaciones multicanal",
-    en: "Multi-channel notification system",
-  },
-  demo5_desc: {
-    es: "Motor de notificaciones configurable vía reglas: email, SMS, push y webhooks. Panel de administración con métricas de entrega.",
-    en: "Rule-driven notification engine: email, SMS, push and webhooks. Admin panel with delivery metrics.",
-  },
-  demo6_title: { es: "Plataforma de onboarding digital", en: "Digital onboarding platform" },
-  demo6_desc: {
-    es: "Flujo de alta de clientes con validación de identidad, firma electrónica y conexión a buró de crédito. Reduce el tiempo de onboarding de días a minutos.",
-    en: "Customer sign-up flow with identity verification, electronic signature and credit bureau connection. Reduces onboarding time from days to minutes.",
-  },
 
   /* ---- about: who we are ---- */
   wwa_eyebrow: { es: "Quiénes somos", en: "Who we are" },
