@@ -8,7 +8,8 @@ ENV CI=true
 ARG PUBLIC_CAP_SITE_KEY
 ENV PUBLIC_CAP_SITE_KEY=$PUBLIC_CAP_SITE_KEY
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Node 25+ no longer bundles corepack, so install pnpm through npm.
+RUN npm install --global pnpm@latest
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --prod --frozen-lockfile
