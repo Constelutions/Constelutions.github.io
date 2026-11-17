@@ -2,6 +2,8 @@
    CONSTELUTIONS — interactions
    starfield · live constellation · header · reveal · form
    ============================================================ */
+import { loadCapWidget } from "./capWidget";
+
 (function () {
   "use strict";
 
@@ -264,18 +266,17 @@
 
   /* ---------- contact form ---------- */
 
-  /** Endpoint nginx proxies to the mailer container. No trailing slash: the
-   *  site's trailingSlash:"always" governs Astro page routes, while /api/ is
-   *  proxied straight through, so a slash here would not be redirected — it
-   *  would simply miss the route. */
-  const CONTACT_ENDPOINT = "/api/contact";
+  /** Contact API endpoint: the `constelutions` producer of Hermes, the shared
+   *  contact relay (also used by the FincaApp marketing site). It is on another
+   *  origin, so nginx's CSP lists it in connect-src. */
+  const CONTACT_ENDPOINT = "https://relay.constelutions.tech/v1/constelutions/contact";
 
   /** Abandon a submission that has not answered in this long. Without a cap a
    *  stalled connection leaves the button disabled with no way back. */
   const CONTACT_TIMEOUT_MS = 15000;
 
-  /** Mirrors the server-side rules in mailer/lib/contact_request.dart. The
-   *  server is authoritative — this only spares the user a round trip. */
+  /** Mirrors the contact service's validation rules. The server is
+   *  authoritative — this only spares the user a round trip. */
   const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
   interface ContactField {
@@ -298,20 +299,20 @@
     const capWidget = form.querySelector<HTMLElementTagNameMap["cap-widget"]>("cap-widget");
     const capError = document.getElementById("contact-cap-err");
 
-    /** The widget chunk is loaded lazily — the entry bundle ships only what
-     *  first render needs — the moment the form scrolls into view, so it has
-     *  time to solve before the visitor reaches the submit button. */
+    /** The widget script is loaded lazily — the page requests nothing from the
+     *  Cap instance until the form scrolls into view — so it has time to solve
+     *  before the visitor reaches the submit button. */
     if (capWidget) {
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
             observer.disconnect();
-            void import("./capWidget").then((m) => m.loadCapWidget());
+            loadCapWidget();
           }
         }, { rootMargin: "200px" });
         observer.observe(form);
       } else {
-        void import("./capWidget").then((m) => m.loadCapWidget());
+        loadCapWidget();
       }
     }
 
@@ -528,7 +529,7 @@
       // The widget auto-injects this hidden input once a challenge is
       // solved. Its absence means the visitor has not solved it yet (or the
       // chunk has not loaded) — surface that instead of sending a request
-      // the mailer will just answer 403 to.
+      // the contact service will just answer 403 to.
       const capToken = byName<HTMLInputElement>("cap-token")?.value ?? "";
       if (capWidget && !capToken) {
         if (capError) capError.hidden = false;
