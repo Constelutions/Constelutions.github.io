@@ -17,6 +17,31 @@ and a global send throttle in the mailer.
 This spec is self-contained: every file path, field name, env var, and
 directive is fixed here. Implement it as written.
 
+> **Amendment: shared Cap, and no mailer in this repo.** Two things changed
+> after this spec was written.
+>
+> 1. Cap is no longer part of this compose stack. It is one shared instance,
+>    deployed from the infra repo (ADR 0004) at
+>    `https://captcha.constelutions.tech`, with its own Valkey. The browser
+>    loads `/assets/widget.js` and the two WASM files (`cap_wasm_bg.wasm`,
+>    `hashwx.wasm`) straight from there and talks to
+>    `https://captcha.constelutions.tech/<site-key>/`; `scripts/capWidget.ts`
+>    injects the script lazily, as before. Site keys are created in that
+>    instance's dashboard.
+> 2. The Dart mailer and the nginx `/api/` proxy and rate limit were removed.
+>    The contact relay is moving into a separate microservice shared with the
+>    FincaApp marketing site, and will own siteverify, the honeypot check,
+>    rate limiting and the send throttle. Until it exists, `CONTACT_ENDPOINT`
+>    in `scripts/main.ts` is blank and the form shows its error state.
+>
+> Everything below about the same-origin `/cap/` proxy, the `cap` and `valkey`
+> containers, `CAP_ADMIN_KEY`, `CAP_CORS_ORIGIN`, the `cap-widget` npm
+> package, the SSH-tunnel dashboard, the first-deploy bootstrap, the mailer
+> (siteverify, send throttle, fail-open) and the nginx `/api/` location is the
+> original design and no longer applies to this repo. The honeypot field, the
+> widget gating in the browser and the request payload are unchanged, and the
+> server-side rules are the requirements for the new service.
+
 ## Threat model
 
 | Attacker tier | Behavior | Stopped by |

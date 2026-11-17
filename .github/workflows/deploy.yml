@@ -30,6 +30,10 @@ jobs:
         working-directory: src/site
       - run: pnpm run build
         working-directory: src/site
+        env:
+          # Public by nature (baked into the page). Without it the widget would
+          # send challenge requests for the key "undefined" to the shared Cap.
+          PUBLIC_CAP_SITE_KEY: 7a46c3305b
       - uses: actions/upload-pages-artifact@v3
         with:
           path: src/site/dist

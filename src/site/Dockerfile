@@ -21,9 +21,11 @@ RUN pnpm build
 # max-quality bytes (brotli -11, gzip -9) without burning request-time CPU on
 # them. Skipped for woff2/png/ico, which are already compressed formats, and
 # for anything under 512 B, where the framing overhead cancels out the gain.
+# Not .html: nginx injects a per-request CSP nonce into it (see nginx.conf), and
+# that cannot be done on a precompressed body.
 RUN apk add --no-cache brotli \
     && find dist -type f -size +512c \
-      \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.mjs' \
+      \( -name '*.css' -o -name '*.js' -o -name '*.mjs' \
          -o -name '*.svg' -o -name '*.json' -o -name '*.xml' -o -name '*.txt' \) \
       -print0 \
     | xargs -0 -r -I{} sh -c 'gzip -9 -c "{}" > "{}.gz" && brotli -Z -c "{}" > "{}.br"'

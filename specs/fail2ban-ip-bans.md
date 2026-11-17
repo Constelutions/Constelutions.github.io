@@ -6,6 +6,12 @@ that spec rejects abusive requests at the application edge; this one bans the
 IPs behind sustained abuse at the host firewall, so they stop consuming any
 resources at all.
 
+> **Note:** the nginx `/api/` location, its rate limit and the mailer were
+> removed from the site (see the amendment in contact-form-anti-spam.md), so
+> the ban jail (`http-ratelimit` in the infra repo) has no nginx `contact`
+> limit lines to match until the shared contact service is fronted by the same
+> kind of limit and its log is wired in.
+
 Implementation spans two repositories:
 
 | Repo | Path | Changes |
