@@ -2,7 +2,7 @@
 
 Source for the Constelutions marketing site, built with [Astro](https://astro.build). The site is deployed to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), and can also be built into a self-contained nginx Docker image for hosting elsewhere (e.g. Coolify).
 
-The contact form posts to a contact API that does not exist yet: the mail relay that used to run alongside nginx was removed, and its replacement is a shared microservice (also meant for the FincaApp marketing site) still to be built. Until its URL is set in `CONTACT_ENDPOINT` (`src/site/src/scripts/main.ts`), submitting the form shows its error state. The Cap captcha widget does work: it loads from the shared Cap instance.
+The contact form posts to Hermes, the shared contact relay (also used by the FincaApp marketing site), at `https://relay.constelutions.tech/v1/constelutions/contact` (`CONTACT_ENDPOINT` in `src/site/src/scripts/main.ts`). Hermes verifies the Cap token, rate-limits, and emails the submission; the form's field names and the `service` values must match the `constelutions` producer in Hermes's `appsettings.json`. The Cap captcha widget loads from the shared Cap instance.
 
 ## Project structure
 
@@ -42,9 +42,8 @@ pnpm dev          # http://localhost:4321
 | `pnpm preview`          | Preview the production build locally          |
 | `pnpm exec astro check` | Type-check `.astro` and `.ts` files           |
 
-> The contact form shows its error state on submit until `CONTACT_ENDPOINT` is
-> set (see above). The captcha widget loads from the shared Cap instance, so it
-> needs network access.
+> The contact form and the captcha widget need network access: the widget loads
+> from the shared Cap instance and the form posts to Hermes.
 
 ## Environment
 
@@ -136,7 +135,7 @@ handful of Coolify-specific settings the first time you set the resource up.
 
 ### Content Security Policy
 
-The nginx config serves a strict CSP on every HTML response: scripts and styles run only from this origin, the shared Cap instance, or with a per-request nonce. The pages are static, so nginx generates the nonce (`$request_id`), adds it to every `<script>` and `<style>` tag with `sub_filter`, and sets `window.CAP_SCRIPT_NONCE` and `window.CAP_CSS_NONCE` for the widget (it needs them for its injected style and its instrumentation iframe). That is why the Dockerfile does not precompress `.html`. When `CONTACT_ENDPOINT` points to another origin, add it to `connect-src` in `src/site/nginx.conf`, or the browser blocks the request. The GitHub Pages build has no nginx, so it gets no CSP.
+The nginx config serves a strict CSP on every HTML response: scripts and styles run only from this origin, the shared Cap instance, or with a per-request nonce. The pages are static, so nginx generates the nonce (`$request_id`), adds it to every `<script>` and `<style>` tag with `sub_filter`, and sets `window.CAP_SCRIPT_NONCE` and `window.CAP_CSS_NONCE` for the widget (it needs them for its injected style and its instrumentation iframe). That is why the Dockerfile does not precompress `.html`. `connect-src` allows the shared Cap instance and Hermes's origin; a new endpoint on another origin must be added to `connect-src` in `src/site/nginx.conf`, or the browser blocks the request. The GitHub Pages build has no nginx, so it gets no CSP.
 
 ### Captcha
 

@@ -266,12 +266,10 @@ import { loadCapWidget } from "./capWidget";
 
   /* ---------- contact form ---------- */
 
-  /** Contact API endpoint. Blank on purpose: the mail relay that used to sit
-   *  behind /api/contact was removed, and its replacement (a shared
-   *  microservice, also used by the FincaApp marketing site) does not exist
-   *  yet. While it is blank, a submission shows the error pane instead of
-   *  posting anywhere. Set it to the service's URL to enable the form. */
-  const CONTACT_ENDPOINT = "";
+  /** Contact API endpoint: the `constelutions` producer of Hermes, the shared
+   *  contact relay (also used by the FincaApp marketing site). It is on another
+   *  origin, so nginx's CSP lists it in connect-src. */
+  const CONTACT_ENDPOINT = "https://relay.constelutions.tech/v1/constelutions/contact";
 
   /** Abandon a submission that has not answered in this long. Without a cap a
    *  stalled connection leaves the button disabled with no way back. */
@@ -449,11 +447,6 @@ import { loadCapWidget } from "./capWidget";
       const timer = window.setTimeout(() => controller.abort(), CONTACT_TIMEOUT_MS);
 
       try {
-        if (CONTACT_ENDPOINT === "") {
-          showPane(errorPane);
-          return;
-        }
-
         const response = await fetch(CONTACT_ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "application/json" },

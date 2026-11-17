@@ -31,8 +31,9 @@ directive is fixed here. Implement it as written.
 > 2. The Dart mailer and the nginx `/api/` proxy and rate limit were removed.
 >    The contact relay is moving into a separate microservice shared with the
 >    FincaApp marketing site, and will own siteverify, the honeypot check,
->    rate limiting and the send throttle. Until it exists, `CONTACT_ENDPOINT`
->    in `scripts/main.ts` is blank and the form shows its error state.
+>    rate limiting and the send throttle. It is now Hermes
+>    (`https://relay.constelutions.tech`), and `CONTACT_ENDPOINT` in
+>    `scripts/main.ts` points at its `constelutions` producer.
 >
 > Everything below about the same-origin `/cap/` proxy, the `cap` and `valkey`
 > containers, `CAP_ADMIN_KEY`, `CAP_CORS_ORIGIN`, the `cap-widget` npm
