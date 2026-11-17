@@ -10,7 +10,7 @@
 # and is used ONLY here. Local development stays on the ordinary glibc SDK and
 # pubspec.yaml is untouched, so `dart run`, `dart test` and `dart analyze` work
 # normally on a developer machine.
-FROM ghcr.io/dart-musl/dart:3.13.7@sha256:c7c35a148d85c173747d3302109d82828af5b7c4b6f1b39976b30f75de9362d7 AS build
+FROM ghcr.io/dart-musl/dart:3.14.0@sha256:01434c3c12e782633c7429a96276ea883d020eb5568abd475b21e4de294f0535 AS build
 WORKDIR /app
 
 # Dependencies resolve before the sources are copied so that editing a .dart
